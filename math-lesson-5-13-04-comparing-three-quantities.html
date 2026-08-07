@@ -49,6 +49,21 @@ body{background:#F0F2F8;color:#0E1C42;line-height:1.6}.page-wrap{max-width:920px
 .footer{background:#0E1C42!important;border-top:4px solid #55C8E8!important}.footer-main span{color:#55C8E8!important;font-weight:700!important}.footer-sub{color:rgba(255,255,255,.5)!important}.footer-copy{color:rgba(255,255,255,.3)!important}
 @keyframes progressShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 
+/* ═══════ STANDARDS TOGGLE BAR ═══════ */
+.standards-toggle-bar{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#1a2a3a,#1e3448);padding:10px 28px;cursor:pointer;user-select:none;border-bottom:1px solid rgba(85,200,232,.12);}
+.standards-toggle-bar:hover{background:linear-gradient(135deg,#1e3044,#23394d);}
+.standards-toggle-label{font-size:12px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.standards-toggle-arrow{font-size:10px;color:rgba(255,255,255,.35);transition:transform .25s ease;}
+.standards-toggle-bar.open .standards-toggle-arrow{transform:rotate(180deg);}
+.standards-panel{max-height:0;overflow:hidden;transition:max-height .3s ease;background:#14212e;border-bottom:1px solid rgba(85,200,232,.08);}
+.standards-panel.open{max-height:200px;}
+.standards-panel-inner{display:flex;gap:32px;padding:14px 28px 16px;flex-wrap:wrap;}
+.standards-group{display:flex;flex-direction:column;gap:6px;}
+.standards-group-label{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;font-weight:700;}
+.standards-codes{font-size:12px;color:rgba(255,255,255,.65);line-height:1.7;font-weight:500;}
+.standards-codes .fl-code{color:#80CBC4;}
+.standards-codes .tx-code{color:#FFD54F;}
+.footer-standards{font-size:10px;color:rgba(255,255,255,.3);margin-top:6px;letter-spacing:.3px;}
 </style>
 </head>
 <body id="pageTop">
@@ -60,7 +75,25 @@ body{background:#F0F2F8;color:#0E1C42;line-height:1.6}.page-wrap{max-width:920px
   <div class="header-badge"><span class="header-badge-icon">🌿</span><span class="header-badge-icon">🦉</span><span class="header-badge-text">Lesson 5.13.04</span></div>
 </div>
 <div class="quote-strip"><div class="quote-strip-text">"A three-part ratio is one picture with three rows. The rows can change size, but the parts must stay linked."</div><div class="quote-strip-attr">Ratio Big Idea</div></div>
-<div class="info-strip"><div class="info-cell"><div class="info-icon" style="background:#EEF8EA;">🧭</div><div><div class="info-label">Unit</div><div class="info-value">Unit 13</div><div class="info-detail">Ratio</div></div></div><div class="info-cell"><div class="info-icon" style="background:#FFFDF1;">📅</div><div><div class="info-label">Lesson</div><div class="info-value">5.13.04</div><div class="info-detail">Three quantities</div></div></div><div class="info-cell"><div class="info-icon" style="background:#F3F9EA;">📊</div><div><div class="info-label">Standard</div><div class="info-value">Ratio Models</div><div class="info-detail">Compare with bars</div></div></div><div class="info-cell"><div class="info-icon" style="background:#FFF4E8;">🔗</div><div><div class="info-label">Focus</div><div class="info-value">A:B:C</div><div class="info-detail">Pair and triple comparisons</div></div></div></div>
+
+<!-- ═══════════ STANDARDS ALIGNMENT ═══════════ -->
+<div class="standards-toggle-bar" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open');">
+  <span class="standards-toggle-label">Standards Alignment</span>
+  <span class="standards-toggle-arrow">&#9660;</span>
+</div>
+<div class="standards-panel">
+  <div class="standards-panel-inner">
+    <div class="standards-group">
+      <div class="standards-group-label">Florida B.E.S.T.</div>
+      <div class="standards-codes"><span class="fl-code">MA.5.AR.2.2</span></div>
+    </div>
+    <div class="standards-group">
+      <div class="standards-group-label">Texas TEKS</div>
+      <div class="standards-codes"><span class="tx-code">5.4.F</span></div>
+    </div>
+  </div>
+</div>
+  <div class="info-strip"><div class="info-cell"><div class="info-icon" style="background:#EEF8EA;">🧭</div><div><div class="info-label">Unit</div><div class="info-value">Unit 13</div><div class="info-detail">Ratio</div></div></div><div class="info-cell"><div class="info-icon" style="background:#FFFDF1;">📅</div><div><div class="info-label">Lesson</div><div class="info-value">5.13.04</div><div class="info-detail">Three quantities</div></div></div><div class="info-cell"><div class="info-icon" style="background:#F3F9EA;">📊</div><div><div class="info-label">Standard</div><div class="info-value">MA.5.AR.2.2</div><div class="info-detail">Compare with bars</div></div></div><div class="info-cell"><div class="info-icon" style="background:#FFF4E8;">🔗</div><div><div class="info-label">Focus</div><div class="info-value">A:B:C</div><div class="info-detail">Pair and triple comparisons</div></div></div></div>
 <div class="explorer-strip"><span class="explorer-compass">🧭</span><div><div class="explorer-mission-label">Today's Mission</div><div class="explorer-mission-text">Build a three-row ratio bar model, compare two rows at a time, and explain how all three rows stay connected.</div></div></div>
 <div class="intro-2col"><div class="intro-card theme-question"><div class="intro-card-head"><div class="intro-card-head-icon">❓</div><div><div class="intro-card-head-label">Essential Question</div><div class="intro-card-head-title">How can one ratio compare three quantities at once?</div></div></div><div class="intro-card-body"><p>A two-part ratio compares two things, like green to gold. A three-part ratio compares three things in one linked model.</p><p>Today you will see that <strong>2:3:5</strong> means three rows are connected: 2 parts, 3 parts, and 5 parts.</p></div></div><div class="intro-card theme-objectives"><div class="intro-card-head"><div class="intro-card-head-icon">🎯</div><div><div class="intro-card-head-label">Today's Objectives</div><div class="intro-card-head-title">You will…</div></div></div><div class="intro-card-body"><div class="obj-line"><span class="obj-icon">📊</span><span><strong>Build</strong> a three-row ratio bar model with equal-sized parts.</span></div><div class="obj-line"><span class="obj-icon">🔍</span><span><strong>Compare</strong> any two quantities from a three-part ratio.</span></div><div class="obj-line"><span class="obj-icon">💬</span><span><strong>Explain</strong> how scaling all three rows keeps the same comparison.</span></div></div></div></div>
 <div class="need-strip"><span class="need-strip-label">You'll need:</span><span class="need-chip">📓 Math Journal</span><span class="need-chip">✏️ Pencil</span><span class="need-chip">🧱 Equal parts mindset</span></div>
@@ -118,7 +151,8 @@ body{background:#F0F2F8;color:#0E1C42;line-height:1.6}.page-wrap{max-width:920px
   <div class="gathered-box"><div class="gathered-head"><div class="gathered-head-icon">📋</div><div><div class="gathered-head-label">Your Math Journal</div><div class="gathered-head-title">All Answers from Today</div></div></div><div class="gathered-body"><textarea class="gathered-output" id="gatheredOutput" readonly>Click "Gather My Answers" to collect your work.</textarea><div class="gathered-actions"><button class="purple-btn" onclick="gatherAnswers()">📋 Gather My Answers</button><button class="green-btn" onclick="copyAnswers()">Copy All Answers</button><button class="check-btn" onclick="downloadJournal()">Download My Math Journal</button></div></div></div>
   <div class="turn-in-card"><div class="turn-in-header"><div class="turn-in-header-icon">✅</div><div><div class="turn-in-header-label">Turn-In Checklist</div><div class="turn-in-header-title">Ready to Submit?</div></div></div><div class="turn-in-body"><div class="turn-in-item" onclick="toggleCheck(this)"><span class="turn-in-check">✓</span><span>I completed the Show What You Know problems.</span></div><div class="turn-in-item" onclick="toggleCheck(this)"><span class="turn-in-check">✓</span><span>I used row order when reading ratios.</span></div><div class="turn-in-item" onclick="toggleCheck(this)"><span class="turn-in-check">✓</span><span>I reviewed my gathered Math Journal answers.</span></div></div></div>
 </div>
-<div class="footer"><div class="footer-main">🏫 <span>Optima Academy Online</span></div><div class="footer-sub">Math · Grade 5 · 5.13.04</div><div class="footer-copy">© 2025 Optima Academy Online</div></div>
+<div class="footer"><div class="footer-main">🏫 <span>Optima Academy Online</span></div><div class="footer-sub">Math · Grade 5 · 5.13.04</div><div class="footer-standards">FL: MA.5.AR.2.2 &middot; TX: 5.4.F</div>
+<div class="footer-copy">© 2025 Optima Academy Online</div></div>
 </div><canvas id="confettiCanvas"></canvas>
 <script>
 const lessonKey='g5-5-13-04';let scale=1;

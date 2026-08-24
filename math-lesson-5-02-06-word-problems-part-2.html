@@ -26,7 +26,30 @@
 .standards-codes .fl-code{color:#80CBC4;}
 .standards-codes .tx-code{color:#FFD54F;}
 .footer-standards{font-size:10px;color:rgba(255,255,255,.3);margin-top:6px;letter-spacing:.3px;}
-</style></head>
+</style><style id="fluencyStyles">
+.fluency-box{background:#fff;border:2px solid #F5C518;border-radius:18px;overflow:hidden;margin-bottom:22px;font-family:'Nunito',sans-serif}
+.fluency-head{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#F5C518,#E8B723);padding:14px 20px;flex-wrap:wrap}
+.fluency-head-icon{font-size:26px;line-height:1}
+.fluency-head-label{font-size:10px;color:#0E1C42;font-weight:800;text-transform:uppercase;letter-spacing:0.5px}
+.fluency-head-title{font-size:15px;color:#0E1C42;font-weight:800}
+.fluency-timer-ui{margin-left:auto;display:flex;align-items:center;gap:10px}
+.fluency-timer-display{font-size:20px;font-weight:800;color:#0E1C42;min-width:46px;text-align:center}
+.fluency-start-btn{background:#0E1C42;color:#fff;border:none;border-radius:10px;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer}
+.fluency-start-btn:disabled{opacity:0.55;cursor:default}
+.fluency-body{padding:16px 20px}
+.fluency-instructions{font-size:13px;color:#4A5568;margin:0 0 12px}
+.fluency-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin-bottom:14px}
+.fluency-item{display:flex;align-items:center;gap:6px;background:#FAFBFF;border:1.5px solid #E2E8F4;border-radius:10px;padding:8px 10px}
+.fluency-item.fluency-correct{border-color:#2DB87A;background:#EAFBF3}
+.fluency-item.fluency-wrong{border-color:#E07B39;background:#FDF1E9}
+.fluency-q{font-size:13px;font-weight:700;color:#0E1C42;white-space:nowrap}
+.fluency-input{width:46px;border:1.5px solid #CBD5E8;border-radius:6px;padding:4px;font-size:14px;text-align:center;font-family:'Nunito',sans-serif}
+.fluency-input:disabled{background:#F0F2F8}
+.fluency-check-btn{background:#2DB87A;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-weight:800;font-size:13px;cursor:pointer}
+.fluency-check-btn:disabled{opacity:0.55;cursor:default}
+.fluency-result{margin-top:10px;font-size:14px;color:#0E1C42;font-weight:700}
+</style>
+</head>
 <body id="pageTop"><div class="page-wrap">
 
 <!-- ═══════════════════════════════════════════════════════════════════════
@@ -260,6 +283,35 @@
 
 <div class="tab-panel active" id="tab-warmup">
 
+
+<div class="fluency-box" data-timed="true">
+<div class="fluency-head">
+<div class="fluency-head-icon">⏱️</div>
+<div><div class="fluency-head-label">TIMED FLUENCY CHALLENGE</div><div class="fluency-head-title">Mixed Operations Review</div></div>
+<div class="fluency-timer-ui"><span class="fluency-timer-display" id="fluencyTimerDisplay">60s</span><button class="fluency-start-btn" id="fluencyStartBtn" onclick="fluencyStart()">Start Timer</button></div>
+</div>
+<div class="fluency-body">
+<p class="fluency-instructions">You have 60 seconds. Hit Start Timer, then solve as many as you can!</p>
+<div class="fluency-grid" id="fluencyGrid">
+<div class="fluency-item"><span class="fluency-q">47 + 35 =</span><input autocomplete="off" class="fluency-input" data-answer="82" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">90 − 28 =</span><input autocomplete="off" class="fluency-input" data-answer="62" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">7 × 8 =</span><input autocomplete="off" class="fluency-input" data-answer="56" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">54 ÷ 9 =</span><input autocomplete="off" class="fluency-input" data-answer="6" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">63 + 19 =</span><input autocomplete="off" class="fluency-input" data-answer="82" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">8 × 6 =</span><input autocomplete="off" class="fluency-input" data-answer="48" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">72 ÷ 8 =</span><input autocomplete="off" class="fluency-input" data-answer="9" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">85 − 37 =</span><input autocomplete="off" class="fluency-input" data-answer="48" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">9 × 9 =</span><input autocomplete="off" class="fluency-input" data-answer="81" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">45 ÷ 5 =</span><input autocomplete="off" class="fluency-input" data-answer="9" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">56 + 27 =</span><input autocomplete="off" class="fluency-input" data-answer="83" inputmode="numeric" type="text" disabled/></div>
+<div class="fluency-item"><span class="fluency-q">64 ÷ 8 =</span><input autocomplete="off" class="fluency-input" data-answer="8" inputmode="numeric" type="text" disabled/></div>
+</div>
+<button class="fluency-check-btn" id="fluencyCheckBtn" onclick="fluencyCheck()" disabled>Check My Answers</button>
+<div class="fluency-result" id="fluencyResult"></div>
+</div>
+<textarea class="journal-box" data-label="Fluency Warm-Up (Mixed Operations Review)" id="fluencyJournal" readonly="" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"></textarea>
+</div>
+
 <div class="activity bl-slate"><div class="activity-head"><div class="activity-num" style="background:#3A6B9A;">📖</div><div><div class="activity-title">Story Setup</div><div class="activity-sub">All the information you need is right here.</div></div></div><div class="activity-body"><p><strong>The situation:</strong> A teacher buys 5 packs of pencils. Each pack has 12 pencils. The teacher gives away 8 pencils, then shares the pencils that are left equally between 4 tables.</p><div class="model-board"><div class="expression-big">(5 × 12 − 8) ÷ 4</div><div class="callout callout-info"><span class="callout-icon">🔎</span><p><strong>What the numbers mean:</strong> 5 × 12 counts all the pencils bought. The − 8 removes the pencils given away. The ÷ 4 shares only the pencils that are left.</p></div><div class="callout callout-think"><span class="callout-icon">🧠</span><p><strong>Start here:</strong> First count all the pencils bought: 5 × 12. The subtraction must happen before the sharing because only the pencils left are divided.</p></div></div></div></div>
 <div class="activity bl-yellow"><div class="activity-head"><div class="activity-num" style="background:#F5C518;color:#0E1C42;">🤔</div><div><div class="activity-title">Think About It</div><div class="activity-sub">Notice the structure before calculating.</div></div></div><div class="activity-body"><div class="callout callout-think"><span class="callout-icon">🧠</span><p>A teacher buys 5 packs of 12 pencils. She gives away 8 pencils, then splits the rest equally between 4 tables.</p></div><div class="expression-big">(5 × 12 − 8) ÷ 4</div><div class="journal-label">What do you think should happen first? Why? <span class="saved-dot" id="dot-warm"></span></div><textarea class="journal-box" id="journal-warm" data-label="Warm-Up — What should happen first" oninput="autoSave(this,'dot-warm')"></textarea></div></div>
 <div class="tab-next-wrap"><p class="tab-transition-voice">You looked at the structure. Now build the expression.</p><button type="button" class="tab-next-btn" onclick="switchTab('learn')">Continue to 📐 Learn →</button></div></div>
@@ -305,4 +357,69 @@ function chooseChip(btn,good){var area=btn.closest('.activity-body')||document;a
 var selectedMatch=null;
 function selectMatch(card){if(card.classList.contains('matched'))return;if(!selectedMatch){selectedMatch=card;card.classList.add('selected');return}if(card===selectedMatch){card.classList.remove('selected');selectedMatch=null;return}if(card.dataset.match===selectedMatch.dataset.match&&card.dataset.side!==selectedMatch.dataset.side){card.classList.add('matched');selectedMatch.classList.add('matched');card.classList.remove('selected');selectedMatch.classList.remove('selected');selectedMatch=null}else{card.classList.add('bad');selectedMatch.classList.add('bad');setTimeout(function(){document.querySelectorAll('.match-card.bad,.match-card.selected').forEach(function(x){x.classList.remove('bad','selected')});selectedMatch=null},450)}}
 window.addEventListener('DOMContentLoaded',function(){restoreJournals();updateProgress()});
-</script></body></html>
+</script><script id="fluencyScript">
+(function(){
+var FLUENCY_TIMED = true;
+var FLUENCY_TITLE = "Mixed Operations Review";
+var fluencyInterval = null;
+var fluencySecondsLeft = 60;
+
+window.fluencyStart = function(){
+  if(!FLUENCY_TIMED) return;
+  var grid = document.getElementById('fluencyGrid');
+  if(!grid) return;
+  grid.querySelectorAll('.fluency-input').forEach(function(i){ i.disabled = false; });
+  var btn = document.getElementById('fluencyStartBtn');
+  if(btn){ btn.disabled = true; btn.textContent = 'Timer Running\u2026'; }
+  var checkBtn = document.getElementById('fluencyCheckBtn');
+  if(checkBtn) checkBtn.disabled = false;
+  fluencySecondsLeft = 60;
+  fluencyUpdateDisplay();
+  fluencyInterval = setInterval(function(){
+    fluencySecondsLeft--;
+    fluencyUpdateDisplay();
+    if(fluencySecondsLeft <= 0){
+      clearInterval(fluencyInterval);
+      grid.querySelectorAll('.fluency-input').forEach(function(i){ i.disabled = true; });
+      window.fluencyCheck();
+    }
+  }, 1000);
+};
+
+function fluencyUpdateDisplay(){
+  var el = document.getElementById('fluencyTimerDisplay');
+  if(el) el.textContent = fluencySecondsLeft + 's';
+}
+
+window.fluencyCheck = function(){
+  if(fluencyInterval){ clearInterval(fluencyInterval); fluencyInterval = null; }
+  var items = document.querySelectorAll('#fluencyGrid .fluency-item');
+  var correct = 0, attempted = 0, total = items.length;
+  var lines = [];
+  items.forEach(function(item){
+    var input = item.querySelector('.fluency-input');
+    var qText = item.querySelector('.fluency-q').textContent;
+    var given = (input.value || '').trim();
+    var ans = input.dataset.answer;
+    var ok = given !== '' && given === ans;
+    if(given !== '') attempted++;
+    item.classList.remove('fluency-correct','fluency-wrong');
+    if(ok){ correct++; item.classList.add('fluency-correct'); }
+    else if(given !== ''){ item.classList.add('fluency-wrong'); }
+    lines.push(qText + ' ' + ans + '   [answered: ' + (given || 'blank') + ']' + (ok ? ' \u2713' : (given ? ' \u2717' : '')));
+  });
+  var pct = total ? Math.round((correct/total)*100) : 0;
+  var timeStr = FLUENCY_TIMED ? (' in ' + (60 - fluencySecondsLeft) + ' seconds') : '';
+  var summary = 'Fluency Warm-Up \u2014 ' + FLUENCY_TITLE + '\n' + correct + ' / ' + total + ' correct (' + pct + '%)' + timeStr + '\n\n' + lines.join('\n');
+  var j = document.getElementById('fluencyJournal');
+  if(j) j.value = summary;
+  var resEl = document.getElementById('fluencyResult');
+  if(resEl) resEl.innerHTML = correct + ' / ' + total + ' correct (' + pct + '%)' + timeStr;
+  var checkBtn = document.getElementById('fluencyCheckBtn');
+  if(checkBtn) checkBtn.disabled = true;
+  var startBtn = document.getElementById('fluencyStartBtn');
+  if(startBtn) startBtn.textContent = 'Done';
+};
+})();
+</script>
+</body></html>

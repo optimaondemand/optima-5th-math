@@ -26,7 +26,30 @@
 .standards-codes .fl-code{color:#80CBC4;}
 .standards-codes .tx-code{color:#FFD54F;}
 .footer-standards{font-size:10px;color:rgba(255,255,255,.3);margin-top:6px;letter-spacing:.3px;}
-</style></head>
+</style><style id="fluencyStyles">
+.fluency-box{background:#fff;border:2px solid #F5C518;border-radius:18px;overflow:hidden;margin-bottom:22px;font-family:'Nunito',sans-serif}
+.fluency-head{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#F5C518,#E8B723);padding:14px 20px;flex-wrap:wrap}
+.fluency-head-icon{font-size:26px;line-height:1}
+.fluency-head-label{font-size:10px;color:#0E1C42;font-weight:800;text-transform:uppercase;letter-spacing:0.5px}
+.fluency-head-title{font-size:15px;color:#0E1C42;font-weight:800}
+.fluency-timer-ui{margin-left:auto;display:flex;align-items:center;gap:10px}
+.fluency-timer-display{font-size:20px;font-weight:800;color:#0E1C42;min-width:46px;text-align:center}
+.fluency-start-btn{background:#0E1C42;color:#fff;border:none;border-radius:10px;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer}
+.fluency-start-btn:disabled{opacity:0.55;cursor:default}
+.fluency-body{padding:16px 20px}
+.fluency-instructions{font-size:13px;color:#4A5568;margin:0 0 12px}
+.fluency-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin-bottom:14px}
+.fluency-item{display:flex;align-items:center;gap:6px;background:#FAFBFF;border:1.5px solid #E2E8F4;border-radius:10px;padding:8px 10px}
+.fluency-item.fluency-correct{border-color:#2DB87A;background:#EAFBF3}
+.fluency-item.fluency-wrong{border-color:#E07B39;background:#FDF1E9}
+.fluency-q{font-size:13px;font-weight:700;color:#0E1C42;white-space:nowrap}
+.fluency-input{width:46px;border:1.5px solid #CBD5E8;border-radius:6px;padding:4px;font-size:14px;text-align:center;font-family:'Nunito',sans-serif}
+.fluency-input:disabled{background:#F0F2F8}
+.fluency-check-btn{background:#2DB87A;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-weight:800;font-size:13px;cursor:pointer}
+.fluency-check-btn:disabled{opacity:0.55;cursor:default}
+.fluency-result{margin-top:10px;font-size:14px;color:#0E1C42;font-weight:700}
+</style>
+</head>
 <body id="pageTop"><div class="page-wrap">
 
 <!-- ═══════════════════════════════════════════════════════════════════════
@@ -260,6 +283,33 @@
 
 <div class="tab-panel active" id="tab-warmup">
 
+
+<div class="fluency-box" data-timed="false">
+<div class="fluency-head">
+<div class="fluency-head-icon">✍️</div>
+<div><div class="fluency-head-label">FLUENCY WARM-UP</div><div class="fluency-head-title">Add &amp;amp; Subtract Within 100</div></div>
+
+</div>
+<div class="fluency-body">
+<p class="fluency-instructions">Warm up your fact fluency before today's lesson. Work through these, then check your answers.</p>
+<div class="fluency-grid" id="fluencyGrid">
+<div class="fluency-item"><span class="fluency-q">47 + 28 =</span><input autocomplete="off" class="fluency-input" data-answer="75" inputmode="numeric" type="text"/></div>
+<div class="fluency-item"><span class="fluency-q">83 − 45 =</span><input autocomplete="off" class="fluency-input" data-answer="38" inputmode="numeric" type="text"/></div>
+<div class="fluency-item"><span class="fluency-q">56 + 37 =</span><input autocomplete="off" class="fluency-input" data-answer="93" inputmode="numeric" type="text"/></div>
+<div class="fluency-item"><span class="fluency-q">91 − 29 =</span><input autocomplete="off" class="fluency-input" data-answer="62" inputmode="numeric" type="text"/></div>
+<div class="fluency-item"><span class="fluency-q">34 + 48 =</span><input autocomplete="off" class="fluency-input" data-answer="82" inputmode="numeric" type="text"/></div>
+<div class="fluency-item"><span class="fluency-q">70 − 36 =</span><input autocomplete="off" class="fluency-input" data-answer="34" inputmode="numeric" type="text"/></div>
+<div class="fluency-item"><span class="fluency-q">65 + 27 =</span><input autocomplete="off" class="fluency-input" data-answer="92" inputmode="numeric" type="text"/></div>
+<div class="fluency-item"><span class="fluency-q">52 − 18 =</span><input autocomplete="off" class="fluency-input" data-answer="34" inputmode="numeric" type="text"/></div>
+<div class="fluency-item"><span class="fluency-q">29 + 43 =</span><input autocomplete="off" class="fluency-input" data-answer="72" inputmode="numeric" type="text"/></div>
+<div class="fluency-item"><span class="fluency-q">86 − 57 =</span><input autocomplete="off" class="fluency-input" data-answer="29" inputmode="numeric" type="text"/></div>
+</div>
+<button class="fluency-check-btn" id="fluencyCheckBtn" onclick="fluencyCheck()">Check My Answers</button>
+<div class="fluency-result" id="fluencyResult"></div>
+</div>
+<textarea class="journal-box" data-label="Fluency Warm-Up (Add &amp;amp; Subtract Within 100)" id="fluencyJournal" readonly="" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"></textarea>
+</div>
+
 <div class="activity bl-slate"><div class="activity-head"><div class="activity-num" style="background:#3A6B9A;">📖</div><div><div class="activity-title">Story Setup</div><div class="activity-sub">All the information you need is right here.</div></div></div><div class="activity-body"><p><strong>The situation:</strong> A class is packing notebooks for student supply crates. Each crate gets 6 red notebooks and 4 blue notebooks. There are 3 crates total.</p><div class="model-board"><div class="expression-big">(6 + 4) × 3</div><div class="callout callout-info"><span class="callout-icon">🔎</span><p><strong>What the numbers mean:</strong> 6 red notebooks + 4 blue notebooks makes one crate group. The parentheses show the notebooks that belong together in each crate. Then the 3 tells how many identical crates are packed.</p></div><div class="callout callout-think"><span class="callout-icon">🧠</span><p><strong>Start here:</strong> First find the notebooks in one crate: 6 + 4.</p></div></div></div></div>
 <div class="activity bl-yellow"><div class="activity-head"><div class="activity-num" style="background:#F5C518;color:#0E1C42;">🤔</div><div><div class="activity-title">Think About It</div><div class="activity-sub">Notice the structure before calculating.</div></div></div><div class="activity-body"><div class="callout callout-think"><span class="callout-icon">🧠</span><p>A class packs 6 red notebooks and 4 blue notebooks into each of 3 crates.</p></div><div class="expression-big">(6 + 4) × 3</div><div class="journal-label">What do you think should happen first? Why? <span class="saved-dot" id="dot-warm"></span></div><textarea class="journal-box" id="journal-warm" data-label="Warm-Up — What should happen first" oninput="autoSave(this,'dot-warm')"></textarea></div></div>
 <div class="tab-next-wrap"><p class="tab-transition-voice">You looked at the structure. Now build the expression.</p><button type="button" class="tab-next-btn" onclick="switchTab('learn')">Continue to 📐 Learn →</button></div></div>
@@ -305,4 +355,69 @@ function chooseChip(btn,good){var area=btn.closest('.activity-body')||document;a
 var selectedMatch=null;
 function selectMatch(card){if(card.classList.contains('matched'))return;if(!selectedMatch){selectedMatch=card;card.classList.add('selected');return}if(card===selectedMatch){card.classList.remove('selected');selectedMatch=null;return}if(card.dataset.match===selectedMatch.dataset.match&&card.dataset.side!==selectedMatch.dataset.side){card.classList.add('matched');selectedMatch.classList.add('matched');card.classList.remove('selected');selectedMatch.classList.remove('selected');selectedMatch=null}else{card.classList.add('bad');selectedMatch.classList.add('bad');setTimeout(function(){document.querySelectorAll('.match-card.bad,.match-card.selected').forEach(function(x){x.classList.remove('bad','selected')});selectedMatch=null},450)}}
 window.addEventListener('DOMContentLoaded',function(){restoreJournals();updateProgress()});
-</script></body></html>
+</script><script id="fluencyScript">
+(function(){
+var FLUENCY_TIMED = false;
+var FLUENCY_TITLE = "Add & Subtract Within 100";
+var fluencyInterval = null;
+var fluencySecondsLeft = 60;
+
+window.fluencyStart = function(){
+  if(!FLUENCY_TIMED) return;
+  var grid = document.getElementById('fluencyGrid');
+  if(!grid) return;
+  grid.querySelectorAll('.fluency-input').forEach(function(i){ i.disabled = false; });
+  var btn = document.getElementById('fluencyStartBtn');
+  if(btn){ btn.disabled = true; btn.textContent = 'Timer Running\u2026'; }
+  var checkBtn = document.getElementById('fluencyCheckBtn');
+  if(checkBtn) checkBtn.disabled = false;
+  fluencySecondsLeft = 60;
+  fluencyUpdateDisplay();
+  fluencyInterval = setInterval(function(){
+    fluencySecondsLeft--;
+    fluencyUpdateDisplay();
+    if(fluencySecondsLeft <= 0){
+      clearInterval(fluencyInterval);
+      grid.querySelectorAll('.fluency-input').forEach(function(i){ i.disabled = true; });
+      window.fluencyCheck();
+    }
+  }, 1000);
+};
+
+function fluencyUpdateDisplay(){
+  var el = document.getElementById('fluencyTimerDisplay');
+  if(el) el.textContent = fluencySecondsLeft + 's';
+}
+
+window.fluencyCheck = function(){
+  if(fluencyInterval){ clearInterval(fluencyInterval); fluencyInterval = null; }
+  var items = document.querySelectorAll('#fluencyGrid .fluency-item');
+  var correct = 0, attempted = 0, total = items.length;
+  var lines = [];
+  items.forEach(function(item){
+    var input = item.querySelector('.fluency-input');
+    var qText = item.querySelector('.fluency-q').textContent;
+    var given = (input.value || '').trim();
+    var ans = input.dataset.answer;
+    var ok = given !== '' && given === ans;
+    if(given !== '') attempted++;
+    item.classList.remove('fluency-correct','fluency-wrong');
+    if(ok){ correct++; item.classList.add('fluency-correct'); }
+    else if(given !== ''){ item.classList.add('fluency-wrong'); }
+    lines.push(qText + ' ' + ans + '   [answered: ' + (given || 'blank') + ']' + (ok ? ' \u2713' : (given ? ' \u2717' : '')));
+  });
+  var pct = total ? Math.round((correct/total)*100) : 0;
+  var timeStr = FLUENCY_TIMED ? (' in ' + (60 - fluencySecondsLeft) + ' seconds') : '';
+  var summary = 'Fluency Warm-Up \u2014 ' + FLUENCY_TITLE + '\n' + correct + ' / ' + total + ' correct (' + pct + '%)' + timeStr + '\n\n' + lines.join('\n');
+  var j = document.getElementById('fluencyJournal');
+  if(j) j.value = summary;
+  var resEl = document.getElementById('fluencyResult');
+  if(resEl) resEl.innerHTML = correct + ' / ' + total + ' correct (' + pct + '%)' + timeStr;
+  var checkBtn = document.getElementById('fluencyCheckBtn');
+  if(checkBtn) checkBtn.disabled = true;
+  var startBtn = document.getElementById('fluencyStartBtn');
+  if(startBtn) startBtn.textContent = 'Done';
+};
+})();
+</script>
+</body></html>

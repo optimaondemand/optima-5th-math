@@ -355,7 +355,7 @@ function draw(){var q=PROBS[p],o='',st=$('u15stage');
   for(var j=0;j<10;j++)o+='<text x="'+(j*sw+sw/2)+'" y="82" font-size="11" font-weight="800" fill="#0E1C42" text-anchor="middle">'+(q.money?'$':'')+num(q.Q/10)+'</text>';
   for(var j2=0;j2<=10;j2++)o+='<text x="'+(j2*sw)+'" y="14" font-size="10" font-weight="800" fill="#6B3FA0" text-anchor="middle">'+(j2*10)+'%</text>';
   o+='<rect x="0" y="20" width="'+W+'" height="44" fill="none" stroke="#0E1C42" stroke-width="3"/>';
-  st.innerHTML='<div class="u7-cap">The whole bar is '+(q.money?'$':'')+num(q.Q)+' '+(q.unit||'')+'. Each big section is 10%.</div><svg viewBox="-12 0 464 92" style="width:100%;max-width:520px;display:block;margin:0 auto">'+o+'</svg>';}
+  st.innerHTML='<div class="u7-cap">The whole bar is '+(q.money?'$':'')+num(q.Q)+(q.unit?' '+q.unit:'')+'. Each big section is 10%.</div><svg viewBox="-12 0 464 92" style="width:100%;max-width:520px;display:block;margin:0 auto">'+o+'</svg>';}
 }
 function pct(){return isBar()?n*5:n;}
 function amt(){var q=PROBS[p];return q.Q*n/20;}

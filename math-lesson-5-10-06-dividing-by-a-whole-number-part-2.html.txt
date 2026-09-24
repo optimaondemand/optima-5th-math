@@ -1,0 +1,217 @@
+Optima Academy Online — Grade 5 Math Lesson 5.10.06
+📐 Lesson Progress
+0%
+Optima Academy Online
+An Education Experience Company
+Dividing by a Whole Number — Part 2
+🦉
+Lesson 5.10.06
+"The written algorithm makes more sense when each step matches the model."
+Decimal Operations Big Idea
+&#128266; READ ALOUD &mdash; LISTEN TO THIS PAGE
+&#9654;&#65039; Listen
+&#9632; Stop
+Speed
+Slower
+Normal
+Faster
+Standards Alignment
+&#9660;
+Florida B.E.S.T.
+MA.5.NSO.2.5
+&middot;
+MTR.2.1
+&middot;
+MTR.5.1
+Texas TEKS
+5.3.F
+&middot;
+5.3.G
+🧭
+Unit
+Unit 10
+The Four Operations of Decimals
+📅
+Lesson
+5.10.06
+Partition-to-Algorithm Bridge
+📐
+Standard
+MA.5.NSO.2.5
+Decimal operations
+🔢
+Focus
+Decimal Division Algorithm
+MTR.2.1 · MTR.5.1
+🧭
+Today's Mission
+Connect decimal strip partitioning to the written division algorithm.
+❓
+Essential Question
+How does the strip model explain the written decimal division steps?
+Today the model and the algorithm sit side by side. Each time the model trades or shares pieces, the written work records that same move.
+🎯
+Today's Objectives
+You will…
+🧱
+Build
+the decimal operation with a visual model.
+🧮
+Connect
+the model to a written method.
+💬
+Explain
+why the result makes sense using place-value language.
+You'll need:
+📓 Math Journal
+✏️ Pencil
+🧮 Place-value thinking
+🔍 Warm-Up
+📐 Learn
+🌟 Show What You Know
+✍️
+FLUENCY WARM-UP
+Fraction of a Whole Number
+Warm up your fact fluency before today’s lesson. Work through these, then check your answers.
+3
+4
+× 8
+2
+3
+× 6
+1
+2
+× 10
+3
+5
+× 10
+2
+5
+× 15
+3
+4
+of 20
+1
+3
+of 18
+5
+6
+of 12
+3
+8
+of 16
+2
+7
+of 21
+Check My Answers
+🤔
+Think About It
+Notice first. Then predict.
+🧠
+If 5.28 is split into 4 equal groups, what might each group be close to?
+5.28 ÷ 4
+🔍 I Notice…
+❓ I Wonder…
+Guess first:
+Estimate first: should the answer be close to 1, close to 2, or close to 10?
+The answer will be larger.
+The answer will be smaller.
+The answer will stay close.
+✏️ My prediction
+You warmed up your decimal thinking. Now build the new operation with a model.
+Continue to 📐 Learn →
+📚
+Daily Vocabulary
+Tap to Build Today’s Math Language
+Tap each card to flip it. Read the word, then read the meaning. You will use these words in today’s models and explanations.
+🧾
+algorithm
+tap to flip
+algorithm
+a step-by-step written method
+tap to flip back
+↘️
+remainder
+tap to flip
+remainder
+the amount left to keep sharing
+tap to flip back
+🔁
+trade
+tap to flip
+trade
+to exchange one larger piece for 10 smaller pieces
+tap to flip back
+💯
+hundredths
+tap to flip
+hundredths
+100 equal parts of one whole
+tap to flip back
+🧾
+Centerpiece: Partitioner-to-Algorithm Bridge
+Watch the model and algorithm move together.
+What to do:
+Click through each step of 5.28 ÷ 4. The left side explains the model. The right side shows the matching written step.
+Model Move
+Start with 5.28. Share into 4 equal groups.
+?
+Ready to share.
+Written Work
+4 ) 5.28
+Start by dividing the wholes.
+Next Step
+Reset
+✏️ Why does the decimal point in the quotient line up with the decimal point in 5.28?
+📐 What You Just Saw
+The algorithm records the same sharing you did in the model.
+Wholes are shared first, then tenths, then hundredths.
+The decimal point lines up because the quotient has ones, tenths, and hundredths in the same order as the dividend.
+👥
+Math Crew — What Do They Think?
+Four ways to think about the same model.
+A
+Atlas — pattern spotter
+“I can see the remainder as pieces that still need to be traded and shared.”
+F
+Felix — method tester
+“I check by multiplying: 1.32 × 4 = 5.28.”
+H
+Hazel — visual thinker
+“I picture each group receiving 1 whole, then 3 tenths, then 2 hundredths.”
+C
+Cora — precise explainer
+“The quotient 1.32 means each group gets 1 whole, 3 tenths, and 2 hundredths.”
+You saw the model and named the math. Now try a few carefully chosen problems.
+Continue to 🌟 Show What You Know →
+📬
+Show What You Know
+Two focused checks.
+1
+Solve
+8.64 ÷ 4
+and explain one algorithm step with model language.
+2
+A student writes 5.28 ÷ 4 = 13.2. Use place value to explain the error.
+🗺️
+Connection Forward: What Comes Next
+Keep the model in your toolkit.
+Next you will divide by decimal pieces such as 0.1 and 0.01. The answer will count how many small pieces fit inside a whole number.
+📋
+Your Math Journal
+All Answers from Today
+Click "Gather My Answers" to collect your work.
+📋 Gather My Answers
+Copy All Answers
+Download My Math Journal
+✅
+Turn-In Checklist
+Ready to Submit?
+I completed the Show What You Know checks.
+I explained my thinking with place-value words.
+I reviewed my gathered Math Journal answers.
+🏫
+Optima Academy Online
+Math · Grade 5 · 5.10.06
+FL: MA.5.NSO.2.5, MTR.2.1, MTR.5.1 &middot; TX: 5.3.F, 5.3.G
+© 2025 Optima Academy Online

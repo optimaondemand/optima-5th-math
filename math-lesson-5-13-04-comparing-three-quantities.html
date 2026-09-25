@@ -17,6 +17,7 @@
 .tab-bar{position:sticky;top:38px;z-index:100;background:#fff;border-bottom:3px solid #E1E9D9;display:flex;overflow-x:auto;box-shadow:0 -4px 0 0 #173820}.tab-btn{flex:1;min-width:130px;padding:12px 8px 11px;background:transparent;border:none;border-bottom:4px solid transparent;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6F8567;cursor:pointer;transition:all .2s;white-space:nowrap;line-height:1.3;text-align:center}.tab-btn:hover{color:#173820;background:#F3F9EA}.tab-btn.active{color:#173820;border-bottom-color:#2E7D4F;background:#fff}.tab-btn .tab-check{display:none;font-size:12px;color:#2E7D4F;margin-left:4px;font-weight:900}.tab-btn.visited .tab-check{display:inline}.tab-panel{display:none;padding:24px 28px 36px}.tab-panel.active{display:block}
 /* ═══ VIDEO PLACEHOLDER ═══ */
 .video-placeholder-wrap {
+  display: none;
   border-radius: 14px; overflow: hidden; margin: 0 0 18px;
   border: 2px dashed rgba(107,63,160,0.4);
   background: linear-gradient(135deg, #0E1C42, #1A2D5A);
@@ -330,6 +331,20 @@ body{background:#F0F2F8;color:#0E1C42;line-height:1.6}.page-wrap{max-width:920px
 <div class="tab-bar" id="tabBar"><button class="tab-btn active" data-tab="warmup" onclick="switchTab('warmup')">🔍 Warm-Up <span class="tab-check">✓</span></button><button class="tab-btn" data-tab="learn" onclick="switchTab('learn')">📐 Learn <span class="tab-check">✓</span></button><button class="tab-btn" data-tab="assignment" onclick="switchTab('assignment')">🌟 Show What You Know <span class="tab-check">✓</span></button></div>
 
 <div class="tab-panel active" id="tab-warmup">
+<!-- ═══ INTRODUCTION VIDEO ═══ -->
+<div class="video-placeholder-wrap">
+<!-- slot: g5math-13-04 -->
+<div class="video-placeholder-inner">
+  <span class="vp-icon">&#x1F3AC;</span>
+  <div class="vp-label">Introduction Video</div>
+  <div class="vp-title">Optima Academy Online — Grade 5 Math Lesson 5.13.04</div>
+  <div class="vp-slot">g5math-13-04</div>
+  <div class="vp-notes">
+    <strong>Teacher recording notes:</strong> Introduction video for this lesson.
+  </div>
+</div>
+</div>
+
   
   <div class="activity bl-gold"><div class="activity-head"><div class="activity-num" style="background:#D0A945;color:#173820;">🤔</div><div><div class="activity-title">Think About It: A Trail Team</div><div class="activity-sub">Look at the three groups before writing numbers.</div></div></div><div class="activity-body">
     <div class="callout callout-think"><span class="callout-icon">🏕️</span><p>A trail club has hikers, cyclists, and paddlers. For every <strong>2 hikers</strong>, there are <strong>3 cyclists</strong> and <strong>5 paddlers</strong>.</p></div>
@@ -418,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.removeAttribute('height');
         iframe.style.cssText = 'display:block;width:100%;aspect-ratio:16/9;border:none;';
         wrap.innerHTML = '';
-        wrap.style.cssText = 'border:none;background:#000;border-radius:14px;overflow:hidden;margin:0 0 18px;';
+        wrap.style.cssText = 'display:block;border:none;background:#000;border-radius:14px;overflow:hidden;margin:0 0 18px;';
         wrap.appendChild(iframe);
       });
     })

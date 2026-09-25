@@ -8,6 +8,7 @@
 .tab-radio{position:absolute;left:-9999px}.tab-bar{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid #E2E8F4;display:flex;overflow-x:auto;box-shadow:0 -4px 0 0 #0E1C42}.tab-label{flex:1;min-width:130px;padding:12px 8px 11px;border-bottom:4px solid transparent;font-size:13px;font-weight:900;color:#7A88A8;cursor:pointer;text-align:center}#tab-warmup:checked~.tab-bar label[for=tab-warmup],#tab-learn:checked~.tab-bar label[for=tab-learn],#tab-show:checked~.tab-bar label[for=tab-show]{color:#0E1C42;border-bottom-color:#1A8A7D;background:#fff}.tab-panel{display:none;padding:24px 28px 36px}#tab-warmup:checked~main #panel-warmup,#tab-learn:checked~main #panel-learn,#tab-show:checked~main #panel-show{display:block}
 /* ═══ VIDEO PLACEHOLDER ═══ */
 .video-placeholder-wrap {
+  display: none;
   border-radius: 14px; overflow: hidden; margin: 0 0 18px;
   border: 2px dashed rgba(107,63,160,0.4);
   background: linear-gradient(135deg, #0E1C42, #1A2D5A);
@@ -349,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.removeAttribute('height');
         iframe.style.cssText = 'display:block;width:100%;aspect-ratio:16/9;border:none;';
         wrap.innerHTML = '';
-        wrap.style.cssText = 'border:none;background:#000;border-radius:14px;overflow:hidden;margin:0 0 18px;';
+        wrap.style.cssText = 'display:block;border:none;background:#000;border-radius:14px;overflow:hidden;margin:0 0 18px;';
         wrap.appendChild(iframe);
       });
     })

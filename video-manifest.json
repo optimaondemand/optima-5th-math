@@ -81,7 +81,7 @@
   },
   "g5math-05-01": {
     "status": "ready",
-    "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/-xvceCv8cQs?si=8okaiHr4NYwM3eGT\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+    "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/l-uzZayHkxk?si=BfmmjkqSk066a6f4\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
   },
   "g5math-05-02": {
     "status": "pending",
@@ -116,8 +116,8 @@
     "embed": ""
   },
   "g5math-06-01": {
-    "status": "pending",
-    "embed": ""
+    "status": "ready",
+    "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/2PTk_9Io2mg?si=uAjM5oJvlEtDtvAn\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
   },
   "g5math-06-02": {
     "status": "pending",
@@ -136,8 +136,8 @@
     "embed": ""
   },
   "g5math-07-01": {
-    "status": "pending",
-    "embed": ""
+    "status": "ready",
+    "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/WpdxP7xKAV8?si=L35kcOs3snVXWyNr\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
   },
   "g5math-07-02": {
     "status": "pending",
@@ -156,8 +156,8 @@
     "embed": ""
   },
   "g5math-08-01": {
-    "status": "pending",
-    "embed": ""
+    "status": "ready",
+    "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/8NUpNTADg2w?si=8kKy_am4-jxsTLzA\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
   },
   "g5math-08-02": {
     "status": "pending",

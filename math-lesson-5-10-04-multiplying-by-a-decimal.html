@@ -538,4 +538,52 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(function(err) { console.warn('Video manifest load failed:', err); });
 });
 </script>
+<!-- OAO copy fix -->
+<script>
+(function(){
+  function say(text, ok){
+    var btn = document.querySelector('[onclick*="copyAnswers"]');
+    var box = document.getElementById('oaoCopyStatus');
+    if(!box){
+      box = document.createElement('p');
+      box.id = 'oaoCopyStatus';
+      box.setAttribute('role','status');
+      box.setAttribute('aria-live','polite');
+      box.style.cssText = 'margin:10px 0 0;padding:10px 14px;border-radius:10px;font-size:15px;font-weight:700;line-height:1.5;';
+      var anchor = btn ? (btn.parentNode || btn) : document.getElementById('gatheredOutput');
+      if(anchor && anchor.parentNode){ anchor.parentNode.insertBefore(box, anchor.nextSibling); } else { document.body.appendChild(box); }
+    }
+    box.textContent = text;
+    box.style.background = ok ? '#E3F8ED' : '#FFF8E6';
+    box.style.border = ok ? '2px solid #B8E8CF' : '2px solid #F5E6C8';
+    box.style.color = '#0E1C42';
+  }
+  window.copyAnswers = function(){
+    var out = document.getElementById('gatheredOutput');
+    var text = '';
+    try { var r = gatherAnswers(); text = (typeof r === 'string' && r) ? r : ''; } catch(e) {}
+    if(!text && out) text = out.value || '';
+    if(out && !out.value && text) out.value = text;
+    function fallback(){
+      var ok = false;
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly','');
+        ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+        document.body.appendChild(ta); ta.focus(); ta.select(); ta.setSelectionRange(0, text.length);
+        ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch(e) { ok = false; }
+      if(ok){ say('Copied! Now paste your answers where your teacher asked you to turn them in.', true); }
+      else {
+        if(out){ out.focus(); out.select(); }
+        say('Your answers are highlighted in the box above. Press Ctrl + C (or Command + C on a Mac) to copy them.', false);
+      }
+    }
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(text).then(function(){ say('Copied! Now paste your answers where your teacher asked you to turn them in.', true); }, fallback);
+    } else { fallback(); }
+  };
+})();
+</script>
 </body></html>

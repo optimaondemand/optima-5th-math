@@ -374,8 +374,8 @@ function switchTab(tab){
  updateProgress(); window.scrollTo({top:0,behavior:'smooth'});
 }
 function updateProgress(){const tabs=[...document.querySelectorAll('.tab-btn')]; const i=tabs.findIndex(b=>b.classList.contains('active')); const pct=Math.round(((i+1)/Math.max(tabs.length,1))*100); const f=document.getElementById('progressFill'); const p=document.getElementById('progressPct'); if(f)f.style.width=pct+'%'; if(p)p.textContent=pct+'%';}
-function autoSave(el,dotId){try{localStorage.setItem('g5u5-'+el.id,el.value)}catch(e){} const d=document.getElementById(dotId); if(d){d.classList.add('saved');setTimeout(()=>d.classList.remove('saved'),700)}}
-function restoreJournals(){document.querySelectorAll('textarea.journal-box').forEach(t=>{try{const v=localStorage.getItem('g5u5-'+t.id); if(v)t.value=v}catch(e){}})}
+function autoSave(el,dotId){try{localStorage.setItem('g5-05-01-'+el.id,el.value)}catch(e){} const d=document.getElementById(dotId); if(d){d.classList.add('saved');setTimeout(()=>d.classList.remove('saved'),700)}}
+function restoreJournals(){document.querySelectorAll('textarea.journal-box').forEach(t=>{try{const v=localStorage.getItem('g5-05-01-'+t.id); if(v)t.value=v}catch(e){}})}
 function gatherAnswers(){let out=document.title+'\n\n'; document.querySelectorAll('textarea[data-label]').forEach(t=>{out+=t.dataset.label+'\n'+(t.value.trim()||'[No answer yet]')+'\n\n'}); const g=document.getElementById('gatheredOutput'); if(g)g.value=out; return out;}
 function copyAnswers(){const out=gatherAnswers(); if(navigator.clipboard){navigator.clipboard.writeText(out)}}
 function downloadJournal(){const out=gatherAnswers(); const blob=new Blob([out],{type:'text/plain'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=(document.title||'math-journal').replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.txt'; a.click();}

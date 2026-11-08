@@ -545,6 +545,10 @@
       <textarea class="bd-w" id="prove" aria-label="Prove it: why is 1 mm the same as 0.001 m?"></textarea>
     </div>
   </section>
+  <section class="bd-sec" id="w3">
+    <h2><span class="n">WRAP-UP</span> The builder's window</h2>
+    <div class="bd-win" id="win3"></div>
+  </section>
   <section class="bd-sec" id="bd-site">
     <h2><span class="n">END OF DAY 1</span> The build site</h2>
     <div class="bd-site"><div class="lab"><b>Day 1 of 10</b><span id="bd-day">Set the four corner stakes.</span></div><div class="svgbox"></div></div>
@@ -581,7 +585,7 @@ window.BD_INIT = [function () {
   var IMG = { haghe: 'images/builders/g5b-haghe-pyramids.jpg', rod: 'images/builders/g5b-cubit-rod.jpg' };
   var siteSvg = '<svg class="sitesvg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"></svg>';
   BD.Win(document.getElementById('win1'), {
-    id: 'w1', title: 'Giza, about 2560 BCE', tag: 'Window 1 of 3',
+    id: 'w1', title: 'Giza, about 2560 BCE', tag: 'Window 1 of 2',
     teaser: 'Press play to meet the master builder.',
     scenes: [
       { id: 'art', img: IMG.haghe, ar: 1920 / 1247, cap: 'Pyramids of Gizeh · drawn by David Roberts in the 1830s · public domain' },
@@ -601,6 +605,17 @@ window.BD_INIT = [function () {
         choice: { prompt: 'How many digits after the decimal point?', opts: [{ id: 'one', text: 'One digit (tenths)' }, { id: 'two', text: 'Two digits (hundredths)' }, { id: 'three', text: 'Three digits' }, { id: 'ns', text: 'I’m not sure yet' }] } },
       { scene: 'site', audio: 'audio/builders/hemiunu-w1-08.mp3', cam: [0, 0, 1], say: 'Let’s zoom into that last meter and find out.',
         task: { text: 'Start with the meter stick. Find 1 dm, 1 cm and 1 mm.', go: '#j1', label: 'Go to Job 1' } }
+    ]
+  });
+  BD.Win(document.getElementById('win3'), {
+    id: 'w3', title: 'Giza, end of Day 1', tag: 'Window 2 of 2',
+    teaser: 'Press play. Hemiunu checks your work.',
+    scenes: [ { id: 'art', img: IMG.haghe, ar: 1920 / 1247, cap: 'Pyramids of Gizeh · drawn by David Roberts in the 1830s · public domain' } ],
+    lines: [
+      { scene: 'art', audio: 'audio/builders/hemiunu-w3-01.mp3', cam: [0.3, 0.35, 1.6], say: 'The base is measured to the millimeter.' },
+      { scene: 'art', audio: 'audio/builders/hemiunu-w3-02.mp3', cam: [0.15, 0.15, 1.3], say: 'Good work, builder.' },
+      { scene: 'art', audio: 'audio/builders/hemiunu-w3-03.mp3', cam: [0, 0, 1], say: 'Tomorrow we need even more care.',
+        task: { text: 'Set the four corner stakes to finish Day 1.', go: '#bd-site', label: 'Go to the build site' } }
     ]
   });
   var s = document.querySelector('#win1 .sitesvg'); BD.drawSite(s, 1, { id: 'win', drawCords: true });
@@ -641,6 +656,7 @@ window.BD_INIT = [function () {
     { sel: '#j6', say: 'Find the flag first. Which two marks is it between?', ask: [{ q: 'What happens when I zoom in?', a: 'The part you tap is divided into 10 equal parts.' }] },
     { sel: '#j7', say: 'Simplify in a single step.', ask: [{ q: 'Which numbers divide 1,000?', a: '2, 4, 5, 8, 10, 20, 25, 40, 50, 100, 125, 200, 250, 500.' }] },
     { sel: '#j8', say: 'You have done all of this today. Take your time.', ask: [] },
+    { sel: '#w3', say: 'Press play. I want to see your work.', ask: [] },
     { sel: '#bd-site', say: 'Drive the four stakes to finish Day 1.', ask: [{ q: 'What happens tomorrow?', a: 'My crews lay the first layer of stones.' }] }
   ]);
 }];

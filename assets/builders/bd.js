@@ -533,8 +533,8 @@
     var g = $('#gather'); if (!g) return; var out = $('#gathered');
     var pr = $('#prove'); if (pr) { if (ST.prove) pr.value = ST.prove; pr.addEventListener('input', function () { ST.prove = pr.value; save(); }); }
     g.addEventListener('click', function () {
-      var t = ['Lesson 5.09.01 Thousandths', ''];
-      $$('.bd-job').forEach(function (j) { var sec = j.closest('.bd-sec'), h = $('h2', sec); var vals = $$('.bd-eq', j).map(function (p) { var c = p.cloneNode(true); $$('.bd-afb,.bd-stephd', c).forEach(function (x) { x.remove(); }); var ci = $$('input', c); $$('input', p).forEach(function (inp, i) { ci[i].replaceWith(document.createTextNode('[' + (inp.value || ' ') + ']')); }); $$('.bd-fr', c).forEach(function (f) { f.replaceWith(document.createTextNode(f.textContent.replace('][', ']/['))); }); return c.textContent.replace(/\s+/g, ' ').trim(); }); if (vals.length) { t.push(h.textContent.trim()); vals.forEach(function (v) { t.push('  ' + v); }); } });
+      var t = [((($('.bd-chip.lead') || {}).textContent || '').split('·')[0].trim() + ' ' + (($('.bd-title') || {}).textContent || '')).trim(), ''];
+      $$('.bd-job').forEach(function (j) { var sec = j.closest('.bd-sec'), h = $('h2', sec); var vals = $$('.bd-eq', j).map(function (p) { var c = p.cloneNode(true); $$('.bd-afb,.bd-stephd', c).forEach(function (x) { x.remove(); }); var cs = $$('select', c); $$('select', p).forEach(function (sl, i) { cs[i].replaceWith(document.createTextNode('[' + (sl.value || ' ') + ']')); }); var ci = $$('input', c); $$('input', p).forEach(function (inp, i) { ci[i].replaceWith(document.createTextNode('[' + (inp.value || ' ') + ']')); }); $$('.bd-fr', c).forEach(function (f) { f.replaceWith(document.createTextNode(f.textContent.replace('][', ']/['))); }); return c.textContent.replace(/\s+/g, ' ').trim(); }); if (vals.length) { t.push(h.textContent.trim()); vals.forEach(function (v) { t.push('  ' + v); }); } });
       var cwv = $('#crew-w'); if (cwv && cwv.value) t.push('', 'Math Crew: ' + cwv.value);
       var opv = $('#onepic'); if (opv && opv.value) t.push('', 'Big idea: ' + opv.value);
       if (pr) t.push('', 'Prove it: ' + pr.value);
@@ -546,7 +546,7 @@
   function predictionBack() {
     var box = $('#bd-predict-back'); if (!box) return;
     if (CFG.predict) { var P = CFG.predict, sh = function () { box.style.display = 'grid'; box.innerHTML = '<div class="bd-face" style="width:64px;height:64px">' + face('') + '</div><div><b>Hemiunu:</b> ' + P.html(ST[P.key || 'w1-predict']) + '</div>'; };
-      document.addEventListener('bd-done', function (e) { if (e.target.id === P.on || (e.target.closest && e.target.closest('#' + P.on))) sh(); }); document.addEventListener('bd-check', function () { if (P.onSteps && stepsDone(P.onSteps)) sh(); });
+      document.addEventListener('bd-done', function (e) { if (e.target.id === P.on || (e.target.closest && e.target.closest('#' + P.on))) sh(); }); document.addEventListener('bd-check', function () { setTimeout(function () { if (P.onSteps && stepsDone(P.onSteps)) sh(); }, 80); });
       if ((ST['disc-' + P.on] && ST['disc-' + P.on].done) || (P.onSteps && ST['st-' + P.onSteps] === -1)) sh(); return; }
     function show() { var p = ST['w1-predict']; var map = { one: 'one digit', two: 'two digits', three: 'three digits', ns: 'you weren’t sure yet' };
       box.innerHTML = '<div class="bd-face" style="width:64px;height:64px">' + face('') + '</div><div><b>Hemiunu:</b> ' + (p ? (p === 'ns' ? 'Before you zoomed, you weren’t sure. ' : 'Before you zoomed, you thought we would need ' + map[p] + ' after the point. ') : '') + 'You needed <b>three</b>: 2 tenths, 5 hundredths and 3 thousandths. What do you think now: why did it take three zooms?</div>'; }
@@ -573,7 +573,7 @@
     var g = $('#bd-guide'); if (g) { if (IMGS().full) { g.classList.remove('ph'); g.classList.add('full'); g.innerHTML = '<img src="' + IMGS().full + '" alt="Hemiunu, the master builder, holding his measuring rod">'; } else g.innerHTML = HEMI; }
   }
   function stepsDone(id) { var g = $('.bd-steps[data-id="' + id + '"]'); return g && g.classList.contains('all'); }
-  var JOBS = (CFG.jobs || ['s1', 's2b', 's3', 's4', 's5', 's6', 's7', 'j8']).map(function (id) { return id === 'j8' ? function () { return $$('#j8 .bd-ans').every(function (e) { return e.classList.contains('ok'); }) && ($('#prove') || {}).value && $('#prove').value.trim().length > 15; } : function () { return stepsDone(id); }; });
+  var JOBS = (CFG.jobs || ['s1', 's2b', 's3', 's4', 's5', 's6', 's7', 'j8']).map(function (id) { return id === 'j8' ? function () { return $$('#j8 .bd-ans').every(function (e) { return e.classList.contains('ok'); }) && $$('#j8 .bd-sel').every(function (e) { return e.classList.contains('ok'); }) && ($('#prove') || {}).value && $('#prove').value.trim().length > 15; } : function () { return stepsDone(id); }; });
   function progress() {
     var n = JOBS.filter(function (f) { return f(); }).length, p = $('.bd-prog');
     if (p) { $('.bar i', p).style.width = (n / JOBS.length * 100) + '%'; $('.n', p).textContent = n + ' of ' + JOBS.length + ' jobs'; }
@@ -792,9 +792,84 @@
     draw();
   }
 
+  /* ── compare chart: numbers lined up by place; tap places left to right until the digits differ ── */
+  var PN = ['ones', 'tenths', 'hundredths', 'thousandths'];
+  function Cmp(host) {
+    var id = host.id, nums = host.getAttribute('data-nums').split(','), labs = (host.getAttribute('data-labels') || '').split(',');
+    var fill = host.hasAttribute('data-fill'), unit = host.getAttribute('data-unit') || '';
+    var rows = nums.map(function (n) { var p = n.split('.'); var f = (p[1] || ''); return [p[0]].concat([0, 1, 2].map(function (k) { return f[k] != null ? f[k] : null; })); });
+    var blanks = rows.some(function (r) { return r.some(function (d) { return d == null; }); });
+    var st = ST['cmp-' + id] || { filled: false, chk: 0 }; if (!fill || !blanks) st.filled = true;
+    function dig(r, k) { var d = r[k]; return d == null ? (st.filled ? '0' : null) : d; }
+    function need() { var dmax = 0; for (var i = 0; i < rows.length; i++) for (var j = i + 1; j < rows.length; j++) { var d = 4; for (var k = 0; k < 4; k++) { if (+(rows[i][k] || 0) !== +(rows[j][k] || 0)) { d = k; break; } } dmax = Math.max(dmax, d === 4 ? 3 : d); } return dmax + 1; }
+    var N = need(), EQ = rows.length === 2 && [0, 1, 2, 3].every(function (k) { return +(rows[0][k] || 0) === +(rows[1][k] || 0); });
+    host.innerHTML = '<div class="bd-cgrid" style="grid-template-columns:auto repeat(4,minmax(0,1fr))"><div class="cl"></div>' + PN.map(function (p, k) { return '<button type="button" class="ch ' + ['o', 't', 'h', 'th'][k] + '" data-k="' + k + '">' + p.charAt(0).toUpperCase() + p.slice(1) + (k === 0 ? '<b class="pt">•</b>' : '') + '</button>'; }).join('') +
+      rows.map(function (r, i) { return '<div class="cl">' + (labs[i] || '') + '</div>' + [0, 1, 2, 3].map(function (k) { return '<div class="cc ' + ['o', 't', 'h', 'th'][k] + '" data-k="' + k + '" data-r="' + i + '"></div>'; }).join(''); }).join('') + '</div>' +
+      '<div class="bd-crow">' + (fill && blanks ? '<button type="button" class="bd-btn ghost zf">✏️ Write a 0 in each empty place</button>' : '') + '<p class="bd-fb" role="status"></p></div>';
+    var fb = $('.bd-fb', host), zf = $('.zf', host);
+    function draw(msg, bad) {
+      $$('.cc', host).forEach(function (c) { var r = rows[+c.getAttribute('data-r')], k = +c.getAttribute('data-k'), d = dig(r, k); c.textContent = d == null ? '' : d; c.classList.toggle('blank', d == null); c.classList.toggle('ghost', r[k] == null && st.filled); });
+      $$('.ch', host).forEach(function (b) { var k = +b.getAttribute('data-k'); b.classList.toggle('same', k < st.chk && (k < N - 1 || EQ)); b.classList.toggle('diff', !EQ && k === N - 1 && st.chk >= N); });
+      $$('.cc', host).forEach(function (c) { var k = +c.getAttribute('data-k'); c.classList.toggle('same', k < st.chk && (k < N - 1 || EQ)); c.classList.toggle('diff', !EQ && k === N - 1 && st.chk >= N); });
+      if (zf) zf.hidden = st.filled;
+      host.classList.toggle('filled', !!st.filled); host.classList.toggle('done', st.chk >= N);
+      if (msg != null) { fb.className = 'bd-fb' + (bad ? ' bad' : st.chk >= N ? ' ok' : ''); fb.innerHTML = msg; }
+      ST['cmp-' + id] = st; save();
+    }
+    if (zf) zf.addEventListener('click', function () { st.filled = true; draw('Zeros fill the empty places. The values do not change.'); document.dispatchEvent(new CustomEvent('bd-done')); });
+    host.addEventListener('click', function (e) {
+      var c = e.target.closest('.ch,.cc'); if (!c) return; var k = +c.getAttribute('data-k');
+      if (!st.filled) return draw('First write a 0 in each empty place, so every number has the same places.', true);
+      if (st.chk >= N) return;
+      if (k > st.chk) return draw('Start at the left. Check the ' + PN[st.chk] + ' place first.', true);
+      if (k < st.chk) return;
+      st.chk++; var ds = rows.map(function (r) { return dig(r, k); });
+      var msg = st.chk >= N ? (N === 4 && ds.every(function (d) { return d === ds[0]; }) ? 'Every place is the same. The numbers are equal.' : PN[k].charAt(0).toUpperCase() + PN[k].slice(1) + ': ' + ds.join(', ') + (rows.length > 2 ? '. Now you have checked enough places to put them all in order.' : '. Different! This place decides.'))
+        : PN[k].charAt(0).toUpperCase() + PN[k].slice(1) + ': ' + ds.join(', ') + (ds.every(function (d) { return d === ds[0]; }) ? '. Same. Move one place right.' : '. Some are different. Keep going to sort the rest.');
+      draw(msg); document.dispatchEvent(new CustomEvent('bd-done'));
+    });
+    draw(st.chk ? '' : 'Tap a place to compare it.');
+  }
+  /* ── number line to thousandths: tap where each number goes ── */
+  function NLine(host) {
+    var id = host.id, lo = Math.round(parseFloat(host.getAttribute('data-lo')) * 1000), hi = Math.round(parseFloat(host.getAttribute('data-hi')) * 1000), unit = host.getAttribute('data-unit') || '';
+    var pts = host.getAttribute('data-pts').split(',').map(function (p) { var q = p.split(':'); return { v: Math.round(parseFloat(q[0]) * 1000), s: q[0], lab: q[1] || q[0] }; });
+    var st = ST['nl-' + id] || { n: 0 }, span = hi - lo, nar, VW, X0, X1, W, FS, pend = null, COL = ['#1f3f8f', '#b0336a', '#1e8c5a', '#9a6a00'];
+    host.innerHTML = '<p class="bd-nlq"></p><svg class="bd-nlsvg" role="application" aria-label="Number line from ' + (lo / 1000) + ' to ' + (hi / 1000) + '. Tap a tick mark."></svg>' +
+      '<div class="bd-nlpick" hidden><button type="button" class="bd-btn ghost lt" aria-label="One tick left">◀</button><b class="rd"></b><button type="button" class="bd-btn ghost rt" aria-label="One tick right">▶</button><button type="button" class="bd-btn gold go">Place it ✓</button></div><p class="bd-fb" role="status"></p>';
+    var svg = $('svg', host), q = $('.bd-nlq', host), fb = $('.bd-fb', host), pick = $('.bd-nlpick', host);
+    function layout() { nar = host.clientWidth > 0 && host.clientWidth < 560; VW = nar ? 520 : 1000; FS = nar ? 1.5 : 1; X0 = nar ? 34 : 40; X1 = VW - X0; W = X1 - X0; svg.setAttribute('viewBox', '0 0 ' + VW + ' 190'); }
+    function x(v) { return X0 + (v - lo) / span * W; }
+    function fmt(v) { return (v / 1000).toFixed(3); }
+    function draw() {
+      svg.innerHTML = ''; NS('line', { x1: X0, y1: 110, x2: X1, y2: 110, stroke: '#3a2700', 'stroke-width': 3 }, svg);
+      for (var v = lo; v <= hi; v++) { var big = v % 10 === 0, mid = v % 5 === 0; NS('line', { x1: x(v), y1: 110 - (big ? 24 : mid ? 15 : 9), x2: x(v), y2: 110 + (big ? 24 : mid ? 15 : 9), stroke: big ? '#3a2700' : '#8a6417', 'stroke-width': big ? 3 : 1.6 }, svg);
+        if (big) NS('text', { x: x(v), y: 162, 'text-anchor': 'middle', 'font-size': 22 * (nar ? 1.15 : 1), 'font-weight': 900, fill: '#3a2700', text: (v / 1000).toFixed(2) }, svg);
+        NS('rect', { x: x(v) - W / span / 2, y: 60, width: W / span, height: 100, fill: 'transparent', class: 'tk', 'data-v': v, style: 'cursor:pointer' }, svg); }
+      if (pend != null) NS('path', { d: 'M' + x(pend) + ' 104 l-10 -18 h20 z', fill: '#8a8f9c' }, svg);
+      pts.slice(0, st.n).forEach(function (p, i) { var c = COL[i % 4], y = i % 2 ? 54 : 30; NS('path', { d: 'M' + x(p.v) + ' 104 l-9 -16 h18 z', fill: c }, svg);
+        var tx = Math.min(VW - 70, Math.max(70, x(p.v)));
+        NS('text', { x: tx, y: y, 'text-anchor': 'middle', 'font-size': 18 * (nar ? 1.2 : 1), 'font-weight': 900, fill: c, text: p.lab + (p.lab !== p.s ? ' (' + p.s + ')' : '') }, svg);
+        NS('line', { x1: x(p.v), y1: y + 6, x2: x(p.v), y2: 86, stroke: c, 'stroke-width': 1.5, 'stroke-dasharray': '3 3' }, svg); });
+      var cur = pts[st.n]; q.innerHTML = cur ? 'Tap where <b>' + cur.lab + (cur.lab !== cur.s ? ' (' + cur.s + (unit ? ' ' + unit : '') + ')' : '') + '</b> goes.' : 'All placed. The greater number is farther right.';
+      pick.hidden = pend == null || st.n >= pts.length; if (pend != null) $('.rd', pick).textContent = fmt(pend);
+      host.classList.toggle('done', st.n >= pts.length); ST['nl-' + id] = st; save();
+    }
+    function place(v) {
+      var p = pts[st.n]; if (!p) return;
+      if (v === p.v) { st.n++; pend = null; fb.className = 'bd-fb ok'; fb.textContent = p.s + ' is ' + Math.round(v - lo) + ' small ticks past ' + (lo / 1000).toFixed(2) + '.'; draw(); document.dispatchEvent(new CustomEvent('bd-done')); }
+      else { fb.className = 'bd-fb bad'; fb.textContent = 'That tick is ' + fmt(v) + '. Each small tick is 0.001. ' + ((p.s.split('.')[1] || '').length < 3 ? 'Write ' + p.s + ' with three places first: ' + fmt(p.v) + '.' : 'Count the small ticks from ' + (Math.floor(p.v / 10) / 100).toFixed(2) + '.'); }
+    }
+    svg.addEventListener('click', function (e) { var t = e.target.closest('.tk'); if (!t || st.n >= pts.length) return; var v = +t.getAttribute('data-v'); if (nar) { pend = v; fb.textContent = ''; draw(); } else place(v); });
+    $('.lt', pick).addEventListener('click', function () { pend = Math.max(lo, pend - 1); draw(); });
+    $('.rt', pick).addEventListener('click', function () { pend = Math.min(hi, pend + 1); draw(); });
+    $('.go', pick).addEventListener('click', function () { place(pend); });
+    layout(); draw(); function sync() { if (!host.clientWidth) return; var o = nar; layout(); if (o !== nar) { pend = null; draw(); } } if ('ResizeObserver' in window) new ResizeObserver(sync).observe(host); addEventListener('resize', sync);
+  }
+
   window.BD = { Hund: Hund, Museum: Museum, helper: helper, Win: Win, Zoom: Zoom, Block: Block, drawSite: drawSite, HEMI: HEMI, Discs: Discs };
   document.addEventListener('DOMContentLoaded', function () {
-    shell(); book(); lightbox(); site(); teach(); Build($('#build')); $$('.bd-discs').forEach(Discs); answers(); selects(); rulers(); stations(); gather(); predictionBack();
+    shell(); book(); lightbox(); site(); teach(); Build($('#build')); $$('.bd-discs').forEach(Discs); $$('.bd-cmp').forEach(Cmp); $$('.bd-nl').forEach(NLine); answers(); selects(); rulers(); stations(); gather(); predictionBack();
     (window.BD_INIT || []).forEach(function (f) { f(); });
     steps(); progress(); ['bd-check'].forEach(function (ev) { document.addEventListener(ev, function () { setTimeout(progress, 50); }); }); ['click', 'change', 'input', 'bd-done'].forEach(function (ev) { document.addEventListener(ev, function () { setTimeout(progress, 50); }, true); });
   });

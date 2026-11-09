@@ -486,7 +486,11 @@
         if (mmv === find) { show(mmv, true); h.classList.add('done'); ST[key] = 1; save(); fb.className = 'bd-fb ok'; fb.textContent = find === 100 ? 'Yes! 10 cm = 1 dm. 10 of these make 1 m.' : find === 10 ? 'Yes! 1 cm. 100 of these make 1 m.' : 'Yes! 1 mm. 1,000 of these make 1 m.'; document.dispatchEvent(new CustomEvent('bd-done')); }
         else { show(mmv, false); fb.className = 'bd-fb bad'; fb.textContent = 'That mark is ' + (mmv % 10 === 0 ? mmv / 10 + ' cm' : mmv + ' mm') + '. Try again.'; }
       }
-      svg.addEventListener('click', function (e) { var r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * W, mmv = Math.max(mm0, Math.min(mm1, Math.round((x - X0) / px + mm0))); if (find % 10 === 0 && Math.abs(mmv - Math.round(mmv / 10) * 10) <= 2) mmv = Math.round(mmv / 10) * 10; pick(mmv); });
+      var hit = NS('g', {}, svg); for (var hm = mm0; hm <= mm1; hm++) NS('rect', { x: X0 + (hm - mm0 - 0.5) * px, y: 0, width: px, height: 130, fill: '#000', 'fill-opacity': 0, 'data-mm': hm }, hit);
+      svg.addEventListener('click', function (e) { var t = e.target && e.target.closest ? e.target.closest('[data-mm]') : null, mmv;
+        if (t) mmv = +t.getAttribute('data-mm');
+        else { var x; try { var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; x = pt.matrixTransform(svg.getScreenCTM().inverse()).x; } catch (er) { var r = svg.getBoundingClientRect(); x = (e.clientX - r.left) / r.width * W; } mmv = Math.round((x - X0) / px + mm0); }
+        mmv = Math.max(mm0, Math.min(mm1, mmv)); if (find % 10 === 0 && Math.abs(mmv - Math.round(mmv / 10) * 10) <= 2) mmv = Math.round(mmv / 10) * 10; pick(mmv); });
       var kv = mm0; svg.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { kv = Math.min(mm1, kv + 1); show(kv, false); mark.firstChild.setAttribute('fill', '#1f3f8f'); e.preventDefault(); } if (e.key === 'ArrowLeft') { kv = Math.max(mm0, kv - 1); show(kv, false); mark.firstChild.setAttribute('fill', '#1f3f8f'); e.preventDefault(); } if (e.key === 'Enter') pick(kv); });
       if (ST[key]) { show(find, true); h.classList.add('done'); }
     });

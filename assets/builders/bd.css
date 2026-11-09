@@ -568,3 +568,9 @@ body.bd-onbook .bd-hcard{display:none}
 .bd-nlpick[hidden]{display:none}
 .bd-nlpick .rd{font:900 24px var(--sans);min-width:4.2em;text-align:center}
 .bd-nlpick .bd-btn{padding:8px 12px}
+/* ── rounding line (5.09.04) ── */
+.bd-rnd{margin:10px 0;background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 10px}
+.bd-rbtn{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:6px 0}
+.bd-rbtn[hidden]{display:none}
+.bd-rbtn .bd-btn{font-size:17px}
+.bd-rnd,.bd-nl{width:100%;max-width:780px}

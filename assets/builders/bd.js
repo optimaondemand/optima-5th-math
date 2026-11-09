@@ -867,9 +867,44 @@
     layout(); draw(); function sync() { if (!host.clientWidth) return; var o = nar; layout(); if (o !== nar) { pend = null; draw(); } } if ('ResizeObserver' in window) new ResizeObserver(sync).observe(host); addEventListener('resize', sync);
   }
 
+  /* ── rounding line: the two benchmarks at the rounding place, the halfway mark; place the number, pick the nearer benchmark ── */
+  function Rnd(host) {
+    var id = host.id, P = +host.getAttribute('data-place'), num = host.getAttribute('data-num'), unit = host.getAttribute('data-unit') || '';
+    var N = Math.round(parseFloat(num) * 1000), S = Math.pow(10, 3 - P), lo = Math.floor(N / S) * S, hi = lo + S, mid = lo + S / 2, sub = S / 10, tap = N % sub === 0;
+    var PNm = ['whole number', 'tenth', 'hundredth'][P];
+    var st = ST['rnd-' + id] || { ph: tap ? 0 : 1 }, X0 = 60, X1 = 940, W = X1 - X0;
+    function f(v) { return (v / 1000).toFixed(P); }
+    function x(v) { return X0 + (v - lo) / S * W; }
+    host.innerHTML = '<p class="bd-nlq"></p><svg class="bd-nlsvg" viewBox="0 0 1000 200" role="application" aria-label="Number line from ' + f(lo) + ' to ' + f(hi) + '"></svg>' +
+      '<div class="bd-rbtn"><button type="button" class="bd-btn ghost dn"></button><button type="button" class="bd-btn ghost up"></button></div><p class="bd-fb" role="status"></p>';
+    var svg = $('svg', host), q = $('.bd-nlq', host), fb = $('.bd-fb', host), dn = $('.dn', host), up = $('.up', host);
+    dn.textContent = '◀ Round to ' + f(lo); up.textContent = 'Round to ' + f(hi) + ' ▶';
+    function draw() {
+      var k = host.clientWidth && host.clientWidth < 560 ? 1.9 : 1; svg.setAttribute('viewBox', '0 0 1000 ' + (k > 1 ? 240 : 200));
+      svg.innerHTML = ''; NS('line', { x1: X0, y1: 120, x2: X1, y2: 120, stroke: '#3a2700', 'stroke-width': 4 }, svg);
+      for (var i = 0; i <= 10; i++) { var v = lo + i * sub, end = i === 0 || i === 10, half = i === 5;
+        NS('line', { x1: x(v), y1: 120 - (end ? 30 : half ? 22 : 12), x2: x(v), y2: 120 + (end ? 30 : half ? 22 : 12), stroke: half ? '#c0392b' : '#3a2700', 'stroke-width': end ? 4 : half ? 3 : 2, 'stroke-dasharray': half ? '6 4' : '' }, svg);
+        if (tap && st.ph === 0) NS('rect', { x: x(v) - W / 20, y: 70, width: W / 10, height: 100, fill: 'transparent', class: 'tk', 'data-v': v, style: 'cursor:pointer' }, svg); }
+      [lo, hi].forEach(function (v) { NS('text', { x: x(v), y: k > 1 ? 222 : 182, 'text-anchor': 'middle', 'font-size': 30 * k, 'font-weight': 900, fill: '#1F2A44', text: f(v) }, svg); });
+      NS('text', { x: x(mid), y: k > 1 ? 222 : 182, 'text-anchor': 'middle', 'font-size': 18 * k, 'font-weight': 800, fill: '#c0392b', text: 'halfway ' + (mid / 1000).toFixed(P + 1) }, svg);
+      if (st.ph >= 1) { NS('path', { d: 'M' + x(N) + ' 112 l-12 -22 h24 z', fill: '#1f3f8f' }, svg); NS('text', { x: Math.min(900, Math.max(100, x(N))), y: 60, 'text-anchor': 'middle', 'font-size': 28 * k, 'font-weight': 900, fill: '#1f3f8f', text: num + (unit ? ' ' + unit : '') }, svg); }
+      if (st.ph >= 2) { var tgt = N >= mid ? hi : lo; NS('path', { d: 'M' + x(N) + ' 135 Q ' + (x(N) + x(tgt)) / 2 + ' 175 ' + x(tgt) + ' 140', fill: 'none', stroke: '#1e8c5a', 'stroke-width': 4, 'marker-end': '' }, svg); NS('circle', { cx: x(tgt), cy: 120, r: 12, fill: '#1e8c5a' }, svg); }
+      q.innerHTML = st.ph === 0 ? 'Tap where <b>' + num + '</b> goes.' : st.ph === 1 ? 'Is ' + num + ' closer to ' + f(lo) + ' or ' + f(hi) + '? Round to the nearest ' + PNm + '.' : num + ' ≈ <b>' + f(N >= mid ? hi : lo) + '</b> (nearest ' + PNm + ')';
+      $('.bd-rbtn', host).hidden = st.ph !== 1; host.classList.toggle('done', st.ph >= 2); ST['rnd-' + id] = st; save();
+    }
+    svg.addEventListener('click', function (e) { var t = e.target.closest('.tk'); if (!t || st.ph !== 0) return; var v = +t.getAttribute('data-v');
+      if (v === N) { st.ph = 1; fb.className = 'bd-fb ok'; fb.textContent = num + ' is ' + ((N - lo) / sub) + ' small ticks past ' + f(lo) + '.'; draw(); document.dispatchEvent(new CustomEvent('bd-done')); }
+      else { fb.className = 'bd-fb bad'; fb.textContent = 'That tick is ' + (v / 1000).toFixed(P + 1) + '. Count the small ticks from ' + f(lo) + '.'; } });
+    function pick(v) { var right = N >= mid ? hi : lo;
+      if (v === right) { st.ph = 2; fb.className = 'bd-fb ok'; fb.textContent = N === mid ? num + ' is exactly halfway. We round up to ' + f(hi) + '.' : N > mid ? num + ' is past halfway, so it is closer to ' + f(hi) + '.' : num + ' is before halfway, so it is closer to ' + f(lo) + '.'; draw(); document.dispatchEvent(new CustomEvent('bd-done')); }
+      else { fb.className = 'bd-fb bad'; fb.textContent = N === mid ? 'It sits exactly on halfway. When a number is halfway, we round up.' : 'Look at the red halfway mark. Which side of it is ' + num + ' on?'; } }
+    dn.addEventListener('click', function () { pick(lo); }); up.addEventListener('click', function () { pick(hi); });
+    draw(); if ('ResizeObserver' in window) { var lw = 0; new ResizeObserver(function () { var w = host.clientWidth; if (w && (w < 560) !== (lw < 560 && lw > 0) ) draw(); lw = w; }).observe(host); }
+  }
+
   window.BD = { Hund: Hund, Museum: Museum, helper: helper, Win: Win, Zoom: Zoom, Block: Block, drawSite: drawSite, HEMI: HEMI, Discs: Discs };
   document.addEventListener('DOMContentLoaded', function () {
-    shell(); book(); lightbox(); site(); teach(); Build($('#build')); $$('.bd-discs').forEach(Discs); $$('.bd-cmp').forEach(Cmp); $$('.bd-nl').forEach(NLine); answers(); selects(); rulers(); stations(); gather(); predictionBack();
+    shell(); book(); lightbox(); site(); teach(); Build($('#build')); $$('.bd-discs').forEach(Discs); $$('.bd-cmp').forEach(Cmp); $$('.bd-nl').forEach(NLine); $$('.bd-rnd').forEach(Rnd); answers(); selects(); rulers(); stations(); gather(); predictionBack();
     (window.BD_INIT || []).forEach(function (f) { f(); });
     steps(); progress(); ['bd-check'].forEach(function (ev) { document.addEventListener(ev, function () { setTimeout(progress, 50); }); }); ['click', 'change', 'input', 'bd-done'].forEach(function (ev) { document.addEventListener(ev, function () { setTimeout(progress, 50); }, true); });
   });

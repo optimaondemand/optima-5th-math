@@ -8,7 +8,7 @@
    Saving: localStorage (this device). */
 (function () {
   'use strict';
-  var KEY = 'g5bd-5-09-01';
+  var CFG = window.BD_CFG || {}, KEY = CFG.key || 'g5bd-5-09-01';
   var ST = {}; try { ST = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
   function save() { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch (e) {} }
   function $(s, r) { return (r || document).querySelector(s); }
@@ -125,6 +125,8 @@
 
   function site() {
     var host = $('#bd-site'); if (!host) return;
+    var DAY = CFG.day || 1;
+    if (DAY > 1) return siteDay(host, DAY);
     var svg = NS('svg', { role: 'img', 'aria-label': 'The building site of the Great Pyramid' }, $('.svgbox', host));
     var done = ST.stakes || [];
     drawSite(svg, 1, { id: 'main', drawCords: done.length === 4 });
@@ -154,13 +156,41 @@
     btn && btn.addEventListener('click', function () { var on = btn.getAttribute('aria-pressed') !== 'true'; btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Back to today' : 'Peek at the finished pyramid'; drawSite(svg, on ? 10 : 1, { id: 'main', drawCords: done.length === 4 }); lab.querySelector('b').textContent = on ? 'The last day of Unit 9' : 'Day 1 of 10'; mark(); });
   }
 
+  /* day 2+: tap the ghost blocks to finish today's stage */
+  function siteDay(host, DAY) {
+    var svg = NS('svg', { role: 'img', 'aria-label': 'The building site of the Great Pyramid, day ' + DAY }, $('.svgbox', host));
+    var N = 4, done = ST.blocks || [], lab = $('.lab', host), btn = $('#bd-reveal'), msg = $('#bd-site-msg'), D = CFG.site || {};
+    function ghosts() {
+      $$('.gblk', svg).forEach(function (n) { n.remove(); });
+      if (done.length >= N) return;
+      for (var i = 0; i < N; i++) { var q = lerp(Lp, Rp, .14 + i * .22), on = done.indexOf(i) >= 0;
+        var gb = NS('g', { class: 'gblk', 'data-i': i, transform: 'translate(' + q[0] + ',' + (q[1] - 6) + ')', tabindex: 0, role: 'button', 'aria-label': 'Set block ' + (i + 1), style: 'cursor:pointer' }, svg);
+        NS('rect', { x: -26, y: -26, width: 52, height: 26, rx: 2, fill: on ? '#d8b06d' : 'rgba(255,255,255,.55)', stroke: on ? '#8a6417' : '#fff', 'stroke-width': 2, 'stroke-dasharray': on ? '' : '5 4' }, gb);
+        if (!on) NS('text', { x: 0, y: -8, 'text-anchor': 'middle', 'font-size': 14, 'font-weight': 900, fill: '#6b4700', text: 'tap' }, gb); }
+    }
+    function draw() {
+      drawSite(svg, done.length >= N ? DAY : DAY - 1, { id: 'main', drawCords: true, static: true }); ghosts();
+      msg.textContent = done.length < N ? (D.todo || 'Tap each block to set it') + ' (' + done.length + ' of ' + N + ').' : (D.doneMsg || 'Done for today.');
+      if (done.length >= N) { lab.classList.add('done'); $('#bd-day').textContent = D.doneLab || ('Day ' + DAY + ' done.'); }
+    }
+    function set(i) { if (done.indexOf(i) >= 0) return; done.push(i); ST.blocks = done; save(); draw(); if (done.length >= N) document.dispatchEvent(new CustomEvent('bd-done')); }
+    svg.addEventListener('click', function (e) { var g = e.target.closest('.gblk'); if (g) set(+g.getAttribute('data-i')); });
+    svg.addEventListener('keydown', function (e) { var g = e.target.closest('.gblk'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); set(+g.getAttribute('data-i')); } });
+    draw();
+    var reel = $('.bd-reel', host);
+    for (var k = 1; k <= 10; k++) { var f = el('figure', k === DAY ? 'now' : (k > DAY ? 'lock' : '')); var sv = NS('svg', { 'aria-hidden': 'true' }, f);
+      drawSite(sv, k, { id: 'r' + k, thumb: true, static: true, drawCords: true }); f.appendChild(el('figcaption', '', STAGES[k][0] + '<br>' + STAGES[k][1])); reel.appendChild(f); }
+    btn && btn.addEventListener('click', function () { var on = btn.getAttribute('aria-pressed') !== 'true'; btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Back to today' : 'Peek at the finished pyramid';
+      if (on) { drawSite(svg, 10, { id: 'main', static: true }); } else draw(); lab.querySelector('b').textContent = on ? 'The last day of Unit 9' : 'Day ' + DAY + ' of 10'; });
+  }
+
   /* ═══ the builder's window ═══════════════════════════════ */
   function Win(host, cfg) {
     var i = -1, typing = null, lines = cfg.lines, picked = ST[cfg.id + '-predict'];
     host.innerHTML =
       '<div class="top"><span class="ttl">' + cfg.title + '</span><span class="tr"><button type="button" class="snd" aria-pressed="true">🔊 Voice on</button> ' + cfg.tag + '</span></div>' +
       '<div class="bd-cam">' + cfg.scenes.map(function (s, k) { return '<div class="layer' + (k ? ' off' : '') + '" data-scene="' + s.id + '"><div class="pic" style="background-image:url(' + s.img + ')"></div>' + (s.svg || '') + '<div class="vignette"></div>' + (s.cap ? '<div class="cap">' + s.cap + '</div>' : '') + '</div>'; }).join('') +
-      (IMGS().full ? '<img class="bd-walk" src="' + IMGS().full + '" alt="">' : '') +
+      (IMGS().walk || IMGS().full ? '<img class="bd-walk" src="' + (IMGS().walk || IMGS().full) + '" alt="">' : '') +
       '<div class="bd-close" role="dialog" aria-modal="false"><div class="im"></div><div class="tx"></div><button class="x" type="button">Close ✕</button></div>' +
       '<div class="bd-play"><button type="button">▶ Step into the window</button></div></div>' +
       '<div class="bd-talk"><div class="bd-face">' + face('Hemiunu') + '</div><div class="bd-say" aria-live="polite"><div class="who">Hemiunu · master builder</div><div class="line"></div><div class="extra"></div>' +
@@ -371,21 +401,22 @@
     if (isNaN(x)) return 'Type a number.';
     var isDec = /\./.test(String(ans)), near = function (p, q) { return Math.abs(p - q) < 1e-9; };
     if (isDec) {
-      if (near(x, a * 1000)) return 'That counts the thousandths. Now write it as a decimal: ' + Math.round(a * 1000) + ' thousandths = 0.___ . The last digit goes in the 3rd place after the point.';
-      if (near(x, a * 100)) return 'That counts the hundredths. Write it as a decimal with the point in the right place.';
-      if (near(x, a * 10)) return a < 0.1 ? 'Too big by 10 times. Is there a 0 in the tenths place?' : 'Too big by 10 times. Check where the point goes. The last digit is thousandths: 3 places after the point.';
+      var pl = (String(ans).split('.')[1] || '').length, unit = ['tenths', 'hundredths', 'thousandths'][pl - 1] || 'thousandths', ord = ['1st', '2nd', '3rd'][pl - 1] || '3rd', P10 = Math.pow(10, pl);
+      if (String(x).replace(/0/g, '') === String(a).replace(/0/g, '') && !near(x, a)) return 'Check for an empty place. It needs a 0 to hold it.' + (h ? ' ' + h : '');
+      if (near(x, a * P10)) return 'That counts the ' + unit + '. Now write it as a decimal: ' + Math.round(a * P10) + ' ' + unit + ' = 0.___ . The last digit goes in the ' + ord + ' place after the point.';
+      if (near(x, a * 10)) return a < 0.1 ? 'Too big by 10 times. Is there a 0 in the tenths place?' : 'Too big by 10 times. Check where the point goes: ' + unit + ' are the ' + ord + ' place after the point.';
       if (near(x, a / 10)) return 'Too small by 10 times. You have one zero too many.';
-      if (near(x, a * 1000 / 100) || near(x, a * 1000 / 10)) return 'Check the places. Thousandths are the 3rd place after the point.';
+      if (near(x, a * 100) || near(x, a * 1000)) return 'Check the places. ' + unit.charAt(0).toUpperCase() + unit.slice(1) + ' are the ' + ord + ' place after the point.';
     }
     if (/denominator/.test(lab)) {
       if (x === 100 && a === 1000) return 'Thousandths: how many make 1 whole? 1,000, not 100.';
       if (x === 10 && a === 1000) return 'Thousandths: how many make 1 whole? 1,000.';
       var fr = inp.closest('.bd-fr'), top = fr && fr.querySelector('.bd-ans');
-      if (top) { var tv = parseFloat(top.value), ta = parseFloat(top.getAttribute('data-a')); if (tv && near(tv / x, ta / a) && x !== a) return 'Same amount, but not in simplest form. Divide the numerator and denominator again by the same number.'; }
+      if (top) { var tv = parseFloat(top.value), ta = parseFloat(top.getAttribute('data-a')); if (tv && near(tv / x, ta / a) && x < a) return 'Same amount! Here, use a denominator of ' + a.toLocaleString('en-US') + ' to show the place.'; if (tv && near(tv / x, ta / a) && x !== a) return 'Same amount, but not in simplest form. Divide the numerator and denominator again by the same number.'; }
     }
     if (/numerator/.test(lab)) {
       var fr2 = inp.closest('.bd-fr'), bot = fr2 && fr2.querySelectorAll('.bd-ans')[1];
-      if (bot) { var bv = parseFloat(bot.value), ba = parseFloat(bot.getAttribute('data-a')); if (bv && near(x / bv, a / ba) && bv !== ba) return 'Same amount, but not in simplest form. Divide the numerator and denominator again by the same number.'; }
+      if (bot) { var bv = parseFloat(bot.value), ba = parseFloat(bot.getAttribute('data-a')); if (bv && near(x / bv, a / ba) && bv < ba) return 'Same amount! Here, use a denominator of ' + ba.toLocaleString('en-US') + ' to show the place.'; if (bv && near(x / bv, a / ba) && bv !== ba) return 'Same amount, but not in simplest form. Divide the numerator and denominator again by the same number.'; }
     }
     if (!isDec && Math.abs(x - a) <= 2 && a > 5) return 'Close! Count again carefully.' + (h ? ' ' + h : '');
     return h || (inp._tries > 1 ? 'Not yet. Look back at the example above.' : 'Not yet. Look again.');
@@ -514,6 +545,9 @@
   }
   function predictionBack() {
     var box = $('#bd-predict-back'); if (!box) return;
+    if (CFG.predict) { var P = CFG.predict, sh = function () { box.style.display = 'grid'; box.innerHTML = '<div class="bd-face" style="width:64px;height:64px">' + face('') + '</div><div><b>Hemiunu:</b> ' + P.html(ST[P.key || 'w1-predict']) + '</div>'; };
+      document.addEventListener('bd-done', function (e) { if (e.target.id === P.on || (e.target.closest && e.target.closest('#' + P.on))) sh(); }); document.addEventListener('bd-check', function () { if (P.onSteps && stepsDone(P.onSteps)) sh(); });
+      if ((ST['disc-' + P.on] && ST['disc-' + P.on].done) || (P.onSteps && ST['st-' + P.onSteps] === -1)) sh(); return; }
     function show() { var p = ST['w1-predict']; var map = { one: 'one digit', two: 'two digits', three: 'three digits', ns: 'you weren’t sure yet' };
       box.innerHTML = '<div class="bd-face" style="width:64px;height:64px">' + face('') + '</div><div><b>Hemiunu:</b> ' + (p ? (p === 'ns' ? 'Before you zoomed, you weren’t sure. ' : 'Before you zoomed, you thought we would need ' + map[p] + ' after the point. ') : '') + 'You needed <b>three</b>: 2 tenths, 5 hundredths and 3 thousandths. What do you think now: why did it take three zooms?</div>'; }
     document.addEventListener('bd-done', function (e) { if (e.target.id === 'zoom-north') { box.style.display = 'grid'; show(); } });
@@ -539,11 +573,11 @@
     var g = $('#bd-guide'); if (g) { if (IMGS().full) { g.classList.remove('ph'); g.classList.add('full'); g.innerHTML = '<img src="' + IMGS().full + '" alt="Hemiunu, the master builder, holding his measuring rod">'; } else g.innerHTML = HEMI; }
   }
   function stepsDone(id) { var g = $('.bd-steps[data-id="' + id + '"]'); return g && g.classList.contains('all'); }
-  var JOBS = ['s1', 's2b', 's3', 's4', 's5', 's6', 's7', 'j8'].map(function (id) { return id === 'j8' ? function () { return $$('#j8 .bd-ans').every(function (e) { return e.classList.contains('ok'); }) && ($('#prove') || {}).value && $('#prove').value.trim().length > 15; } : function () { return stepsDone(id); }; });
+  var JOBS = (CFG.jobs || ['s1', 's2b', 's3', 's4', 's5', 's6', 's7', 'j8']).map(function (id) { return id === 'j8' ? function () { return $$('#j8 .bd-ans').every(function (e) { return e.classList.contains('ok'); }) && ($('#prove') || {}).value && $('#prove').value.trim().length > 15; } : function () { return stepsDone(id); }; });
   function progress() {
     var n = JOBS.filter(function (f) { return f(); }).length, p = $('.bd-prog');
     if (p) { $('.bar i', p).style.width = (n / JOBS.length * 100) + '%'; $('.n', p).textContent = n + ' of ' + JOBS.length + ' jobs'; }
-    var t = { warmup: JOBS[0](), learn: JOBS.slice(1, 7).every(function (f) { return f(); }), swyk: JOBS[7]() };
+    var L = JOBS.length, t = { warmup: JOBS[0](), learn: JOBS.slice(1, L - 1).every(function (f) { return f(); }), swyk: JOBS[L - 1]() };
     $$('.bd-tab').forEach(function (b) { b.classList.toggle('done', !!t[b.getAttribute('data-tab')]); });
   }
 
@@ -667,7 +701,7 @@
   function selects() {
     $$('.bd-sel').forEach(function (sel, k) {
       var key = 'sel-' + k, fb = el('span', 'bd-afb'); sel.insertAdjacentElement('afterend', fb);
-      function chk() { if (!sel.value) { sel.className = 'bd-sel'; fb.textContent = ''; return; } var ok = sel.value === sel.getAttribute('data-a'); sel.className = 'bd-sel ' + (ok ? 'ok' : 'bad'); fb.className = 'bd-afb' + (ok ? '' : ' bad'); fb.textContent = ok ? '' : 'Look at the place of the last digit.'; document.dispatchEvent(new CustomEvent('bd-check')); }
+      function chk() { if (!sel.value) { sel.className = 'bd-sel'; fb.textContent = ''; return; } var ok = sel.value === sel.getAttribute('data-a'); sel.className = 'bd-sel ' + (ok ? 'ok' : 'bad'); fb.className = 'bd-afb' + (ok ? '' : ' bad'); fb.textContent = ok ? '' : (sel.getAttribute('data-hint') || 'Look at the place of the last digit.'); document.dispatchEvent(new CustomEvent('bd-check')); }
       if (ST[key]) sel.value = ST[key];
       sel.addEventListener('change', function () { ST[key] = sel.value; save(); chk(); }); if (sel.value) chk();
     });
@@ -713,9 +747,54 @@
     draw();
   }
 
-  window.BD = { Hund: Hund, Museum: Museum, helper: helper, Win: Win, Zoom: Zoom, Block: Block, drawSite: drawSite, HEMI: HEMI };
+  /* ── place-value discs: a chart Ones | Tenths | Hundredths | Thousandths; add, take away, break 1 into 10, trade 10 for 1 ── */
+  var DCOL = [{ n: 'ones', N: 'Ones', c: 'o', lab: '1', v: 1000 }, { n: 'tenths', N: 'Tenths', c: 't', lab: '0.1', v: 100 }, { n: 'hundredths', N: 'Hundredths', c: 'h', lab: '0.01', v: 10 }, { n: 'thousandths', N: 'Thousandths', c: 'th', lab: '0.001', v: 1 }];
+  function dval(c) { var t = c[0] * 1000 + c[1] * 100 + c[2] * 10 + c[3], w = Math.floor(t / 1000), f = String(t % 1000).padStart(3, '0'); return w + '.' + f; }
+  function Discs(host) {
+    var id = host.id, T = (host.getAttribute('data-target') || '').split(',').filter(Boolean).map(Number), S0 = (host.getAttribute('data-start') || '0,0,0,0').split(',').map(Number);
+    var show = host.getAttribute('data-mode') === 'show', trade = host.hasAttribute('data-trade'), tonly = host.hasAttribute('data-tradeonly'), unit = host.getAttribute('data-unit') || '';
+    var st = show ? { c: S0.slice() } : (ST['disc-' + id] || { c: S0.slice() }), c = st.c;
+    host.innerHTML = '<div class="bd-dmat" role="group" aria-label="Place-value chart with discs">' + DCOL.map(function (d, k) {
+      return '<div class="col ' + d.c + '" data-k="' + k + '"><div class="hd">' + d.N + (k === 0 ? '<b class="pt" aria-hidden="true">•</b>' : '') + '</div><div class="pile" aria-live="polite"></div>' +
+        (show ? '' : '<div class="ctl">' + (tonly ? '' : '<button type="button" class="mn" aria-label="Take away one ' + d.lab + ' disc">−</button><button type="button" class="pl" aria-label="Add one ' + d.lab + ' disc">+</button>') + '</div>' +
+          (trade ? '<div class="tr">' + (k < 3 ? '<button type="button" class="brk">Break 1 into 10 ▸</button>' : '') + (k > 0 ? '<button type="button" class="bun">◂ Trade 10 for 1</button>' : '') + '</div>' : '')) + '</div>';
+    }).join('') + '</div>' + (show ? '' : '<div class="bd-dout"><div class="bd-num" aria-live="polite"></div><p class="bd-fb" role="status"></p></div>');
+    var num = $('.bd-num', host), fb = $('.bd-fb', host);
+    function draw(pop) {
+      $$('.col', host).forEach(function (col, k) {
+        var d = DCOL[k], p = $('.pile', col);
+        p.innerHTML = Array.apply(null, Array(Math.min(c[k], 20))).map(function (_, i) { return '<i class="dk ' + d.c + (pop === k && i === c[k] - 1 ? ' pop' : '') + '">' + d.lab + '</i>'; }).join('') + (c[k] > 20 ? '<small>+' + (c[k] - 20) + '</small>' : '');
+        p.setAttribute('aria-label', c[k] + ' ' + d.lab + ' discs');
+        if (!show) { var mn = $('.mn', col), br = $('.brk', col), bu = $('.bun', col); if (mn) mn.disabled = c[k] === 0; if (br) br.disabled = c[k] === 0; if (bu) bu.disabled = c[k] < 10; }
+      });
+      if (show) return;
+      var small = c.every(function (v, k) { return k === 0 ? v < 10 : v < 10; });
+      num.innerHTML = small ? '<span class="d o">' + c[0] + '</span>.' + [1, 2, 3].map(function (k) { return '<span class="d ' + DCOL[k].c + '">' + c[k] + '</span>'; }).join('') + (unit ? '<span class="u">' + unit + '</span>' : '')
+        : '<span class="d">' + dval(c) + '</span>' + (unit ? '<span class="u">' + unit + '</span>' : '');
+      var ok = T.length === 4 && T.every(function (v, k) { return c[k] === v; }), pre = 0;
+      for (var k = 0; k < 4 && T.length === 4; k++) { if (c[k] === T[k]) pre = k + 1; else break; }
+      DCOL.forEach(function (_, k) { host.classList.toggle('c' + k, pre > k); });
+      var over = -1; if (T.length === 4) for (var j = 0; j < 4; j++) if (c[j] > T[j] && !trade) { over = j; break; }
+      fb.className = 'bd-fb' + (ok ? ' ok' : ''); fb.textContent = ok ? (host.getAttribute('data-ok') || 'That matches.') : over >= 0 ? 'Too many ' + DCOL[over].n + '. Take one away.' : '';
+      if (ok !== !!st.done) { st.done = ok; }
+      host.classList.toggle('done', ok);
+      ST['disc-' + id] = st; save();
+    }
+    if (!show) host.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b || b.disabled) return; var k = +b.closest('.col').getAttribute('data-k'), pop = k;
+      if (b.classList.contains('pl')) { if (c[k] >= 19) return; c[k]++; }
+      else if (b.classList.contains('mn')) c[k]--;
+      else if (b.classList.contains('brk')) { c[k]--; c[k + 1] += 10; pop = k + 1; }
+      else if (b.classList.contains('bun')) { c[k] -= 10; c[k - 1]++; pop = k - 1; }
+      else return;
+      draw(pop); host.dispatchEvent(new CustomEvent('bd-done', { bubbles: true }));
+    });
+    draw();
+  }
+
+  window.BD = { Hund: Hund, Museum: Museum, helper: helper, Win: Win, Zoom: Zoom, Block: Block, drawSite: drawSite, HEMI: HEMI, Discs: Discs };
   document.addEventListener('DOMContentLoaded', function () {
-    shell(); book(); lightbox(); site(); teach(); Build($('#build')); answers(); selects(); rulers(); stations(); gather(); predictionBack();
+    shell(); book(); lightbox(); site(); teach(); Build($('#build')); $$('.bd-discs').forEach(Discs); answers(); selects(); rulers(); stations(); gather(); predictionBack();
     (window.BD_INIT || []).forEach(function (f) { f(); });
     steps(); progress(); ['bd-check'].forEach(function (ev) { document.addEventListener(ev, function () { setTimeout(progress, 50); }); }); ['click', 'change', 'input', 'bd-done'].forEach(function (ev) { document.addEventListener(ev, function () { setTimeout(progress, 50); }, true); });
   });

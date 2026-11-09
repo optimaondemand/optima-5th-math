@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 9 Family Guide · 5th Grade Math · Optima Academy Online</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700;800;900&display=swap');
+:root{--navy:#0E1C42;--ink:#3A4A6B;--muted:#5E6C8C;--brown:#3B2417;--terra:#B07A12;--terra-bg:#FFF4DA;--cream:#FFF8EC;--line:#E8DCC8;
+ --sky-bg:#EAF8FD;--gold-bg:#FFF3DC;--green-bg:#E3F8ED;--plum-bg:#F1ECFA;--k:#6B3FA0;--h:#3A6B9A;--t:#2DB87A;--o:#E07B39;}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:"Nunito",sans-serif;font-size:18px;line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 48px}
+h1,h2,h3{font-family:"Lora",Georgia,serif;color:var(--navy);margin:0}
+p{margin:0 0 10px} strong{color:var(--navy)}
+.px{font-family:"Nunito",sans-serif;font-weight:900;letter-spacing:.08em}
+.hero{background:var(--navy);color:#fff;border:3px solid var(--brown);border-radius:18px;padding:26px 28px;position:relative;overflow:hidden}
+.hero .brand{font-size:15px;color:#BFD0EE;margin-bottom:10px;text-transform:uppercase}
+.hero h1{color:#fff;font-size:34px;line-height:1.2;margin-bottom:6px}
+.hero .sub{font-size:19px;color:#DCE6F7;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 13px;font-size:16px;font-weight:700}
+.hero .town{position:absolute;right:18px;bottom:14px;opacity:.9}
+.print-btn{display:inline-block;margin-top:16px;background:var(--terra);color:#fff;border:2px solid #fff;border-radius:10px;padding:8px 16px;font:800 16px "Nunito",sans-serif;cursor:pointer}
+.card{background:#fff;border:3px solid var(--brown);border-radius:16px;padding:22px 24px;margin-top:18px;box-shadow:0 4px 0 rgba(59,36,23,.12)}
+.card-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.card-head .ico{font-size:26px;line-height:1}
+.card-head h2{font-size:24px}
+.card-head .tag{margin-left:auto;font-size:14px;color:var(--terra)}
+ul.how{list-style:none;padding:0;margin:0}
+ul.how li{display:flex;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line)}
+ul.how li:last-child{border-bottom:none}
+ul.how .i{font-size:22px;width:30px;flex-shrink:0;text-align:center}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border-radius:12px;padding:14px 16px}
+.box-label{font-size:14px;text-transform:uppercase;margin-bottom:4px}
+.b-sky{background:var(--sky-bg)}.b-sky .box-label{color:#1F8CB0}
+.b-gold{background:var(--gold-bg)}.b-gold .box-label{color:#9A6C14}
+.b-green{background:var(--green-bg)}.b-green .box-label{color:#1F8452}
+.b-plum{background:var(--plum-bg)}.b-plum .box-label{color:#6A4FA3}
+.b-terra{background:var(--terra-bg)}.b-terra .box-label{color:#A6512A}
+table.days{width:100%;border-collapse:collapse}
+.days th{font-size:14px;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line);font-family:"Nunito",sans-serif;font-weight:900;letter-spacing:.06em}
+.days td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.days tr:last-child td{border-bottom:none}
+.ln{font-family:"Lora",Georgia,serif;font-weight:700;font-size:20px;color:var(--navy);white-space:nowrap}
+.ln span{display:block;font-family:"Nunito",sans-serif;font-size:14px;font-weight:700;color:var(--muted)}
+.ttl{font-weight:800;color:var(--navy)}
+.small{font-size:16px;color:var(--muted)}
+.eg{display:inline-block;background:var(--cream);border:1.5px solid var(--line);border-radius:8px;padding:2px 10px;font-weight:800;color:var(--navy);margin-top:4px}
+.chk-row td{background:#F6F2EA}
+.pill{display:inline-block;font-size:13px;font-weight:800;border-radius:999px;padding:2px 10px;margin:4px 4px 0 0;background:var(--plum-bg);color:#6A4FA3}
+.stairs{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:center}
+.stairs svg{width:100%;height:auto;display:block}
+.rule{display:flex;flex-direction:column;gap:8px}
+.rule div{background:var(--cream);border:2px solid var(--brown);border-radius:10px;padding:8px 12px;font-weight:800;color:var(--navy)}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.fact{border:2px solid var(--brown);border-radius:12px;padding:10px 12px;background:#fff}
+.fact h3{font-size:16px;font-family:"Nunito",sans-serif;font-weight:900;letter-spacing:.06em;color:var(--terra);margin-bottom:4px;text-transform:uppercase}
+.fact p{font-size:15px;margin:0;line-height:1.5}
+.words{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.word{background:var(--cream);border-radius:10px;padding:10px 14px}
+.word b{display:block;color:var(--navy);font-size:19px}
+.word span{font-size:16px}
+ol.home{margin:0;padding-left:22px} ol.home li{margin-bottom:10px}
+.mist li{margin-bottom:8px}
+.links a{color:#1F6FA0;font-weight:800}
+.tracker{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stop{border:2px dashed var(--brown);border-radius:12px;padding:10px;text-align:center;font-weight:800;color:var(--navy);font-size:15px;min-height:96px;display:flex;flex-direction:column;justify-content:space-between}
+.stop .bx{width:30px;height:30px;border:2.5px solid var(--brown);border-radius:6px;margin:6px auto 0;background:#fff}
+.stop.boss{background:var(--terra-bg);border-style:solid}
+.stop.test{background:#F6F2EA}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1;margin:0 .1em;font-size:.9em}
+.frac .num{border-bottom:1.6px solid currentColor;padding:0 .2em .05em}
+.frac .den{padding:.05em .2em 0}
+.note{font-size:14px;color:var(--muted);margin-top:8px}
+.foot{text-align:center;font-size:14px;color:var(--muted);margin-top:24px}
+@media(max-width:640px){.two,.stairs,.words{grid-template-columns:1fr}.facts{grid-template-columns:1fr 1fr}.tracker{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.hero .town{display:none}.days .hide-sm{display:none}}
+@media print{body{background:#fff;font-size:15px}.print-btn{display:none}.card{box-shadow:none;break-inside:avoid;border-width:2px}.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}.wrap{padding:0}}
+.pv{display:flex;gap:6px;align-items:flex-end;justify-content:center;margin:6px 0 4px}.pv span{text-align:center;font:900 13px "Nunito",sans-serif;padding:6px 10px;border-radius:8px}.pv span b{display:block;font-size:26px}.pv em{font-style:normal;font-size:30px;font-weight:900;padding-bottom:6px}.pv .o{background:#eef0f4;color:#3a4256}.pv .t{background:#f7ebc9;color:#6b4700}.pv .h{background:#d7efe2;color:#155c39}.pv .th{background:#fbe3ec;color:#8a2453}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="brand px">Family Guide · 5th Grade Math</div>
+  <h1>Unit 9: Decimals</h1>
+  <p class="sub">Thousandths, place value, comparing, rounding, and multiplying and dividing by 10, 100 and 1,000</p>
+  <div class="chips"><span class="chip">8 lessons</span><span class="chip">1 concept check</span><span class="chip">Unit test at the end</span><span class="chip">Dimensions Math 5B, Chapter 9</span></div>
+  <button class="print-btn" type="button" onclick="window.print()">🖨️ Print this guide</button>
+  <svg class="town" width="132" height="70" viewBox="0 0 132 70" aria-hidden="true">
+    <rect x="0" y="62" width="132" height="8" fill="#E2C48A"/>
+    <path d="M16 62 L60 12 L104 62 Z" fill="#E8C877"/><path d="M60 12 L104 62 L72 62 Z" fill="#B8913F"/>
+    <path d="M27 50 H93 M37 38 H83 M48 26 H72" stroke="#8A6417" stroke-width="1.5" opacity=".6"/>
+    <path d="M96 62 L114 40 L132 62 Z" fill="#D9B86A"/>
+    <circle cx="120" cy="14" r="7" fill="#FFE7A8"/>
+  </svg>
+</header>
+
+<section class="card">
+  <div class="card-head"><span class="ico">🧭</span><h2>How the Lesson Pages Work</h2></div>
+  <ul class="how">
+    <li><span class="i">🗂️</span><span><strong>Three tabs, in order:</strong> Warm-Up → Lesson → Show What You Know. The Lesson tab has three stops: <strong>Learn it</strong> (a short video and a guided build), <strong>Fix the mix-ups</strong>, and <strong>On your own</strong>.</span></li>
+    <li><span class="i">🏛️</span><span><strong>A master builder guides the unit.</strong> Short <strong>builder's windows</strong> open and close each lesson, with real paintings and photos. They are voiced; <strong>Voice on/off</strong> sits in the window. The <strong>Builder's windows</strong> button at the top hides them if they're distracting, and the math stays.</span></li>
+    <li><span class="i">🔨</span><span><strong>Every task is a "job," one step at a time.</strong> Your student builds the math on a tool first (place-value discs, number lines, compare charts), then writes it. Answer boxes check when your student presses Enter, and a wrong answer shows a hint. <strong>💬 Crew tips</strong> give an extra nudge.</span></li>
+    <li><span class="i">🙋</span><span><strong>Ask me.</strong> A small picture of the builder sits beside the work. Tapping it opens a tip for that part of the page and a few quick questions.</span></li>
+    <li><span class="i">💾</span><span><strong>Answers save as you type,</strong> but only in that browser on that computer. Switching computers or clearing the browser loses them.</span></li>
+    <li><span class="i">📋</span><span><strong>Turning it in:</strong> at the bottom of Show What You Know, press <strong>Gather my work</strong>, then <strong>Copy</strong>, and paste it into the lesson's assignment in Canvas. <strong>Print or save as PDF</strong> is there too. A lesson isn't turned in until it's submitted in Canvas.</span></li>
+    <li><span class="i">✏️</span><span><strong>Independent Practice, the Concept Check and the Unit Test are on Goblins,</strong> linked in the Canvas module after each lesson.</span></li>
+    <li><span class="i">🔊</span><span><strong>Read aloud</strong> at the top reads the page aloud. The <strong>math tools</strong> drawer opens extra virtual manipulatives.</span></li>
+  </ul>
+  <p class="note">The builder's story pages start with lessons 9.01–9.04. The rest of the unit is being added, so a later lesson page may still look a little different.</p>
+</section>
+
+<section class="card">
+  <div class="card-head"><span class="ico">🗺️</span><h2>This Unit at a Glance</h2></div>
+  <p>Your student already knows tenths and hundredths. This unit adds one more place, <strong>thousandths</strong>, and then uses all three: reading and writing decimals, finding the value of each digit, comparing and rounding, and multiplying and dividing by 10, 100 and 1,000. It ends with metric measurement and mental math with decimals.</p>
+  <div class="two">
+    <div class="box b-terra"><div class="box-label px">The big idea</div><p style="margin:0"><strong>Each place is worth 10 times as much as the place to its right.</strong> Divide 1 into 10 equal parts and you get tenths. Divide a tenth into 10 and you get hundredths. Divide again and you get thousandths.</p></div>
+    <div class="box b-sky"><div class="box-label px">The story</div><p style="margin:0">This unit is <strong>The Great Pyramid.</strong> Your student works beside <strong>Hemiunu</strong>, the real master builder of King Khufu's pyramid about 4,500 years ago (shown in an illustration). Each lesson is one day on the build site, from staking the base to setting the capstone. The history is real; the measurements are practice numbers.</p></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><span class="ico">📅</span><h2>Lesson by Lesson</h2></div>
+  <table class="days">
+    <thead><tr><th>Lesson</th><th>What we learn</th><th class="hide-sm">An example</th></tr></thead>
+    <tbody>
+      <tr><td class="ln">9.01<span>Thousandths</span></td><td><span class="ttl">A new place: thousandths. Reading and writing decimals to thousandths, and changing fractions to decimals and back.</span><br><span class="small">1 mm is 1 thousandth of a meter. Fractions with denominators like 8, 250 or 500 become decimals by finding a denominator of 1,000. Story: mark the base of the pyramid to the millimeter.</span></td><td class="hide-sm"><span class="eg">47 mm = <span class="frac"><span class="num">47</span><span class="den">1,000</span></span> m = 0.047 m</span><div class="small"><span class="frac"><span class="num">7</span><span class="den">8</span></span> = <span class="frac"><span class="num">875</span><span class="den">1,000</span></span> = 0.875</div></td></tr>
+      <tr><td class="ln">9.02<span>Place value</span></td><td><span class="ttl">The value of each digit, and expanded form.</span><br><span class="small">The same digit is worth 10 times as much in the place to its left. A 0 holds an empty place. Story: lay the first layer of stones.</span></td><td class="hide-sm"><span class="eg">5.318 = 5 + 0.3 + 0.01 + 0.008</span><div class="small">= 5 + <span class="frac"><span class="num">3</span><span class="den">10</span></span> + <span class="frac"><span class="num">1</span><span class="den">100</span></span> + <span class="frac"><span class="num">8</span><span class="den">1,000</span></span></div></td></tr>
+      <tr><td class="ln">9.03<span>Comparing</span></td><td><span class="ttl">Comparing and ordering decimals with &lt;, &gt; and =.</span><br><span class="small">Line up the decimal points and compare from the left. The first place with different digits decides. More digits does not mean a greater number. Story: check the new blocks.</span></td><td class="hide-sm"><span class="eg">2.6 &gt; 2.586</span><div class="small">2.600 and 2.586: tenths 6 &gt; 5.</div></td></tr>
+      <tr><td class="ln">9.04<span>Rounding</span></td><td><span class="ttl">Rounding to the nearest hundredth, tenth and whole number.</span><br><span class="small">Find the two benchmarks, look at the digit just to the right: 0–4 keep, 5–9 round up. The nearest hundredth of a meter is the nearest centimeter. Story: cut the passage stones.</span></td><td class="hide-sm"><span class="eg">3.784 ≈ 3.78 ≈ 3.8 ≈ 4</span><div class="small">Nearest hundredth, tenth, whole number.</div></td></tr>
+      <tr class="chk-row"><td class="ln">Check<span>On Goblins</span></td><td colspan="2"><span class="ttl">Concept Check.</span> <span class="small">A short check on lessons 9.01–9.04 that helps the teacher catch mix-ups before the unit test.</span></td></tr>
+      <tr><td class="ln">9.05<span>× 10, 100, 1,000</span></td><td><span class="ttl">Multiplying decimals by 10, 100 and 1,000.</span><br><span class="small">Each digit moves one place to the left for each 10. The decimal point stays put; the digits move.</span></td><td class="hide-sm"><span class="eg">0.36 × 100 = 36</span><div class="small">4.7 × 1,000 = 4,700</div></td></tr>
+      <tr><td class="ln">9.06<span>÷ 10, 100, 1,000</span></td><td><span class="ttl">Dividing by 10, 100 and 1,000.</span><br><span class="small">Each digit moves one place to the right for each 10. Zeros hold the empty places.</span></td><td class="hide-sm"><span class="eg">52 ÷ 1,000 = 0.052</span></td></tr>
+      <tr><td class="ln">9.07<span>Measures</span></td><td><span class="ttl">Converting metric measures with decimals.</span><br><span class="small">Kilometers and meters, kilograms and grams, liters and milliliters: 1,000 of the small unit make 1 of the big unit.</span></td><td class="hide-sm"><span class="eg">2.45 km = 2,450 m</span><div class="small">830 g = 0.83 kg</div></td></tr>
+      <tr><td class="ln">9.08<span>Mental math</span></td><td><span class="ttl">Multiplying and dividing decimals in your head.</span><br><span class="small">Think in units: 0.08 is 8 hundredths, so work with 8, then put the place back.</span></td><td class="hide-sm"><span class="eg">0.08 × 30 = 2.4</span><div class="small">8 hundredths × 3 × 10 = 240 hundredths</div></td></tr>
+      <tr class="chk-row"><td class="ln">Test<span>On Goblins</span></td><td colspan="2"><span class="ttl">Unit 9 Test.</span> <span class="small">Every skill from the unit, plus questions where your student explains how they know.</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <div class="card-head"><span class="ico">📐</span><h2>How We Teach It</h2></div>
+  <p>Your student first builds each number with a model on the screen: a meter stick divided into smaller and smaller equal parts, place-value discs, number lines. Then they see it on a place-value chart, and only then write the numbers. The picture we come back to all unit is the place-value chart, in the same colors as the Dimensions Math books:</p>
+  <div class="stairs">
+    <svg viewBox="0 0 300 196" role="img" aria-label="A staircase: 1 meter, 1 decimeter, 1 centimeter, 1 millimeter. Each step down divides by 10: 1, 0.1, 0.01, 0.001 meter.">
+      <rect x="4" y="14" width="74" height="180" fill="#eef0f4" stroke="#3B2417" stroke-width="2.5"/><text x="41" y="40" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="16" fill="#0E1C42">1 m</text><text x="41" y="60" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="13" fill="#3a4256">1</text>
+      <rect x="78" y="56" width="74" height="138" fill="#f7ebc9" stroke="#3B2417" stroke-width="2.5"/><text x="115" y="82" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="16" fill="#0E1C42">1 dm</text><text x="115" y="102" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="13" fill="#6b4700">0.1 m</text>
+      <rect x="152" y="98" width="74" height="96" fill="#d7efe2" stroke="#3B2417" stroke-width="2.5"/><text x="189" y="124" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="16" fill="#0E1C42">1 cm</text><text x="189" y="144" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="13" fill="#155c39">0.01 m</text>
+      <rect x="226" y="140" width="70" height="54" fill="#fbe3ec" stroke="#3B2417" stroke-width="2.5"/><text x="261" y="166" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="16" fill="#0E1C42">1 mm</text><text x="261" y="184" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="12" fill="#8a2453">0.001 m</text>
+      <rect x="84" y="28" width="62" height="20" rx="10" fill="#B07A12"/><text x="115" y="43" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="14" fill="#fff">÷10</text>
+      <rect x="158" y="70" width="62" height="20" rx="10" fill="#B07A12"/><text x="189" y="85" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="14" fill="#fff">÷10</text>
+      <rect x="232" y="112" width="62" height="20" rx="10" fill="#B07A12"/><text x="263" y="127" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="14" fill="#fff">÷10</text>
+    </svg>
+    <div>
+      <div class="pv"><span class="o">Ones<b>5</b></span><em>.</em><span class="t">Tenths<b>3</b></span><span class="h">Hundredths<b>1</b></span><span class="th">Thousandths<b>8</b></span></div>
+      <div class="rule" style="margin-top:10px"><div>⬅ One place left: 10 times as much</div><div>➡ One place right: <span class="frac"><span class="num">1</span><span class="den">10</span></span> as much</div><div>A 0 holds an empty place: 0.038 is not 0.38.</div></div>
+    </div>
+  </div>
+  <p style="margin-top:14px"><strong>Two ways to read a decimal.</strong> 0.526 is "zero point five two six" or "five hundred twenty-six thousandths." The second way shows the place value, so we use both.</p>
+</section>
+
+<section class="card">
+  <div class="card-head"><span class="ico">🧾</span><h2>The Numbers to Know</h2><span class="tag px">Fridge copy</span></div>
+  <div class="facts">
+    <div class="fact"><h3>Place value</h3><p>10 thousandths = 1 hundredth<br>10 hundredths = 1 tenth<br>10 tenths = 1 one</p></div>
+    <div class="fact"><h3>Length</h3><p>1 m = 10 dm<br>1 m = 100 cm<br>1 m = 1,000 mm<br>1 km = 1,000 m</p></div>
+    <div class="fact"><h3>Mass + capacity</h3><p>1 kg = 1,000 g<br>1 L = 1,000 mL<br>1 g = 0.001 kg<br>1 mL = 0.001 L</p></div>
+    <div class="fact"><h3>Rounding</h3><p>Look one digit to the right.<br>0–4: keep<br>5–9: round up<br>Halfway rounds up.</p></div>
+  </div>
+  <p class="note">Numbers less than 1 always get a 0 in the ones place: 0.25, not .25.</p>
+</section>
+
+<section class="card">
+  <div class="card-head"><span class="ico">🔤</span><h2>Words to Know</h2></div>
+  <div class="words">
+    <div class="word"><b>thousandth</b><span>1 of 1,000 equal parts of a whole; the 3rd place after the decimal point</span></div>
+    <div class="word"><b>place value</b><span>what a digit is worth because of where it sits: the 8 in 5.318 is worth 0.008</span></div>
+    <div class="word"><b>expanded form</b><span>a number written as the sum of the values of its digits</span></div>
+    <div class="word"><b>equivalent decimals</b><span>decimals that name the same amount, like 0.7, 0.70 and 0.700</span></div>
+    <div class="word"><b>benchmark</b><span>one of the two numbers you could round to, like 3.7 and 3.8</span></div>
+    <div class="word"><b>≈</b><span>"is about": 3.784 ≈ 3.8</span></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head"><span class="ico">⚠️</span><h2>Mix-Ups to Watch For</h2></div>
+  <ul class="mist">
+    <li><strong>A missing zero.</strong> 38 mm is 38 thousandths of a meter: 0.038 m, not 0.38 m.</li>
+    <li><strong>"More digits means bigger."</strong> 0.5 &gt; 0.483, because 5 tenths is more than 4 tenths. Write 0.5 as 0.500 to see it.</li>
+    <li><strong>Comparing like whole numbers.</strong> 0.48 &gt; 0.135, even though 48 is less than 135. Compare place by place from the left.</li>
+    <li><strong>Rounding twice.</strong> To the nearest tenth, 3.649 ≈ 3.6. Look only at the digit right after the rounding place.</li>
+    <li><strong>"Just add a zero."</strong> 2.5 × 10 is 25, not 2.50. The digits move one place left.</li>
+  </ul>
+</section>
+
+<section class="card">
+  <div class="card-head"><span class="ico">🏠</span><h2>Try It at Home</h2></div>
+  <ol class="home">
+    <li><strong>Kitchen scale.</strong> Weigh an apple or a bag of rice in grams. Write the weight in kilograms (for example, 186 g = 0.186 kg).</li>
+    <li><strong>Ruler hunt.</strong> Measure small things in millimeters, then say each length in meters, both ways: "zero point zero four two" and "forty-two thousandths."</li>
+    <li><strong>Race times.</strong> Look up winning times from a swim meet or track race. Which time is fastest? Put three of them in order.</li>
+    <li><strong>Receipt rounding.</strong> Round each price on a grocery receipt to the nearest dollar, then to the nearest tenth of a dollar (10 cents).</li>
+    <li><strong>Decimal War.</strong> Each player flips 3 cards (ace = 1; 10s and face cards = 0) and builds the greatest number they can as 0.___. Read both numbers aloud; the greater one wins the round.</li>
+  </ol>
+  <p class="note">The best question to ask at home: <strong>"What is that digit worth?"</strong></p>
+</section>
+
+<section class="card">
+  <div class="card-head"><span class="ico">📎</span><h2>Free Printables</h2></div>
+  <p class="links">From Singapore Math, the publisher of our Dimensions Math curriculum:</p>
+  <ul class="links">
+    <li><a href="https://singapore-math.s3.us-west-2.amazonaws.com/BLMs/DM_5_LETTERHOME_9.pdf" target="_blank" rel="noopener">Dimensions Math letter home for Chapter 9</a></li>
+  </ul>
+</section>
+
+<section class="card">
+  <div class="card-head"><span class="ico">✅</span><h2>Unit 9 Tracker</h2><span class="tag px">The Great Pyramid</span></div>
+  <p class="small">Check off each day as your student finishes it.</p>
+  <div class="tracker">
+    <div class="stop">9.01 Thousandths · base staked<div class="bx"></div></div>
+    <div class="stop">9.02 Place value · first layer<div class="bx"></div></div>
+    <div class="stop">9.03 Comparing · lower layers<div class="bx"></div></div>
+    <div class="stop">9.04 Rounding · passages<div class="bx"></div></div>
+    <div class="stop test">Concept Check · halfway up<div class="bx"></div></div>
+    <div class="stop">9.05 × 10, 100, 1,000<div class="bx"></div></div>
+    <div class="stop">9.06 ÷ 10, 100, 1,000<div class="bx"></div></div>
+    <div class="stop">9.07 Measures<div class="bx"></div></div>
+    <div class="stop">9.08 Mental math · capstone<div class="bx"></div></div>
+    <div class="stop boss">Unit 9 Test · the finished pyramid<div class="bx"></div></div>
+  </div>
+</section>
+
+<p class="foot">Optima Academy Online · 5th Grade Math · Unit 9 Family Guide</p>
+</div>
+</body>
+</html>

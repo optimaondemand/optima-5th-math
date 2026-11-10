@@ -596,10 +596,27 @@ window.OAOFrame = window.OAOFrame || (function () {
 
   /* ── shared shell: tabs, chips, progress (jobs finished, never tabs visited) ── */
   function shell() {
+    /* The book, Essential Question and objectives are open on the Warm-Up. On the Lesson and Show What You Know tabs they
+       fold into one slim bar with Show / Hide, remembered per tab (Bethany, 10 Nov 2026; same as G3). */
+    var foldBar = null;
+    function fold(t) {
+      var bk = $('.bd-board'), intro = $('.bd-intro'); if (!bk && !intro) return;
+      if (!foldBar) {
+        var ttl = ($('.bd-chap-t') || {}).textContent || 'The book', eq = ($('.bd-intro .bd-eq h3') || {}).textContent || '';
+        foldBar = document.createElement('div'); foldBar.className = 'bd-fold'; foldBar.hidden = true;
+        foldBar.innerHTML = '<span class="ic" aria-hidden="true">📖</span><span class="tx"><b></b><small></small></span><button type="button" class="bd-btn sm bd-foldbtn" aria-expanded="false"></button>';
+        $('b', foldBar).textContent = ttl; $('small', foldBar).textContent = (eq ? eq + ' · ' : '') + 'Today\u2019s objectives';
+        (bk || intro).parentNode.insertBefore(foldBar, bk || intro);
+        $('button', foldBar).addEventListener('click', function () { ST.unfold = ST.unfold || {}; ST.unfold[ST.tab] = !ST.unfold[ST.tab]; save(); fold(ST.tab); dispatchEvent(new Event('resize')); });
+      }
+      var later = t !== 'warmup', open = !later || !!(ST.unfold && ST.unfold[t]);
+      foldBar.hidden = !later; document.body.classList.toggle('bd-folded', !open);
+      var b = $('button', foldBar); b.textContent = open ? 'Hide ▴' : 'Show ▾'; b.setAttribute('aria-expanded', open);
+    }
     function show(t, el) {
       $$('.bd-tab').forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-tab') === t); });
       $$('.bd-panel').forEach(function (p) { p.hidden = p.getAttribute('data-panel') !== t; });
-      ST.tab = t; save(); dispatchEvent(new Event('resize'));
+      ST.tab = t; save(); fold(t); dispatchEvent(new Event('resize'));
       var tabs = $('.bd-tabs'); if (el) setTimeout(function () { el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }); }, 30);
       else if (tabs.getBoundingClientRect().top < 0) tabs.scrollIntoView({ block: 'start' });
     }
@@ -1022,6 +1039,8 @@ window.OAOFrame = window.OAOFrame || (function () {
   function target(step) {
     var need = step.getAttribute('data-need'), host = need ? $(need.split('.')[0]) : null;
     var box = host || step;
+    /* a disc chart: the hand goes on + in the column the step names (#d2.c1 = tenths), never on − (audit, 10 Nov 2026) */
+    var plus = $$('button.pl', box).filter(shown); if (plus.length) { var cm = /\.c(\d)$/.exec(need || ''); return plus[cm ? +cm[1] : 0] || plus[0]; }
     var list = ['.bd-rsvg', '.bd-zsvg', 'svg[tabindex]', '[role=application]', '[role=slider]', '[role=button]', '[tabindex="0"]', 'button:not(.hint):not(.bd-tipbtn)'];
     for (var i = 0; i < list.length; i++) { var t = $$(list[i], box).filter(shown)[0]; if (t) return t; }
     return null;

@@ -622,3 +622,10 @@ body.bd-onbook .bd-hcard{display:none}
 /* the place-value input chart fits a phone (it spilled past 390 px) */
 .bd-pvin{max-width:100%}
 @media(max-width:480px){.bd-pvin{gap:3px;padding:6px 5px}.bd-pvin span{font-size:11px;padding:5px 3px;letter-spacing:-.02em}.bd-pvin .bd-ans{width:2.1em}}
+
+/* the book + Essential Question + objectives fold into one slim bar after the Warm-Up (10 Nov 2026) */
+.bd-fold{display:flex;align-items:center;gap:12px;margin:14px 0 4px;padding:10px 14px;background:#fffaf0;border:1.5px solid #e6d7b4;border-radius:14px}
+.bd-fold[hidden]{display:none}
+.bd-fold .ic{font-size:24px}.bd-fold .tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.bd-fold .tx b{font-family:var(--serif,Georgia,serif);font-size:18px;color:#1F2A44}.bd-fold .tx small{font-size:13px;font-weight:700;color:#5B6478}
+body.bd-folded .bd-board,body.bd-folded .bd-intro{display:none}

@@ -913,3 +913,158 @@
     steps(); progress(); ['bd-check'].forEach(function (ev) { document.addEventListener(ev, function () { setTimeout(progress, 50); }); }); ['click', 'change', 'input', 'bd-done'].forEach(function (ev) { document.addEventListener(ev, function () { setTimeout(progress, 50); }, true); });
   });
 })();
+
+/* ── click cues + "Start here" (pilot-week feedback, 10 Nov 2026; the same cues as G3 and G4 math) ──────────
+   A 5th grader working alone should never wonder what to click, what to read or what comes next:
+   1. a key line under the header: hand = you can click it · 🔊 listen · 👉 do this now · 🔒 opens next;
+   2. a small hand inside every button; buttons press down; "JOB 1" / "Do" labels are plain text, not pills;
+   3. a bouncing hand on the tool the current step uses (gone on the first touch);
+   4. "▶ Start here": a drawer at the very top with Hemiunu's how-to video (Opti) and a Show-me-around tour;
+   5. a Continue button at the end of the Warm-Up; tabs, Next station and Continue go to the top of the lesson
+      inside Canvas too (the lesson sits in a tall iframe, so the Canvas page is what scrolls).
+   Nothing new uses position:fixed (in Canvas's tall iframe it would land at the bottom of the lesson). */
+(function () {
+  'use strict';
+  var HAND = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2.6a1.5 1.5 0 0 1 3 0V10h.6V8.2a1.5 1.5 0 0 1 3 0V10h.6V9.2a1.5 1.5 0 0 1 3 0v1.5h.3a1.4 1.4 0 0 1 2.8 0V16c0 3.6-2.6 6-6 6h-1.6c-2.2 0-3.8-.9-5-2.7l-4.1-5.5a1.6 1.6 0 0 1 2.5-2L9 14.6V2.6z"/></svg>';
+  var VID = 'assets/video/g5math-howto.mp4', SEEN = 'g5bd-howto-seen';
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return [].slice.call((r || document).querySelectorAll(s)); }
+  function el(t, c, h) { var n = document.createElement(t); if (c) n.className = c; if (h != null) n.innerHTML = h; return n; }
+  function shown(n) { var r = n.getBoundingClientRect(); return r.width > 0 && r.height > 0 && !n.closest('[hidden]'); }
+  function seen() { try { return !!localStorage.getItem(SEEN); } catch (e) { return false; } }
+  function markSeen() { try { localStorage.setItem(SEEN, '1'); } catch (e) {} }
+
+  function toTop() {
+    try { window.scrollTo({ top: 0, behavior: 'instant' }); } catch (e) { window.scrollTo(0, 0); }
+    try { if (window.top !== window.self) (document.body.firstElementChild || document.body).scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) {}
+    try { if (window.parent !== window) window.parent.postMessage(JSON.stringify({ subject: 'lti.scrollToTop' }), '*'); } catch (e) {}
+  }
+  window.BD_TOTOP = toTop;
+
+  function key() {
+    var hd = $('.bd-head'); if (!hd || $('.bd-key')) return;
+    var k = el('div', 'bd-key', '<span><i class="bd-key-hand"></i> You can click it.</span><span><b>🔊</b> You can listen.</span>' +
+      '<span><b>👉</b> The gold box says what to do now.</span><span><b>🔒</b> The next step opens when you finish this one.</span>');
+    hd.parentNode.insertBefore(k, hd.nextSibling);
+  }
+
+  /* ▶ Start here: a drawer at the very top, before the book and the Essential Question */
+  function start() {
+    var k = $('.bd-key'); if (!k || $('.bd-start')) return;
+    var d = el('details', 'bd-start');
+    d.innerHTML = '<summary><span class="t"><b>▶ Start here:</b> how this works</span><span class="s">New to these lessons? Watch Opti for 1 minute.</span></summary>' +
+      '<div class="b"><div class="hv" hidden><video controls playsinline preload="metadata"></video></div>' +
+      '<p class="ht">Watch Opti show how a lesson works. Or take the tour and click along.</p>' +
+      '<div class="bd-row2"><button type="button" class="bd-btn gold tour-go">🧭 Show me around</button><button type="button" class="bd-btn ghost how-x">Close</button></div></div>';
+    k.parentNode.insertBefore(d, k.nextSibling);
+    d.open = !seen();
+    var v = $('video', d), hv = $('.hv', d);
+    v.addEventListener('loadedmetadata', function () { hv.hidden = false; });
+    v.addEventListener('play', markSeen);
+    v.src = VID; v.poster = VID.replace(/\.mp4$/, '.jpg');
+    d.addEventListener('toggle', function () { if (!d.open) { if (!v.paused) v.pause(); markSeen(); } });
+    $('.how-x', d).addEventListener('click', function () { d.open = false; });
+    $('.tour-go', d).addEventListener('click', function () { d.open = false; tour(); });
+  }
+
+  /* the bouncing hand on the tool the current step uses */
+  var DRAG = /\b(drag|slide|move)\b/i;
+  function target(step) {
+    var need = step.getAttribute('data-need'), host = need ? $(need.split('.')[0]) : null;
+    var box = host || step;
+    var list = ['.bd-rsvg', '.bd-zsvg', 'svg[tabindex]', '[role=application]', '[role=slider]', '[role=button]', '[tabindex="0"]', 'button:not(.hint):not(.bd-tipbtn)'];
+    for (var i = 0; i < list.length; i++) { var t = $$(list[i], box).filter(shown)[0]; if (t) return t; }
+    return null;
+  }
+  function place(h) {
+    var m = h.parentNode, t = h._t; if (!m || !t || !t.isConnected || !shown(t)) { h.hidden = true; return; }
+    var mr = m.getBoundingClientRect(), r = t.getBoundingClientRect(), wide = r.width > 160;
+    h.hidden = false; h.style.left = (r.left - mr.left + (wide ? Math.min(60, r.width * .1) : r.width / 2) - 6) + 'px'; h.style.top = (r.top - mr.top + r.height * .45) + 'px';
+  }
+  function cue() {
+    $$('.bd-steps').forEach(function (g) {
+      var st = $('.bd-step.now', g), old = $('.bd-hand', g);
+      if (!st || !shown(st)) { if (old) old.remove(); return; }
+      if (old && old._st === st) { place(old); return; }
+      if (old) old.remove();
+      if (st._bdTouched) return;
+      var t = target(st); if (!t) return;
+      if (getComputedStyle(g).position === 'static') g.style.position = 'relative';
+      var h = el('span', 'bd-hand' + (DRAG.test(st.getAttribute('data-t') || '') ? ' drag' : ''), HAND); h.setAttribute('aria-hidden', 'true');
+      h._t = t; h._st = st; g.appendChild(h); place(h);
+      function gone() { st._bdTouched = true; h.remove(); st.removeEventListener('pointerdown', gone, true); st.removeEventListener('keydown', gone, true); }
+      st.addEventListener('pointerdown', gone, true); st.addEventListener('keydown', gone, true);
+    });
+  }
+
+  /* Continue at the end of the Warm-Up (it had none: students had to find the Lesson tab themselves) */
+  function cont() {
+    var w = $('.bd-panel[data-panel=warmup]'); if (!w || $('.bd-cont', w)) return;
+    var b = el('div', 'bd-contw', '<p>Done with the Warm-Up?</p><button type="button" class="bd-btn gold bd-cont">Continue to 📐 Lesson →</button>');
+    var credits = $$('details', w).filter(function (d) { return /credit/i.test(d.textContent.slice(0, 40)); })[0];
+    w.insertBefore(b, credits || null);
+    $('.bd-cont', b).addEventListener('click', function () { var t = $('.bd-tab[data-tab=learn]'); if (t) t.click(); toTop(); });
+  }
+
+  function tour() {
+    var t0 = $('.bd-tab[data-tab=warmup]'); if (t0) t0.click(); toTop();
+    function vis(sel) { return $$(sel).filter(shown)[0]; }
+    var S = [
+      ['.bd-tabs', 'Your lesson has 3 tabs. Do them in order: <b>Warm-Up</b>, then <b>Lesson</b>, then <b>Show What You Know</b>.'],
+      ['.bd-key', 'This key tells you what things mean. <b>See a little hand? You can click it.</b>'],
+      ['.bd-chip[data-pop], .bd-chip', 'Press <b>🔊 Read aloud</b> to hear the page read to you.'],
+      ['.bd-win .bd-play button', 'Press play to step into the builder\'s window. Then press <b>Next ▶</b> to go on.'],
+      ['.bd-step.now .bd-stephd', 'The <b>gold box</b> tells you what to do now. Do one step at a time. The next step opens when you finish.'],
+      ['.bd-hand', 'The <b>bouncing hand</b> shows you where to click first.'],
+      ['.bd-step.now .hint, button.hint', 'Stuck? Press <b>💡 Hint</b>.'],
+      ['.bd-helper .who', 'You can ask Hemiunu, too. Click him for a tip about the part you are on.'],
+      ['.bd-cont', 'Done with the Warm-Up? Press <b>Continue</b>. The page goes back to the top for you.'],
+      ['.bd-prog', 'This bar fills up as you finish your jobs. You are ready. Let\'s build!']
+    ].map(function (s) { return { n: vis(s[0]), t: s[1] }; }).filter(function (s) { return s.n; });
+    if (!S.length) return;
+    var ring = el('div', 'bd-ring'), tip = el('div', 'bd-tourtip'); ring.setAttribute('aria-hidden', 'true');
+    tip.setAttribute('role', 'dialog'); tip.setAttribute('aria-label', 'Lesson tour');
+    document.body.appendChild(ring); document.body.appendChild(tip);
+    var i = 0;
+    function go(k) {
+      i = k; var s = S[i], n = s.n, pad = 8, stuck = /sticky|fixed/.test(getComputedStyle(n).position);
+      if (stuck) { var ps = n.style.position; n.style.position = 'relative'; n.scrollIntoView({ block: 'center', behavior: 'instant' }); n.style.position = ps; }
+      else n.scrollIntoView({ block: 'center', behavior: 'instant' });
+      var r = n.getBoundingClientRect(), y = r.top + window.scrollY, x = r.left + window.scrollX;
+      ring.style.cssText = 'left:' + (x - pad) + 'px;top:' + (y - pad) + 'px;width:' + (r.width + pad * 2) + 'px;height:' + (r.height + pad * 2) + 'px';
+      tip.innerHTML = '<div class="tx"><div class="nn">Tour · ' + (i + 1) + ' of ' + S.length + '</div><p>' + s.t + '</p>' +
+        '<div class="bd-row2">' + (i ? '<button type="button" class="bd-btn ghost bk">← Back</button>' : '') +
+        '<button type="button" class="bd-btn gold nx">' + (i < S.length - 1 ? 'Next →' : '✓ Done') + '</button>' +
+        (i < S.length - 1 ? '<button type="button" class="bd-btn ghost sk">Skip tour</button>' : '') + '</div></div>';
+      var below = y + r.height + pad + 14, w = Math.min(420, document.documentElement.clientWidth - 24);
+      tip.style.width = w + 'px'; tip.style.left = Math.max(12, Math.min(x, document.documentElement.clientWidth - w - 12)) + 'px'; tip.style.top = below + 'px';
+      var th = tip.offsetHeight, docH = document.documentElement.scrollHeight;
+      if (below + th > Math.min(docH, window.scrollY + innerHeight) && y - pad - 14 - th > 0) tip.style.top = (y - pad - 14 - th) + 'px';
+      try { tip.scrollIntoView({ block: 'nearest', behavior: 'instant' }); } catch (e) {}
+      $('.nx', tip).onclick = function () { if (i < S.length - 1) go(i + 1); else end(); };
+      if ($('.bk', tip)) $('.bk', tip).onclick = function () { go(i - 1); };
+      if ($('.sk', tip)) $('.sk', tip).onclick = end;
+      try { $('.nx', tip).focus({ preventScroll: true }); } catch (e) {}
+    }
+    function esc(e) { if (e.key === 'Escape') end(); }
+    function end() { ring.remove(); tip.remove(); document.removeEventListener('keydown', esc); markSeen(); toTop(); }
+    document.addEventListener('keydown', esc);
+    go(0);
+  }
+  window.BD_TOUR = tour;
+
+  function init() {
+    if (!$('.bd-tabs')) return;
+    key(); start(); cont();
+    /* tabs, Next station and Continue: the very top of the lesson, in Canvas too */
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('.bd-tab, .bd-nextst'); if (!b) return;
+      setTimeout(function () { toTop(); cue(); }, 60);
+    });
+    document.addEventListener('bd-check', function () { setTimeout(cue, 60); });
+    document.addEventListener('bd-done', function () { setTimeout(cue, 90); });
+    addEventListener('resize', function () { requestAnimationFrame(function () { $$('.bd-hand').forEach(place); }); });
+    setTimeout(cue, 300); setTimeout(cue, 1500);
+  }
+  if (document.readyState === 'complete') setTimeout(init, 150); else window.addEventListener('load', function () { setTimeout(init, 150); });
+})();

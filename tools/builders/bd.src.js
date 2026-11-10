@@ -57,7 +57,7 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('on'); });
     $$('[data-zoom]').forEach(function (im) {
       im.tabIndex = 0;
-      function open() { if (tallFrame() && VIS) { var V = view(); lb.style.cssText = 'position:absolute;left:0;right:0;bottom:auto;top:' + V.top + 'px;height:' + V.h + 'px'; } else lb.style.cssText = ''; $('img', lb).src = im.src; $('img', lb).alt = im.alt; $('p', lb).textContent = im.getAttribute('data-zoom'); lb.classList.add('on'); }
+      function open() { $('img', lb).src = im.src; $('img', lb).alt = im.alt; $('p', lb).textContent = im.getAttribute('data-zoom'); lb.classList.add('on'); }
       im.addEventListener('click', open); im.addEventListener('keydown', function (e) { if (e.key === 'Enter') open(); });
     });
   }
@@ -616,16 +616,15 @@
     document.body.appendChild(h); document.body.appendChild(card);
     var who = $('.who', h), cur = null, t = null, wrap = $('.wrap');
     function lane() { var room = (innerWidth - wrap.getBoundingClientRect().width) / 2; h.classList.toggle('lane', room >= 150); }
-    function spot() { var V = view(), y = V.top + V.h * .45, best = spots[0], el0 = null; spots.forEach(function (s) { var e = $(s.sel); if (!e || e.closest('[hidden]')) return; var r = e.getBoundingClientRect(); if (r.top < y) { best = s; el0 = e; } }); return { s: best, e: el0 }; }
+    function spot() { var y = innerHeight * .45, best = spots[0], el0 = null; spots.forEach(function (s) { var e = $(s.sel); if (!e || e.closest('[hidden]')) return; var r = e.getBoundingClientRect(); if (r.top < y) { best = s; el0 = e; } }); return { s: best, e: el0 }; }
     function settle() {
       var sp = spot(); if (sp.s !== cur) { cur = sp.s; if (!card.hidden) open(); }
       if (h.classList.contains('lane')) {
-        var r = wrap.getBoundingClientRect(), V = view(), top = V.top + V.h * .42;
-        if (sp.e) { var er = sp.e.getBoundingClientRect(); top = Math.min(Math.max(er.top + 20, V.top + 80), Math.min(er.bottom - 120, V.top + V.h - 240)); top = Math.max(V.top + 80, top); }
+        var r = wrap.getBoundingClientRect(), top = innerHeight * .42;
+        if (sp.e) { var er = sp.e.getBoundingClientRect(); top = Math.min(Math.max(er.top + 20, 80), Math.min(er.bottom - 120, innerHeight - 240)); top = Math.max(80, top); }
         h.style.left = (r.right + 14) + 'px'; h.style.top = top + 'px';
         card.style.left = ''; card.style.top = (top + 10) + 'px'; card.style.right = (innerWidth - r.right + 6) + 'px';
-      } else if (tallFrame() && VIS) { var V2 = view(); h.style.left = ''; h.style.bottom = 'auto'; h.style.top = (V2.top + V2.h - 90) + 'px'; card.style.right = ''; card.style.bottom = 'auto'; card.style.top = Math.max(V2.top + 10, V2.top + V2.h - 110 - (card.offsetHeight || 260)) + 'px'; }
-      else { h.style.left = h.style.top = h.style.bottom = ''; card.style.top = card.style.right = card.style.bottom = ''; }
+      } else { h.style.left = h.style.top = ''; card.style.top = card.style.right = ''; }
       h.classList.add('show');
     }
     function onScroll() { if (h.classList.contains('lane')) h.classList.remove('show'); clearTimeout(t); t = setTimeout(settle, 450); }
@@ -633,7 +632,7 @@
       var s = cur || spot().s;
       card.innerHTML = '<div class="hd"><span class="f">' + face('') + '</span><div><b>Hemiunu</b><small>Master builder</small></div><button type="button" class="x" aria-label="Close">✕</button></div><p class="tip">' + s.say + '</p>' +
         ((s.ask || []).length ? '<div class="askme">Ask me</div>' + s.ask.map(function (a) { return '<details><summary>' + a.q + '</summary><p>' + a.a + '</p></details>'; }).join('') : '');
-      card.hidden = false; if (tallFrame() && VIS && !h.classList.contains('lane')) settle(); $('.x', card).addEventListener('click', close); $('.x', card).focus({ preventScroll: true });
+      card.hidden = false; $('.x', card).addEventListener('click', close); $('.x', card).focus({ preventScroll: true });
     }
     function close() { card.hidden = true; who.focus({ preventScroll: true }); }
     who.addEventListener('click', function () { card.hidden ? open() : close(); });
@@ -641,7 +640,6 @@
     addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', function () { lane(); onScroll(); });
     document.addEventListener('click', function (e) { if (e.target.closest('.bd-tab')) onScroll(); });
     var bk = $('.bd-board'); if (bk && 'IntersectionObserver' in window) new IntersectionObserver(function (es) { document.body.classList.toggle('bd-onbook', es[0].isIntersecting); }, { threshold: .25 }).observe(bk);
-    visCbs.push(onScroll);
     lane(); settle();
   }
 
@@ -907,18 +905,6 @@
     dn.addEventListener('click', function () { pick(lo); }); up.addEventListener('click', function () { pick(hi); });
     draw(); if ('ResizeObserver' in window) { var lw = 0; new ResizeObserver(function () { var w = host.clientWidth; if (w && (w < 560) !== (lw < 560 && lw > 0) ) draw(); lw = w; }).observe(host); }
   }
-
-  /* Canvas tall frame (pilot check, Nov 2026): Canvas holds the lesson in a tall iframe, so position:fixed lands at the
-     bottom of the lesson and this page never scrolls. view() is the part of the lesson the student can actually see
-     (an IntersectionObserver reports it across the frame); the helper, its help card and the picture lightbox use it. */
-  var VIS = null, visCbs = [];
-  function tallFrame() { var inFrame = true; try { inFrame = window.top !== window.self; } catch (e) {} return inFrame && innerHeight > (screen.availHeight || 900) * 1.25; }
-  function view() { return VIS && tallFrame() ? { top: VIS.top, h: VIS.bottom - VIS.top } : { top: 0, h: innerHeight }; }
-  (function watchVis() {
-    if (!('IntersectionObserver' in window)) return; var th = []; for (var i = 0; i <= 200; i++) th.push(i / 200);
-    function start() { new IntersectionObserver(function (es) { var r = es[0].intersectionRect; if (!r.height) return; VIS = { top: r.top + scrollY, bottom: r.bottom + scrollY }; visCbs.forEach(function (f) { f(); }); }, { threshold: th }).observe(document.body); }
-    if (document.body) start(); else document.addEventListener('DOMContentLoaded', start);
-  })();
 
   window.BD = { Hund: Hund, Museum: Museum, helper: helper, Win: Win, Zoom: Zoom, Block: Block, drawSite: drawSite, HEMI: HEMI, Discs: Discs };
   document.addEventListener('DOMContentLoaded', function () {

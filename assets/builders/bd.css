@@ -618,7 +618,3 @@ body.bd-onbook .bd-hcard{display:none}
 .bd-tourtip .nn{font:900 12px var(--sans,Nunito,sans-serif);letter-spacing:.1em;text-transform:uppercase;color:#9a6b00}
 .bd-tourtip p{margin:4px 0 10px;font-size:17px;line-height:1.4;color:#14213D}
 @media print{.bd-hand,.bd-start,.bd-key,.bd-contw,.bd-ring,.bd-tourtip{display:none!important}}
-
-/* the place-value input chart fits a phone (it spilled past 390 px) */
-.bd-pvin{max-width:100%}
-@media(max-width:480px){.bd-pvin{gap:3px;padding:6px 5px}.bd-pvin span{font-size:11px;padding:5px 3px;letter-spacing:-.02em}.bd-pvin .bd-ans{width:2.1em}}

@@ -1,0 +1,14 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1440,height:900}});await p.route(/fonts/,r=>r.abort());
+const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.goto('file://'+process.cwd()+'/preview-5-09-01.html');await p.waitForTimeout(4000);
+console.log('on book, helper opacity:',await p.evaluate(()=>getComputedStyle(document.querySelector('.bd-helper')).opacity));
+await p.locator('.bd-tab[data-tab=learn]').click();await p.waitForTimeout(400);
+await p.mouse.wheel(0,250);await p.waitForTimeout(150);
+console.log('while scrolling:',await p.evaluate(()=>getComputedStyle(document.querySelector('.bd-helper')).opacity));
+await p.waitForTimeout(1100);console.log('after stop:',await p.evaluate(()=>getComputedStyle(document.querySelector('.bd-helper')).opacity));
+await p.screenshot({path:'shots/k1.png'});
+await p.locator('.bd-helper .who').click();await p.waitForTimeout(300);await p.screenshot({path:'shots/k2.png'});
+await p.keyboard.press('Escape');
+await p.locator('#job4').scrollIntoViewIfNeeded();await p.waitForTimeout(1200);await p.screenshot({path:'shots/k3.png'});
+console.log('ERR',errs);await b.close();})();

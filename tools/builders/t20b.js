@@ -1,0 +1,11 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1100,height:900}});await p.route(/fonts|githubusercontent|github\.io/,r=>r.abort());
+await p.goto('file://'+process.cwd()+'/preview-5-09-02.html');await p.waitForTimeout(500);
+const fb=async(id,v,pre)=>{const e=p.locator('#'+id);if(pre)await p.locator('#'+pre[0]).evaluate((el,v)=>{el.value=v},pre[1]);await e.evaluate((el,v)=>{el.value=v;el.dispatchEvent(new Event('change'))},v);return e.evaluate(el=>{let n=(el.closest('.bd-fr')||el).nextElementSibling;return n&&n.className.indexOf('bd-afb')>=0?(el.classList.contains('ok')?'OK':n.textContent):'?'});};
+const ids=await p.evaluate(()=>[...document.querySelectorAll('.bd-ans')].map(e=>e.id+'='+e.dataset.a+(e.dataset.hint?'':' NOHINT')));console.log(ids.filter(x=>x.includes('NOHINT')).length,'without hints');
+const find=async a=>p.evaluate(a=>[...document.querySelectorAll('.bd-ans')].filter(e=>e.dataset.a===a).map(e=>e.id),a);
+const [i4]=await find('0.4');const [i08]=await find('0.08');const [i006]=await find('0.006');const [i5306]=await find('5.306');
+console.log('0.4 <- 4:',await fb(i4,'4'));console.log('0.08 <- 0.8:',await fb(i08,'0.8'));console.log('0.006 <- 6:',await fb(i006,'6'));console.log('5.306 <- 5.36:',await fb(i5306,'5.36'));
+const fr=await p.evaluate(()=>{const f=[...document.querySelectorAll('.bd-fr')].find(f=>f.querySelectorAll('input')[1].dataset.a==='10');const q=f.querySelectorAll('input');return [q[0].id,q[1].id]});
+console.log('4/10 <- 2/5:',await fb(fr[1],'5',[fr[0],'2']));console.log('0.4 <- .4:',await fb(i4,'.4'));console.log('0.4 <- 0.40:',await fb(i4,'0.40'));
+await b.close();})();

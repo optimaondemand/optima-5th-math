@@ -1,0 +1,163 @@
+{
+"T": 121.82,
+"S": {
+"open": 0.8,
+"c1": 11.113061,
+"c2": 24.571655,
+"c3": 37.18136,
+"c4": 47.271654999999996,
+"c5": 58.124852,
+"c6": 74.670249,
+"c7": 83.324353,
+"c8": 98.414852,
+"close": 114.250748
+},
+"cue": {
+"ones": 14.313,
+"tenths": 15.833,
+"hund": 17.353,
+"thou": 19.033,
+"num": 21.993,
+"g2": 28.453,
+"d2": 33.493,
+"f2": 35.493,
+"g3": 37.664,
+"d3": 42.784,
+"f3": 45.264,
+"g4": 47.785,
+"d4": 53.065,
+"f4": 55.945,
+"e0": 61.449,
+"e1": 64.329,
+"e2": 65.049,
+"e3": 66.969,
+"e4": 69.289,
+"elab": 73.209,
+"x1": 77.692,
+"x2": 78.332,
+"x3": 79.692,
+"x4": 81.132,
+"brk": 84.276,
+"cnt": 87.636,
+"arr1": 91.076,
+"arr": 95.236,
+"reset": 98.751,
+"gz": 103.631,
+"zero": 104.831,
+"ex8": 107.631
+},
+"cap": [
+[
+1.169,
+"This block is 3.274 m long."
+],
+[
+4.769,
+"Four digits. But they are not all worth the same."
+],
+[
+8.209,
+"Let\u2019s find out what each one is worth."
+],
+[
+11.113,
+"Here is a place-value chart with discs."
+],
+[
+14.313,
+"Three ones. Two tenths. Seven hundredths. Four thousandths."
+],
+[
+20.873,
+"The chart shows 3.274."
+],
+[
+24.853,
+"The value of a digit depends on its place."
+],
+[
+28.213,
+"The 2 is in the tenths place."
+],
+[
+30.933,
+"Its value is two tenths: 0.2, or 2/10."
+],
+[
+37.424,
+"The 7 is in the hundredths place."
+],
+[
+40.144,
+"Its value is seven hundredths: 0.07, or 7/100."
+],
+[
+47.545,
+"The 4 is in the thousandths place."
+],
+[
+50.345,
+"Its value is four thousandths: 0.004, or 4/1,000."
+],
+[
+58.409,
+"Add the values and you get the number back."
+],
+[
+61.449,
+"3.274 = 3 + 0.2 + 0.07 + 0.004"
+],
+[
+72.329,
+"This is expanded form."
+],
+[
+74.892,
+"We can also express it with fractions:"
+],
+[
+77.692,
+"3 + 2/10 + 7/100 + 4/1,000"
+],
+[
+83.556,
+"Break one hundredth into ten equal parts."
+],
+[
+86.996,
+"You get ten thousandths."
+],
+[
+89.316,
+"So a hundredth is worth ten times as much as a thousandth."
+],
+[
+93.956,
+"Each place is worth ten times as much as the place to its right."
+],
+[
+98.751,
+"Watch out for an empty place."
+],
+[
+101.151,
+"2.058 has no tenths."
+],
+[
+104.591,
+"The zero holds the place."
+],
+[
+106.911,
+"In expanded form, 2 + 0.05 + 0.008."
+],
+[
+114.544,
+"Every digit has its place, and every place has its value."
+],
+[
+118.944,
+"Now build a block of your own."
+]
+]
+}

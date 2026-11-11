@@ -1,0 +1,35 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1200,height:900}});await p.route(/fonts|githubusercontent|github\.io/,r=>r.abort());
+const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error')errs.push('console:'+m.text())});
+await p.goto('file://'+process.cwd()+'/preview-5-09-02.html');await p.waitForTimeout(1000);
+const fill=async(sel,vals)=>{const ins=p.locator(sel+' .bd-step.now .bd-ans');const n=await ins.count();if(n!==vals.length)console.log('!! count',sel,n,vals);for(let i=0;i<n;i++){await ins.nth(i).fill(String(vals[i]));await ins.nth(i).press('Enter');}await p.waitForTimeout(250);};
+const disc=async(id,c)=>{for(let k=0;k<4;k++)for(let i=0;i<c[k];i++){await p.locator('#'+id+' .col[data-k="'+k+'"] .pl').click();}await p.waitForTimeout(250);};
+const now=async s=>(await p.locator(s+' .bd-step.now .tx').count())?await p.locator(s+' .bd-step.now .tx').first().textContent():'(all done)';
+await p.locator('#j1').scrollIntoViewIfNeeded();
+await disc('d1',[2,6,3,5]);console.log('j1 now:',await now('#j1'));await fill('#j1',['2.635']);await fill('#j1',['0.03',3,100]);
+await p.locator('.bd-tab[data-tab=learn]').click();await p.waitForTimeout(400);
+for(let k=0;k<4;k++){console.log(' s2a:',await now('[data-id=s2a]'));await disc('d2',[[1,0,0,0],[0,4,0,0],[0,0,8,0],[0,0,0,6]][k]);}
+console.log('predict:',await p.locator('#bd-predict-back').textContent());
+await p.locator('#j2').screenshot({path:'shots/b-j2.png'});
+await fill('#j2',['0.4',4,10,'0.08',8,100,'0.006',6,1000]);await fill('#j2',['0.4','0.08','0.006']);await fill('#j2',[4,10,8,100,6,1000]);
+await p.locator('.bd-nextst[data-go="2"]').click();await p.waitForTimeout(400);
+await p.locator('#j3 .bd-sel').selectOption('tenths');await p.waitForTimeout(150);console.log('sel fb:',await p.locator('#j3 .bd-sel').evaluate(e=>e.nextElementSibling.textContent));await p.locator('#j3 .bd-sel').selectOption('hundredths');await p.waitForTimeout(200);
+await fill('#j3',['0.09',9,100]);await fill('#j3',[100]);await fill('#j3',['0.7','0.005']);
+console.log('j4 now:',await now('#j4'));await disc('d4',[5,3,0,6]);await fill('#j4',[5,3,0,6]);await fill('#j4',['5.306','0.06']);await fill('#j4',['8.071','2.009']);
+await fill('#j5',['0.2','0.02','0.002']);await p.locator('#d5 .col[data-k="2"] .brk').click();await p.waitForTimeout(250);await fill('#j5',[10]);await fill('#j5',[10,1,10]);await fill('#j5',[10,100]);
+await p.locator('#j5').screenshot({path:'shots/b-j5.png'});
+await p.locator('.bd-station[data-st="2"]').screenshot({path:'shots/b-st2.png'});
+await p.locator('.bd-nextst[data-go="3"]').click();await p.waitForTimeout(400);
+await disc('d6',[1,5,0,7]);await fill('#j6',['1.507','0.5','0.007']);await fill('#j6',['1.493']);await fill('#j6',[49]);
+await fill('#j7',['0.08']);await fill('#j7',[7,100]);await fill('#j7',['0.008']);
+await p.locator('.bd-station[data-st="3"]').screenshot({path:'shots/b-st3.png'});
+await p.locator('.bd-nextst[data-go="swyk"]').click();await p.waitForTimeout(400);
+const sw=p.locator('#j8 .bd-ans');const v=['0.006','0.3','0.005','2.709'];for(let i=0;i<4;i++){await sw.nth(i).fill(v[i]);await sw.nth(i).press('Enter');}
+await p.locator('#prove').fill('No. Each 3 is worth 10 times as much as the 3 to its right: 3, 0.3, 0.03, 0.003.');
+await p.waitForTimeout(300);console.log('prog:',await p.locator('.bd-prog .n').textContent());
+for(let i=0;i<4;i++){await p.locator('#bd-site .gblk:has(text)').first().click();await p.waitForTimeout(120);}console.log('site:',await p.locator('#bd-site-msg').textContent());
+await p.locator('#bd-site').screenshot({path:'shots/b-site.png'});
+await p.locator('#gather').click();console.log('gathered len:',(await p.locator('#gathered').inputValue()).length);
+await p.reload();await p.waitForTimeout(800);console.log('after reload:',await p.locator('.bd-prog .n').textContent());
+const tabs=await p.locator('.bd-tab.done').count();console.log('tabs done',tabs);
+console.log('ERR',errs);await b.close();})();

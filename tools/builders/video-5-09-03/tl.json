@@ -1,0 +1,119 @@
+{
+"T": 100.36,
+"S": {
+"open": 0.8,
+"c1": 11.74,
+"c2": 19.265374,
+"c3": 30.129705,
+"c4": 44.949796,
+"c5": 52.952698,
+"c6": 74.3778,
+"close": 94.72389999999999
+},
+"cue": {
+"pt": 14.06,
+"ones": 22.544,
+"ten": 26.304,
+"hund": 30.351,
+"res1": 39.311,
+"f1": 45.54,
+"f2": 46.94,
+"arr": 49.66,
+"ch5": 53.138,
+"zero5": 58.738,
+"ten5": 65.738,
+"res5": 68.258,
+"ch6": 74.584,
+"zero6": 75.944,
+"ten6": 77.864,
+"star6": 81.064,
+"hund6": 83.544,
+"ord6": 86.264
+},
+"cap": [
+[
+1.15,
+"Two long blocks for the corner: 3.528 m and 3.582 m."
+],
+[
+7.71,
+"Same digits, different order. Which one is longer?"
+],
+[
+11.74,
+"To compare decimals, line up the decimal points."
+],
+[
+15.58,
+"Now each place sits under the same place."
+],
+[
+19.504,
+"Start at the left, with the greatest place."
+],
+[
+22.544,
+"Ones: 3 and 3. The same."
+],
+[
+26.304,
+"Tenths: 5 and 5. The same."
+],
+[
+30.351,
+"Hundredths: 2 and 8. Different! This place decides."
+],
+[
+36.111,
+"2 hundredths < 8 hundredths, so 3.528 < 3.582."
+],
+[
+45.18,
+"On a number line, 3.582 is farther right."
+],
+[
+49.66,
+"The greater number is always farther right."
+],
+[
+53.138,
+"Watch out. Is 3.482 greater because it has more digits?"
+],
+[
+58.738,
+"Write a zero in each empty place. 3.5 = 3.500."
+],
+[
+65.738,
+"Tenths: 5 and 4. So 3.5 is greater."
+],
+[
+71.138,
+"More digits does not mean a greater number."
+],
+[
+74.584,
+"To order decimals, compare the same way."
+],
+[
+77.864,
+"Tenths: 0, 6, 0. 3.6 is the greatest."
+],
+[
+83.544,
+"Hundredths: 6 and 0."
+],
+[
+86.264,
+"From least to greatest: 3.006, 3.06, 3.6."
+],
+[
+94.994,
+"Line up the places and start at the left."
+],
+[
+97.554,
+"Now check my new blocks."
+]
+]
+}

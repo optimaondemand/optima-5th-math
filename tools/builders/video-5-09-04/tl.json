@@ -1,0 +1,127 @@
+{
+"T": 105.92,
+"S": {
+"open": 0.8,
+"c1": 10.547347,
+"c2": 23.21585,
+"c3": 34.463446,
+"c4": 51.184036,
+"c5": 65.043129,
+"c6": 76.661632,
+"c7": 86.08453399999999,
+"close": 100.607323
+},
+"cue": {
+"flag1": 15.827,
+"half2": 23.567,
+"arr2": 30.207,
+"dig3": 38.747,
+"rule3": 40.347,
+"res3": 45.307,
+"dig4": 58.727,
+"arr4": 60.727,
+"dig5": 69.187,
+"arr5": 71.027,
+"sum5": 72.867,
+"flag6": 80.368,
+"arr6": 82.128,
+"flag7": 87.548,
+"plus7": 91.148,
+"arr7": 94.828,
+"res7": 94.828
+},
+"cap": [
+[
+1.05,
+"This stone is 4.273 m long."
+],
+[
+4.65,
+"My stonecutters cannot cut to the millimeter."
+],
+[
+7.45,
+"How close is close enough?"
+],
+[
+10.547,
+"To round to the nearest hundredth, find the two hundredths it sits between."
+],
+[
+15.827,
+"4.273 is between 4.27 and 4.28."
+],
+[
+23.567,
+"Halfway is 4.275."
+],
+[
+26.927,
+"4.273 is before halfway, so it is closer to 4.27."
+],
+[
+34.707,
+"Look at the digit just to the right of the rounding place. It is 3."
+],
+[
+40.347,
+"0 to 4: keep the digit. 5 to 9: round up."
+],
+[
+45.307,
+"So 4.273 rounds to 4.27."
+],
+[
+51.447,
+"Now round the same number to the nearest tenth."
+],
+[
+54.807,
+"The benchmarks are 4.2 and 4.3."
+],
+[
+58.727,
+"The hundredths digit is 7, so round up: 4.3."
+],
+[
+65.267,
+"To the nearest whole number: 4 or 5?"
+],
+[
+69.187,
+"The tenths digit is 2, so keep the 4."
+],
+[
+72.867,
+"One number, three different roundings."
+],
+[
+76.928,
+"What if a number sits exactly on halfway, like 4.25?"
+],
+[
+82.128,
+"We round up, to 4.3."
+],
+[
+86.468,
+"Watch out. Round 3.96 to the nearest tenth."
+],
+[
+91.148,
+"9 tenths + 1 more tenth make 1 whole."
+],
+[
+94.828,
+"So it rounds to 4.0. The zero shows we rounded to tenths."
+],
+[
+101.084,
+"Close enough, and just right."
+],
+[
+103.377,
+"Now write my work orders."
+]
+]
+}

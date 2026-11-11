@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box}html,body{margin:0;width:1280px;height:720px;overflow:hidden;font-family:Nunito,'Segoe UI',Arial,sans-serif;background:#fbf4e3;color:#1F2A44}
+.top{position:absolute;left:0;right:0;top:0;height:46px;background:#0E1C42;color:#f3d27a;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-weight:800;font-size:17px;letter-spacing:.04em;z-index:5}.top b{color:#fff}
+.site{position:absolute;inset:46px 0 0 0;display:none}.site svg{position:absolute;inset:0;width:100%;height:100%}
+.site img{position:absolute;right:40px;bottom:0;height:88%;filter:drop-shadow(0 10px 14px rgba(0,0,0,.4))}
+.tag{position:absolute;left:260px;top:300px;background:#fffaf0;border:3px solid #8a6417;border-radius:12px;padding:8px 16px;font-size:40px;font-weight:900;box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.who{position:absolute;left:24px;top:62px;z-index:6;background:rgba(14,28,66,.85);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:18px}
+#scene{position:absolute;inset:46px 0 0 0}
+#ln{position:absolute;left:40px;top:40px;width:1200px;height:300px}
+.dig{position:absolute;left:0;right:0;top:350px;text-align:center;font-size:76px;font-weight:900;letter-spacing:.04em}
+.dig span{display:inline-block;padding:0 6px;border-radius:12px}
+.dig .gl{background:#fff3c4;box-shadow:0 0 0 5px #e8b923}
+.dig .rd{text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:12px}
+.chips{position:absolute;left:0;right:0;top:470px;display:flex;justify-content:center;gap:18px}
+.chips span{font-size:28px;font-weight:900;padding:8px 18px;border-radius:999px;background:#fff;border:3px solid #c9b48a}
+.chips .k{border-color:#1f3f8f;color:#1f3f8f}.chips .u{border-color:#1e8c5a;color:#1e8c5a}
+.res{position:absolute;left:0;right:0;top:470px;text-align:center;font-size:48px;font-weight:900;color:#1e7a4c}
+.cap{position:absolute;left:60px;right:60px;bottom:22px;min-height:70px;background:rgba(14,28,66,.92);color:#fff;border-radius:14px;font-size:30px;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 20px;z-index:7}
+</style></head><body>
+<div class="top"><span><b>Lesson 5.09.04</b> · Rounding Decimals</span><span>Master Builders</span></div>
+<div class="site" id="site"><svg></svg><img src="hemiunu-block.webp" alt=""><div class="tag" id="tag">4.273 m</div></div>
+<div id="scene"><svg id="ln" viewBox="0 0 1200 300"></svg><div class="dig" id="dig"></div><div class="chips" id="chips"></div><div class="res" id="res"></div></div>
+<div class="who" id="who">Hemiunu</div><div class="cap" id="cap"></div>
+<script>
+var TL=null;
+function line(o){ // o: lo,hi (thousandths), P, num, half (bool), arrow (bool), labs
+  var X0=80,W=1040,S=o.hi-o.lo,x=function(v){return X0+(v-o.lo)/S*W;},f=function(v){return (v/1000).toFixed(o.P);},h='<line x1="'+X0+'" y1="170" x2="'+(X0+W)+'" y2="170" stroke="#3a2700" stroke-width="5"/>';
+  for(var i=0;i<=10;i++){var v=o.lo+i*S/10,e=i===0||i===10,m=i===5;h+='<line x1="'+x(v)+'" y1="'+(170-(e?38:m?28:16))+'" x2="'+x(v)+'" y2="'+(170+(e?38:m?28:16))+'" stroke="'+(m&&o.half?'#c0392b':'#3a2700')+'" stroke-width="'+(e?5:m?4:3)+'"'+(m&&o.half?' stroke-dasharray="8 6"':'')+'/>';}
+  h+='<text x="'+x(o.lo)+'" y="250" text-anchor="middle" font-size="42" font-weight="900" fill="#1F2A44">'+f(o.lo)+'</text><text x="'+x(o.hi)+'" y="250" text-anchor="middle" font-size="42" font-weight="900" fill="#1F2A44">'+f(o.hi)+'</text>';
+  if(o.half)h+='<text x="'+x((o.lo+o.hi)/2)+'" y="250" text-anchor="middle" font-size="28" font-weight="900" fill="#c0392b">halfway '+((o.lo+o.hi)/2000).toFixed(o.P+1)+'</text>';
+  if(o.flag){h+='<path d="M'+x(o.num)+' 160 l-16 -30 h32 z" fill="#1f3f8f"/><text x="'+Math.min(1100,Math.max(100,x(o.num)))+'" y="100" text-anchor="middle" font-size="44" font-weight="900" fill="#1f3f8f">'+o.ns+'</text>';}
+  if(o.arrow){var t=o.num>=(o.lo+o.hi)/2?o.hi:o.lo;h+='<path d="M'+x(o.num)+' 190 Q '+(x(o.num)+x(t))/2+' 250 '+x(t)+' 196" fill="none" stroke="#1e8c5a" stroke-width="6"/><circle cx="'+x(t)+'" cy="170" r="16" fill="#1e8c5a"/>';}
+  var s=document.getElementById('ln');if(s._h!==h){s.innerHTML=h;s._h=h;}
+}
+function dig(str,g){var h=str.split('').map(function(c,i){return '<span'+(i===g?' class="gl"':'')+'>'+c+'</span>';}).join('');var d=document.getElementById('dig');if(d._h!==h){d.innerHTML=h;d._h=h;}}
+function render(t){
+  var C=TL.cue,S=TL.S,site=t<S.c1-0.3||t>=S.close-0.3,open=t<S.c1-0.3;
+  document.getElementById('site').style.display=site?'block':'none';document.getElementById('scene').style.display=site?'none':'block';
+  document.getElementById('tag').style.display=open?'block':'none';document.getElementById('who').textContent=site?'Hemiunu':'Claire';
+  var c='';TL.cap.forEach(function(x){if(t>=x[0]-0.1)c=x[1];});if(t<TL.cap[0][0]-0.1)c='';
+  var cp=document.getElementById('cap');cp.textContent=c;cp.style.visibility=c?'visible':'hidden';
+  if(site)return;
+  var D=document.getElementById('dig'),CH=document.getElementById('chips'),R=document.getElementById('res');D.style.display='none';CH.innerHTML='';R.textContent='';
+  if(t<S.c4-0.2){ // hundredths
+    line({lo:4270,hi:4280,P:2,num:4273,ns:'4.273',flag:t>=C.flag1,half:t>=C.half2,arrow:t>=C.arr2});
+    if(t>=S.c3-0.2){D.style.display='block';D.style.top='250px';dig('4.273',t>=C.dig3?4:-1);document.getElementById('ln').style.opacity=.25;
+      if(t>=C.rule3)CH.innerHTML='<span class="k">0–4: keep</span><span class="u">5–9: round up</span>'; CH.style.top='370px'; if(t>=C.res3){R.textContent='4.273 ≈ 4.27';R.style.top='450px';}}
+    else document.getElementById('ln').style.opacity=1;
+    return;}
+  document.getElementById('ln').style.opacity=1;D.style.top='330px';R.style.top='450px';
+  if(t<S.c5-0.2){line({lo:4200,hi:4300,P:1,num:4273,ns:'4.273',flag:true,half:true,arrow:t>=C.arr4});D.style.display='block';dig('4.273',t>=C.dig4?3:-1);if(t>=C.arr4)R.textContent='4.273 ≈ 4.3';return;}
+  if(t<S.c6-0.2){line({lo:4000,hi:5000,P:0,num:4273,ns:'4.273',flag:true,half:true,arrow:t>=C.arr5});D.style.display='block';dig('4.273',t>=C.dig5?2:-1);if(t>=C.sum5)R.textContent='4.273 ≈ 4.27 ≈ 4.3 ≈ 4';else if(t>=C.arr5)R.textContent='4.273 ≈ 4';return;}
+  if(t<S.c7-0.2){line({lo:4200,hi:4300,P:1,num:4250,ns:'4.25',flag:t>=C.flag6,half:true,arrow:t>=C.arr6});if(t>=C.arr6)R.textContent='4.25 ≈ 4.3 (halfway rounds up)';return;}
+  line({lo:3900,hi:4000,P:1,num:3960,ns:'3.96',flag:t>=C.flag7,half:true,arrow:t>=C.arr7});
+  if(t>=C.plus7){CH.style.top='330px';CH.innerHTML='<span class="u">9 tenths + 1 tenth = 1 whole</span>';}
+  if(t>=C.res7){R.textContent='3.96 ≈ 4.0';}
+}
+</script></body></html>

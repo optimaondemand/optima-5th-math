@@ -1,0 +1,3 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch();const p=await b.newPage();await p.route(/fonts/,r=>r.abort());await p.goto('file://'+process.cwd()+'/preview-5-09-02.html');await p.waitForTimeout(500);
+const r=await p.evaluate(()=>{const out=[];document.querySelectorAll('.bd-ans').forEach(el=>{const a=el.dataset.a.split('|')[0];if(!/\./.test(a))return;for(const v of [a, a.replace(/0+$/,'').replace(/\.$/,''), a+'0']){el.value=v;el.dispatchEvent(new Event('change'));out.push(v+':'+(el.classList.contains('ok')?'ok':'BAD'));}el.value='';el.dispatchEvent(new Event('change'));});return out.filter(x=>x.endsWith('BAD'))});console.log('rejected:',r);await b.close();})();

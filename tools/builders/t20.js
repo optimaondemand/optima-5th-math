@@ -1,0 +1,12 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1100,height:900}});await p.route(/fonts/,r=>r.abort());
+await p.goto('file://'+process.cwd()+'/preview-5-09-01.html');await p.waitForTimeout(500);
+const t=async(sel,i,v)=>{const e=p.locator(sel).nth(i);await e.evaluate((el,v)=>{el.value=v;el.dispatchEvent(new Event('change'))},v);return e.evaluate(el=>el.parentElement.querySelector('.bd-afb')?el.closest('.bd-fr,.bd-eq,span').parentElement.querySelector('.bd-afb').textContent:'');};
+const fb=async(sel,i,v)=>{const e=p.locator(sel).nth(i);await e.evaluate((el,v)=>{el.value=v;el.dispatchEvent(new Event('change'))},v);return e.evaluate(el=>{let n=(el.closest('.bd-fr')||el).nextElementSibling;return n&&n.className.indexOf('bd-afb')>=0?n.textContent:'?'});};
+console.log('275->',await fb('#j3 .bd-step:nth-of-type(4) .bd-ans',1,'275'));
+console.log('0.38->',await fb('#j8 .bd-ans',0,'0.06'));
+console.log('2.75->',await fb('#j3 .bd-step:nth-of-type(4) .bd-ans',1,'2.75'));
+console.log('den 100->',await fb('#j7 .bd-ans',1,'100'));
+await p.locator('#j7 .bd-ans').nth(2).evaluate(el=>{el.value='12';});console.log('12/500->',await fb('#j7 .bd-ans',3,'500'));
+console.log('ok 0.275->',await fb('#j3 .bd-step:nth-of-type(4) .bd-ans',1,'0.275'));
+await b.close();})();

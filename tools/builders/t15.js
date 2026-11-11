@@ -1,0 +1,28 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1200,height:900}});await p.route(/fonts/,r=>r.abort());
+const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.goto('file://'+process.cwd()+'/preview-5-09-01.html');await p.waitForTimeout(1000);
+const fill=async(sel,vals)=>{const ins=p.locator(sel+' .bd-step.now .bd-ans');const n=await ins.count();for(let i=0;i<n;i++){await ins.nth(i).fill(String(vals[i]));await ins.nth(i).press('Enter');}await p.waitForTimeout(250);};
+const tapRuler=async(mm,from,to)=>{const r=p.locator('#j1 .bd-step.now .bd-rsvg');const bb=await r.boundingBox();const W=1000;const x=bb.x+bb.width*(20+(mm-from*10)*((W-40)/((to-from)*10)))/W;await p.mouse.click(x,bb.y+bb.height*.3);await p.waitForTimeout(250);};
+await p.locator('#j1').scrollIntoViewIfNeeded();
+await tapRuler(100,0,12);await fill('#j1',[1,10,0.1]);await tapRuler(10,0,12);await fill('#j1',[1,100,'0.01']);await tapRuler(1,0,1);await fill('#j1',[1,1000]);await fill('#j1',[168,1000]);
+await p.locator('.bd-tab[data-tab=learn]').click();await p.waitForTimeout(500);
+const seg=async s=>{await p.locator('#build .seg[data-s="'+s+'"]').click();await p.waitForTimeout(250);};
+await seg(2);console.log('step:',await p.locator('#j2 .bd-steps[data-id=s2a] .bd-step.now .tx').textContent());await p.locator('#j2').screenshot({path:'shots/q1.png'});
+await p.locator('#build .zin').click();await p.waitForTimeout(1100);await seg(3);await p.locator('#build .zin').click();await p.waitForTimeout(1100);await seg(5);await p.waitForTimeout(900);
+await p.locator('#j2').screenshot({path:'shots/q2.png'});
+await fill('#j2',[0,3,4,6]);await fill('#j2',[346,1000]);
+await p.locator('.bd-nextst[data-go="2"]').click();await p.waitForTimeout(400);
+await fill('#j3',[38,1000]);await fill('#j3',[0,0,3,8]);await p.locator('#j3 .bd-sel').nth(0).selectOption('hundredths');await p.waitForTimeout(200);console.log('wrong sel fb:',await p.locator('#j3 .bd-sel').nth(0).evaluate(e=>e.nextElementSibling.textContent));await p.locator('#j3 .bd-sel').nth(0).selectOption('thousandths');await fill('#j3',['0.038']);await p.locator('#j3 .bd-sel').nth(1).selectOption('hundredths');await p.waitForTimeout(300);await fill('#j3',['0.64','0.275']);
+for(const k of [3,4,5,13,14,15]){await p.locator('#hund rect.c[data-k="'+k+'"]').click();}await p.locator('#hund .cut').click();await p.waitForTimeout(300);await fill('#j4',[60,60]);
+await fill('#j5',[125]);await fill('#j5',[625,1000]);await fill('#j5',['0.625']);await fill('#j5',['0.046','0.164']);
+await p.locator('.bd-station[data-st="2"]').screenshot({path:'shots/q3.png'});
+await p.locator('.bd-nextst[data-go="3"]').click();await p.waitForTimeout(400);
+await p.locator('#zoom-north .seg[data-s="2"]').click();await p.waitForTimeout(1300);await p.locator('#zoom-north .seg[data-s="5"]').click();await p.waitForTimeout(1300);await p.locator('#zoom-north .tick-hit[data-t="3"]').click();await p.waitForTimeout(500);
+await fill('#j6',[253,1000]);await fill('#j7',[24,1000]);await fill('#j7',[3,125]);await fill('#j7',[3,4]);
+await p.locator('.bd-nextst[data-go="swyk"]').click();await p.waitForTimeout(400);
+const sw=p.locator('#j8 .bd-ans');const v=['0.006','0.028',17,200];for(let i=0;i<4;i++){await sw.nth(i).fill(String(v[i]));await sw.nth(i).press('Enter');}
+await p.locator('#prove').fill('1 m cut into 10 is a tenth, a tenth cut into 10 is a hundredth, again is a thousandth = 1 mm');
+await p.waitForTimeout(200);console.log('prog:',await p.locator('.bd-prog .n').textContent());
+await p.reload();await p.waitForTimeout(800);console.log('after reload:',await p.locator('.bd-prog .n').textContent());
+console.log('ERR',errs);await b.close();})();

@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box}html,body{margin:0;width:1280px;height:720px;overflow:hidden;font-family:Nunito,'Segoe UI',Arial,sans-serif;background:#fbf4e3;color:#1F2A44}
+.top{position:absolute;left:0;right:0;top:0;height:46px;background:#0E1C42;color:#f3d27a;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-weight:800;font-size:17px;letter-spacing:.04em;z-index:5}
+.top b{color:#fff}
+#scene{position:absolute;inset:46px 0 0 0;transition:none}
+.site{position:absolute;inset:46px 0 0 0;display:none}
+.site svg{position:absolute;inset:0;width:100%;height:100%}
+.site img{position:absolute;right:40px;bottom:0;height:88%;filter:drop-shadow(0 10px 14px rgba(0,0,0,.4))}
+.tag{position:absolute;left:330px;top:300px;background:#fffaf0;border:3px solid #8a6417;border-radius:12px;padding:10px 18px;font-size:40px;font-weight:900;box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.who{position:absolute;left:24px;top:62px;z-index:6;background:rgba(14,28,66,.85);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:18px}
+.chart{position:absolute;left:150px;top:78px;width:980px;display:grid;grid-template-columns:repeat(4,1fr);border:3px solid #c9b48a;border-radius:16px;overflow:visible;background:#fff}
+.col{position:relative;border-right:2px solid #e6d9b8;min-height:250px;transition:box-shadow .3s}
+.col:last-child{border-right:0}
+.hd{text-align:center;font-weight:900;font-size:24px;padding:10px 4px}
+.o .hd{background:#eef0f4;color:#3a4256;border-radius:13px 0 0 0}.t .hd{background:#f7ebc9;color:#6b4700}.h .hd{background:#d7efe2;color:#155c39}.th .hd{background:#fbe3ec;color:#8a2453;border-radius:0 13px 0 0}
+.pt{position:absolute;right:-12px;top:6px;font-size:44px;font-weight:900;z-index:3;line-height:1}
+.pile{display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;gap:6px;padding:14px 8px;min-height:228px}
+.dk{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:13px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18),0 2px 3px rgba(0,0,0,.2)}
+.dk.o{background:#fff;border:3px solid #7c8496;color:#3a4256}.dk.t{background:#e8c25a;color:#4d3300}.dk.h{background:#58b884;color:#06361f}.dk.th{background:#ec8fb5;color:#5a0f33}
+.dk.fade{opacity:.25;outline:3px dashed #b0336a}
+.col.glow{box-shadow:0 0 0 6px #e8b923 inset,0 0 26px 6px rgba(232,185,35,.6);z-index:2}
+.zero{position:absolute;left:0;right:0;top:80px;text-align:center;font-size:110px;font-weight:900;color:#9a6a00;opacity:.85}
+.val{position:absolute;left:0;right:0;top:300px;text-align:center;font-size:34px;font-weight:900}
+.val .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1;font-size:26px;margin-left:6px}
+.val .fr i{display:block;width:100%;height:3px;background:currentColor;margin:3px 0}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1;font-size:.72em;margin:0 4px}
+.fr i{display:block;width:100%;height:3px;background:currentColor;margin:3px 0}
+.read{position:absolute;left:150px;top:392px;font-size:68px;font-weight:900;background:#fff;border:3px solid #c9b48a;border-radius:16px;padding:4px 26px}
+.cO{color:#3a4256}.cT{color:#9a6a00}.cH{color:#1e8c5a}.cTH{color:#b0336a}
+.line{position:absolute;left:480px;font-size:40px;font-weight:900;white-space:nowrap}
+#l1{top:400px}#l2{top:462px}
+.lab{position:absolute;left:1010px;top:470px;font-size:22px;font-weight:900;color:#fff;background:#1e7a4c;border-radius:999px;padding:4px 16px}
+.arr{position:absolute;top:-20px;font-size:22px;font-weight:900;color:#c0392b;background:#fff3f0;border:2px solid #c0392b;border-radius:999px;padding:2px 10px;transform:translateX(-50%);z-index:4}
+.note{position:absolute;left:480px;top:404px;font-size:40px;font-weight:900}
+.cap{position:absolute;left:60px;right:60px;bottom:22px;min-height:70px;background:rgba(14,28,66,.92);color:#fff;border-radius:14px;font-size:30px;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 20px;z-index:7}
+.hide{display:none!important}
+.pop{animation:none}
+</style></head><body>
+<div class="top"><span><b>Lesson 5.09.02</b> · Place Value to Thousandths</span><span>Master Builders</span></div>
+<div class="site" id="site"><svg></svg><img src="hemiunu-block.webp" alt=""><div class="tag" id="tag">3.274 m</div></div>
+<div id="scene">
+ <div class="chart" id="chart">
+  <div class="col o" data-k="0"><div class="hd">Ones</div><b class="pt">•</b><div class="pile"></div><div class="val"></div></div>
+  <div class="col t" data-k="1"><div class="hd">Tenths</div><div class="pile"></div><div class="zero hide">0</div><div class="val"></div></div>
+  <div class="col h" data-k="2"><div class="hd">Hundredths</div><div class="pile"></div><div class="val"></div></div>
+  <div class="col th" data-k="3"><div class="hd">Thousandths</div><div class="pile"></div><div class="val"></div></div>
+ </div>
+ <div class="read" id="read"></div>
+ <div class="lab hide" id="lab">expanded form</div>
+ <div class="line" id="l1"></div><div class="line" id="l2"></div>
+ <div class="note hide" id="note">1 hundredth = 10 thousandths</div>
+</div>
+<div class="who" id="who">Hemiunu</div>
+<div class="cap" id="cap"></div>
+<script>
+var TL=null; var LAB=['1','0.1','0.01','0.001'], CL=['o','t','h','th'];
+function fr(a,b){return '<span class="fr"><span>'+a+'</span><i></i><span>'+b+'</span></span>';}
+function render(t){
+  var C=TL.cue,S=TL.S;
+  var site=t<S.c1-0.3||t>=S.close-0.3, open=t<S.c1-0.3;
+  document.getElementById('site').style.display=site?'block':'none';
+  document.getElementById('scene').style.display=site?'none':'block';
+  document.getElementById('tag').style.display=open?'block':'none';
+  document.getElementById('who').textContent=site?'Hemiunu':'Claire';
+  // captions
+  var c=''; TL.cap.forEach(function(x){ if(t>=x[0]-0.1) c=x[1]; }); if(t<TL.cap[0][0]-0.1) c='';
+  c=c.replace(/(\d)\/(\d[\d,]*)/g,function(m,a,b){return fr(a,b)});
+  document.getElementById('cap').innerHTML=c; document.getElementById('cap').style.visibility=c?'visible':'hidden';
+  if(site) return;
+  var late=t>=C.reset;
+  // disc counts with stagger
+  function n(start,max){ if(t<start) return 0; return Math.min(max,1+Math.floor((t-start)/0.14)); }
+  var cnt, fade=-1;
+  if(late){ cnt=[2,0,5,8]; }
+  else { cnt=[n(C.ones,3),n(C.tenths,2),n(C.hund,7),n(C.thou,4)];
+    if(t>=C.brk){ var k=Math.floor((t-C.brk)/0.12); if(t<C.brk+0.5){fade=6;} else { cnt[2]=6; cnt[3]=4+Math.min(10,Math.max(0,k-4)); } } }
+  document.querySelectorAll('.col').forEach(function(col,k){
+    var p=col.querySelector('.pile'), h='';
+    for(var i=0;i<cnt[k];i++) h+='<div class="dk '+CL[k]+(k===2&&i===fade?' fade':'')+'">'+LAB[k]+'</div>';
+    if(p._h!==h){p.innerHTML=h;p._h=h;}
+    var g=false;
+    if(!late){ if(k===1&&t>=C.g2&&t<C.g3) g=true; if(k===2&&t>=C.g3&&t<C.g4) g=true; if(k===3&&t>=C.g4&&t<C.e0) g=true; }
+    else if(k===1&&t>=C.gz) g=true;
+    col.classList.toggle('glow',g);
+    var v='';
+    if(!late&&t<C.e0){ if(k===1&&t>=C.d2) v='<span class="cT">0.2</span>'+(t>=C.f2?' = '+fr(2,10):''); if(k===2&&t>=C.d3) v='<span class="cH">0.07</span>'+(t>=C.f3?' = '+fr(7,100):''); if(k===3&&t>=C.d4) v='<span class="cTH">0.004</span>'+(t>=C.f4?' = '+fr(4,'1,000'):''); }
+    col.querySelector('.val').innerHTML=v;
+  });
+  document.querySelector('.zero').classList.toggle('hide',!(late&&t>=C.zero));
+  var r=document.getElementById('read');
+  r.innerHTML=late?'<span class="cO">2</span>.<span class="cT">0</span><span class="cH">5</span><span class="cTH">8</span>':(t>=C.num?'<span class="cO">3</span>.<span class="cT">2</span><span class="cH">7</span><span class="cTH">4</span>':'');
+  r.style.visibility=r.innerHTML?'visible':'hidden';
+  // expanded lines
+  var l1='',l2='';
+  if(!late&&t>=C.e0&&t<C.brk){ l1='3.274 = '; if(t>=C.e1) l1+='<span class="cO">3</span>'; if(t>=C.e2) l1+=' + <span class="cT">0.2</span>'; if(t>=C.e3) l1+=' + <span class="cH">0.07</span>'; if(t>=C.e4) l1+=' + <span class="cTH">0.004</span>';
+    if(t>=C.x1) l2='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="cO">3</span>'; if(t>=C.x2) l2+=' + <span class="cT">'+fr(2,10)+'</span>'; if(t>=C.x3) l2+=' + <span class="cH">'+fr(7,100)+'</span>'; if(t>=C.x4) l2+=' + <span class="cTH">'+fr(4,'1,000')+'</span>'; }
+  if(late&&t>=C.ex8){ l1='2.058 = <span class="cO">2</span> + <span class="cH">0.05</span> + <span class="cTH">0.008</span>'; }
+  document.getElementById('l1').innerHTML=l1; document.getElementById('l2').innerHTML=l2;
+  document.getElementById('lab').classList.toggle('hide',!(!late&&t>=C.elab&&t<C.brk));
+  document.getElementById('note').classList.toggle('hide',!(!late&&t>=C.cnt));
+  // ×10 arrows
+  document.querySelectorAll('.arr').forEach(function(a){a.remove();});
+  if(!late&&t>=C.arr1){ var xs=t>=C.arr?[1,2,3]:[3]; var ch=document.getElementById('chart');
+    xs.forEach(function(k){ var a=document.createElement('div'); a.className='arr'; a.style.left=(k*25)+'%'; a.textContent='◀ ×10'; ch.appendChild(a); }); }
+}
+</script></body></html>

@@ -629,3 +629,6 @@ body.bd-onbook .bd-hcard{display:none}
 .bd-fold .ic{font-size:24px}.bd-fold .tx{flex:1;min-width:0;display:flex;flex-direction:column}
 .bd-fold .tx b{font-family:var(--serif,Georgia,serif);font-size:18px;color:#1F2A44}.bd-fold .tx small{font-size:13px;font-weight:700;color:#5B6478}
 body.bd-folded .bd-board,body.bd-folded .bd-intro{display:none}
+
+/* the caption under the Essential Question picture: normal line spacing (the card shares the .bd-eq name with equations) */
+.bd-card.bd-eq>p{line-height:1.45}

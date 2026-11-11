@@ -1,52 +1,52 @@
 ﻿repo,voice,text,chars,file,kind,script_source,md5
 optima-5th-math,folder:Claude outputs,,0,Claude outputs/Hemiunu sample (Kofi).mp3,speech,,fe9302d13b3f7dd4fc35a9280882ceaa
-optima-5th-math,hemiunu,,0,assets/vr-17/audio/hemiunu-brief.mp3,speech,,a61bb6e44bf7431da4b554205b5805b3
-optima-5th-math,folder:audio,,0,assets/vr-17/audio/hemiunu-drafting.mp3,speech,,c7ec6c469f29c56430f2b665dbce0bc6
-optima-5th-math,hemiunu,,0,assets/vr-17/audio/hemiunu-step1.mp3,speech,,a1c718c7ad9c8d90f17ff0ee1a0a6494
-optima-5th-math,hemiunu,,0,assets/vr-17/audio/hemiunu-step2.mp3,speech,,2abd54c118f0407975d0ed6c9b1d7c9a
-optima-5th-math,hemiunu,,0,assets/vr-17/audio/hemiunu-step3.mp3,speech,,4db0a28dc6ca785d01fada7c581c81ed
-optima-5th-math,hemiunu,,0,assets/vr-17/audio/hemiunu-step4.mp3,speech,,c167deabdc5b866eeb5019dc5c99cffd
-optima-5th-math,hemiunu,,0,assets/vr-17/audio/hemiunu-step5.mp3,speech,,8db9e0ce7f1a117872c529f6a0f0746e
-optima-5th-math,hemiunu,,0,assets/vr-17/audio/hemiunu-step6.mp3,speech,,88361d4b29c41226b27f31a0cb1b5239
-optima-5th-math,hemiunu,,0,assets/vr-17/audio/hemiunu-step7.mp3,speech,,cd4876d4eecfa881b5cce6bc91c58109
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-02-w1-01.mp3,speech,,9a762924b35e548709b0af005fb73450
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-02-w1-02.mp3,speech,,694cd665cd96e18c282dd3e0b0250535
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-02-w1-03.mp3,speech,,d9c314902937c7d1712481492c3d17d9
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-02-w1-04.mp3,speech,,4419f2270c4d5ae9ba9dcd7e01cc5de8
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-02-w1-05.mp3,speech,,fda4dff50b1d2c835a1972a96e675b93
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-02-w1-06.mp3,speech,,631875d72b933e691a7be7f59e158bc1
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-02-w3-01.mp3,speech,,1cbde6cf5824417d5e9d090e566b4c68
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-02-w3-02.mp3,speech,,3f2769af28257b8dbc945169674340cb
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-02-w3-03.mp3,speech,,e6b38d55ea63eec594fb0e73942cb567
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-03-w1-01.mp3,speech,,93341485a865e6f1adba793675af64fb
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-03-w1-02.mp3,speech,,874dc613949ef040a55dacdae9af60f8
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-03-w1-03.mp3,speech,,1ceedc7fd1c259603f6a5350fe54bbcd
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-03-w1-04.mp3,speech,,30f09549a2d98a80a29695404b01aed2
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-03-w1-05.mp3,speech,,83e03b92ec256c3f672f262588bcbff6
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-03-w1-06.mp3,speech,,f3d7f7a9be5c28467b32018b1384da7c
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-03-w3-01.mp3,speech,,e96cb174eb9b243cdfcdf3a6562a602f
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-03-w3-02.mp3,speech,,da2f52fc5ca9b4915594dd3efd36777e
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-03-w3-03.mp3,speech,,011b190fd9983590fd709593de5794ba
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-04-w1-01.mp3,speech,,ae8bf8aa68c7417f663b46612e2e123a
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-04-w1-02.mp3,speech,,15641e796dbb2ab89de7f6cddf0f96db
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-04-w1-03.mp3,speech,,bf4f72203c3a47ce2633c3021c6347fd
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-04-w1-04.mp3,speech,,f76134c952e94b87c140314fb6469d41
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-04-w1-05.mp3,speech,,cf93b86ae2db4db34fa07f65bd4ca3fa
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-04-w1-06.mp3,speech,,884c6f3334fa40a3e7ddb3b24f91d858
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-04-w3-01.mp3,speech,,80287c22118fdfd6a840eb0469e3692a
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-04-w3-02.mp3,speech,,3e032a645dd12d453b3f27d295e807fc
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-04-w3-03.mp3,speech,,3c0637362a2f5e5e9ffeb221fd5976b5
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w1-01.mp3,speech,,fe9302d13b3f7dd4fc35a9280882ceaa
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w1-02.mp3,speech,,7183ab07712f98a3099912bf36923434
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w1-03.mp3,speech,,fb99395196df2b3d71610761cb2ee6ef
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w1-04.mp3,speech,,3265ac21bfee89addf5f9c69e46766e3
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w1-05.mp3,speech,,81ff19625d25af5b8a0ceb7f0428d0d7
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w1-06.mp3,speech,,db00633de7e179fe0978de3e3922da77
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w1-07.mp3,speech,,c9e7879fd486f63837cfaedc7bcaa4e1
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w1-08.mp3,speech,,eafa84fb07b7613e9501f7890cbbe305
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w3-01.mp3,speech,,8a1b90a07a2a119790e6ac7f445ce711
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w3-02.mp3,speech,,7f35bf69c91aeb351904fc72e07dafe1
-optima-5th-math,hemiunu,,0,audio/builders/hemiunu-w3-03.mp3,speech,,6f19540982f017d01119c4b43a2d03de
+optima-5th-math,hemiunu,"Two new copper chisels just came from the coppersmiths. Before my stonecutters use them, I need to know which one is longer. Build them both, then show me.",155,assets/vr-17/audio/hemiunu-brief.mp3,speech,tools/vr/weeks/17/week.json,a61bb6e44bf7431da4b554205b5805b3
+optima-5th-math,folder:audio,"No headset today? Then come to my drafting table. Build both chisels here, then write me a full report on what you found.",121,assets/vr-17/audio/hemiunu-drafting.mp3,speech,tools/vr/weeks/17/week.json,c7ec6c469f29c56430f2b665dbce0bc6
+optima-5th-math,hemiunu,"Before the headset goes on, study your models. Learn each gray word. You will type it in the search box in VR.",110,assets/vr-17/audio/hemiunu-step1.mp3,speech,tools/vr/weeks/17/week.json,a1c718c7ad9c8d90f17ff0ee1a0a6494
+optima-5th-math,hemiunu,"Put on your headset. Click Explore, type Giza, and pick Pyramids of Giza. Then click Begin Solo.",96,assets/vr-17/audio/hemiunu-step2.mp3,speech,tools/vr/weeks/17/week.json,2abd54c118f0407975d0ed6c9b1d7c9a
+optima-5th-math,hemiunu,"Remember, a Flat is one tenth, a Rod is one hundredth, and a Unit is one thousandth. Build Chisel A on the left, then Chisel B.",127,assets/vr-17/audio/hemiunu-step3.mp3,speech,tools/vr/weeks/17/week.json,4db0a28dc6ca785d01fada7c581c81ed
+optima-5th-math,hemiunu,"Now write it with Number models. Chisel A, the sign, then Chisel B. A small cube is your decimal point.",103,assets/vr-17/audio/hemiunu-step4.mp3,speech,tools/vr/weeks/17/week.json,c167deabdc5b866eeb5019dc5c99cffd
+optima-5th-math,hemiunu,"Still have time? Build a third chisel and line all three up, shortest to longest. This part is just for you.",108,assets/vr-17/audio/hemiunu-step5.mp3,speech,tools/vr/weeks/17/week.json,8db9e0ce7f1a117872c529f6a0f0746e
+optima-5th-math,hemiunu,"Step back so both chisels and your answer fit. Take a photo, or a short video. Then send it to Canvas.",102,assets/vr-17/audio/hemiunu-step6.mp3,speech,tools/vr/weeks/17/week.json,88361d4b29c41226b27f31a0cb1b5239
+optima-5th-math,hemiunu,Press the Meta button and click Quit. Then open Canvas and make sure your work is there.,88,assets/vr-17/audio/hemiunu-step7.mp3,speech,tools/vr/weeks/17/week.json,cd4876d4eecfa881b5cce6bc91c58109
+optima-5th-math,hemiunu,"Welcome back, builder. Yesterday we staked the base. Today we lay the first layer of stones.",92,audio/builders/hemiunu-02-w1-01.mp3,speech,math-lesson-5-09-02-place-value-to-thousandths.html,9a762924b35e548709b0af005fb73450
+optima-5th-math,hemiunu,A photographer took this picture about 150 years ago. See the rows of stone on my pyramid? Each row is one layer.,113,audio/builders/hemiunu-02-w1-02.mp3,speech,math-lesson-5-09-02-place-value-to-thousandths.html,694cd665cd96e18c282dd3e0b0250535
+optima-5th-math,hemiunu,Now look at the giant blocks in front. Tap the glowing ring.,60,audio/builders/hemiunu-02-w1-03.mp3,speech,math-lesson-5-09-02-place-value-to-thousandths.html,d9c314902937c7d1712481492c3d17d9
+optima-5th-math,hemiunu,"Back on my build site, every block in the first layer must be the same height. If one is off, the next layer will tilt.",119,audio/builders/hemiunu-02-w1-04.mp3,speech,math-lesson-5-09-02-place-value-to-thousandths.html,4419f2270c4d5ae9ba9dcd7e01cc5de8
+optima-5th-math,hemiunu,My scribe measured one block: 1.486 meters. Look at the 8. What do you think it is worth?,89,audio/builders/hemiunu-02-w1-05.mp3,speech,math-lesson-5-09-02-place-value-to-thousandths.html,fda4dff50b1d2c835a1972a96e675b93
+optima-5th-math,hemiunu,Every digit has a value. Let’s find out what each one is worth.,63,audio/builders/hemiunu-02-w1-06.mp3,speech,math-lesson-5-09-02-place-value-to-thousandths.html,631875d72b933e691a7be7f59e158bc1
+optima-5th-math,hemiunu,The first layer is level.,25,audio/builders/hemiunu-02-w3-01.mp3,speech,math-lesson-5-09-02-place-value-to-thousandths.html,1cbde6cf5824417d5e9d090e566b4c68
+optima-5th-math,hemiunu,"Every digit in its place. Good work, builder.",45,audio/builders/hemiunu-02-w3-02.mp3,speech,math-lesson-5-09-02-place-value-to-thousandths.html,3f2769af28257b8dbc945169674340cb
+optima-5th-math,hemiunu,Tomorrow we compare the blocks.,31,audio/builders/hemiunu-02-w3-03.mp3,speech,math-lesson-5-09-02-place-value-to-thousandths.html,e6b38d55ea63eec594fb0e73942cb567
+optima-5th-math,hemiunu,"Day three, builder. The first layer is down. Now we need many more blocks for the next layers.",94,audio/builders/hemiunu-03-w1-01.mp3,speech,math-lesson-5-09-03-comparing-decimals.html,93341485a865e6f1adba793675af64fb
+optima-5th-math,hemiunu,Most blocks are cut right here at Giza. The fine white stone comes by boat across the river. Tap the glowing ring.,114,audio/builders/hemiunu-03-w1-02.mp3,speech,math-lesson-5-09-03-comparing-decimals.html,874dc613949ef040a55dacdae9af60f8
+optima-5th-math,hemiunu,See the rows of stone tombs? They belong to the king’s officials. Tap the glowing ring.,87,audio/builders/hemiunu-03-w1-03.mp3,speech,math-lesson-5-09-03-comparing-decimals.html,1ceedc7fd1c259603f6a5350fe54bbcd
+optima-5th-math,hemiunu,"Every new block gets checked. Too tall, and the layer bumps. Too short, and it sags.",84,audio/builders/hemiunu-03-w1-04.mp3,speech,math-lesson-5-09-03-comparing-decimals.html,30f09549a2d98a80a29695404b01aed2
+optima-5th-math,hemiunu,Two blocks just arrived: 1.49 meters and 1.487 meters. Which is taller?,71,audio/builders/hemiunu-03-w1-05.mp3,speech,math-lesson-5-09-03-comparing-decimals.html,83e03b92ec256c3f672f262588bcbff6
+optima-5th-math,hemiunu,More digits does not always mean more. Let’s check them the builder’s way.,74,audio/builders/hemiunu-03-w1-06.mp3,speech,math-lesson-5-09-03-comparing-decimals.html,f3d7f7a9be5c28467b32018b1384da7c
+optima-5th-math,hemiunu,The blocks are in order.,24,audio/builders/hemiunu-03-w3-01.mp3,speech,math-lesson-5-09-03-comparing-decimals.html,e96cb174eb9b243cdfcdf3a6562a602f
+optima-5th-math,hemiunu,"Every block checked, place by place. Good work, builder.",56,audio/builders/hemiunu-03-w3-02.mp3,speech,math-lesson-5-09-03-comparing-decimals.html,da2f52fc5ca9b4915594dd3efd36777e
+optima-5th-math,hemiunu,Tomorrow we round our measurements.,35,audio/builders/hemiunu-03-w3-03.mp3,speech,math-lesson-5-09-03-comparing-decimals.html,011b190fd9983590fd709593de5794ba
+optima-5th-math,hemiunu,"Day four, builder. Look at this map of Giza. A map maker drew it about one hundred seventy years ago.",101,audio/builders/hemiunu-04-w1-01.mp3,speech,math-lesson-5-09-04-rounding-decimals.html,ae8bf8aa68c7417f663b46612e2e123a
+optima-5th-math,hemiunu,"From above, a pyramid is a perfect square. Tap the glowing ring.",64,audio/builders/hemiunu-04-w1-02.mp3,speech,math-lesson-5-09-04-rounding-decimals.html,15641e796dbb2ab89de7f6cddf0f96db
+optima-5th-math,hemiunu,Today my crews cut the stones for the passages inside the pyramid.,66,audio/builders/hemiunu-04-w1-03.mp3,speech,math-lesson-5-09-04-rounding-decimals.html,bf4f72203c3a47ce2633c3021c6347fd
+optima-5th-math,hemiunu,My scribes measure to the millimeter. But my stonecutters only need the nearest centimeter.,91,audio/builders/hemiunu-04-w1-04.mp3,speech,math-lesson-5-09-04-rounding-decimals.html,f76134c952e94b87c140314fb6469d41
+optima-5th-math,hemiunu,"This stone measures 2.346 meters. To the nearest centimeter, what should the work order say?",92,audio/builders/hemiunu-04-w1-05.mp3,speech,math-lesson-5-09-04-rounding-decimals.html,cf93b86ae2db4db34fa07f65bd4ca3fa
+optima-5th-math,hemiunu,Close enough is a skill. Let’s learn to round.,46,audio/builders/hemiunu-04-w1-06.mp3,speech,math-lesson-5-09-04-rounding-decimals.html,884c6f3334fa40a3e7ddb3b24f91d858
+optima-5th-math,hemiunu,The passage stones are cut.,27,audio/builders/hemiunu-04-w3-01.mp3,speech,math-lesson-5-09-04-rounding-decimals.html,80287c22118fdfd6a840eb0469e3692a
+optima-5th-math,hemiunu,"Every work order rounded just right. Good work, builder.",56,audio/builders/hemiunu-04-w3-02.mp3,speech,math-lesson-5-09-04-rounding-decimals.html,3e032a645dd12d453b3f27d295e807fc
+optima-5th-math,hemiunu,Tomorrow my inspectors check our work.,38,audio/builders/hemiunu-04-w3-03.mp3,speech,math-lesson-5-09-04-rounding-decimals.html,3c0637362a2f5e5e9ffeb221fd5976b5
+optima-5th-math,hemiunu,"Hello! I am Hemiunu. About 4,500 years ago, King Khufu put me in charge of building his pyramid.",96,audio/builders/hemiunu-w1-01.mp3,speech,math-lesson-5-09-01-thousandths.html,fe9302d13b3f7dd4fc35a9280882ceaa
+optima-5th-math,hemiunu,"An artist drew it in the 1830s, more than 4,000 years after my crews finished. Every block you see, my crews set in place.",122,audio/builders/hemiunu-w1-02.mp3,speech,math-lesson-5-09-01-thousandths.html,7183ab07712f98a3099912bf36923434
+optima-5th-math,hemiunu,Look at the tip of the pyramid next door. Tap the glowing ring.,63,audio/builders/hemiunu-w1-03.mp3,speech,math-lesson-5-09-01-thousandths.html,fb99395196df2b3d71610761cb2ee6ef
+optima-5th-math,hemiunu,Now come back with me to the very first day. Nothing is built yet. First we mark the base: a perfect square.,108,audio/builders/hemiunu-w1-04.mp3,speech,math-lesson-5-09-01-thousandths.html,3265ac21bfee89addf5f9c69e46766e3
+optima-5th-math,hemiunu,My surveyors measure with rods. Tap the rod.,44,audio/builders/hemiunu-w1-05.mp3,speech,math-lesson-5-09-01-thousandths.html,81ff19625d25af5b8a0ceb7f0428d0d7
+optima-5th-math,hemiunu,"You came from the future with a meter stick. In 1925, a surveyor measured my north side with one. It came out 230 meters and a little more.",139,audio/builders/hemiunu-w1-06.mp3,speech,math-lesson-5-09-01-thousandths.html,db00633de7e179fe0978de3e3922da77
+optima-5th-math,hemiunu,"How exactly did he measure? After the decimal point, how many digits do you think we will need?",95,audio/builders/hemiunu-w1-07.mp3,speech,math-lesson-5-09-01-thousandths.html,c9e7879fd486f63837cfaedc7bcaa4e1
+optima-5th-math,hemiunu,Let’s zoom into that last meter and find out.,45,audio/builders/hemiunu-w1-08.mp3,speech,math-lesson-5-09-01-thousandths.html,eafa84fb07b7613e9501f7890cbbe305
+optima-5th-math,hemiunu,The base is measured to the millimeter.,39,audio/builders/hemiunu-w3-01.mp3,speech,math-lesson-5-09-01-thousandths.html,8a1b90a07a2a119790e6ac7f445ce711
+optima-5th-math,hemiunu,"Good work, builder.",19,audio/builders/hemiunu-w3-02.mp3,speech,math-lesson-5-09-01-thousandths.html,7f35bf69c91aeb351904fc72e07dafe1
+optima-5th-math,hemiunu,Tomorrow we need even more care.,32,audio/builders/hemiunu-w3-03.mp3,speech,math-lesson-5-09-01-thousandths.html,6f19540982f017d01119c4b43a2d03de
 optima-5th-math,folder:video,,0,audio/builders/video/g502-claire.mp3,speech,,98344803cd0d72d7c9e375a72201c9bb
 optima-5th-math,folder:video,,0,audio/builders/video/g502-kofi.mp3,speech,,4c002db5e3c7581692ca0232f0fc3b44
 optima-5th-math,folder:video,,0,audio/builders/video/g503-claire.mp3,speech,,440105341eb1779f380729588663abc4
